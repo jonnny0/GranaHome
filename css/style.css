@@ -1,12 +1,17 @@
 *{
     text-align: justify;
+    font-family: Arial;
 }
 
 body{
-    font-family: 'Gentium Basic', serif;
     font-size: 16px;
-    background: url(../imagenes/backgraund.jpg) repeat;
+    background: url(../imagenes/background.jpg) repeat;
     color: #777777;
+}
+
+header a{
+    text-decoration: none;
+    color: black;
 }
 
 header img{
@@ -16,10 +21,17 @@ header img{
 header hr{
     width: 75%;
     height: 7px;
+    border-radius: 5px;
+    background-color: #606061;
 }
 
 header #logo{
     width: 70%;
+    float: left;
+}
+
+header #logoPaginaInicial{
+    width: 100%;
     float: left;
 }
 
@@ -30,7 +42,7 @@ header #identificacion{
 }
 
 footer{
-    background: url(../imagenes/backgraund_footer.jpg) repeat;
+    background: url(../imagenes/background_footer.jpg) repeat;
     padding: 20px;
 }
 
@@ -55,6 +67,17 @@ button:hover{
 button:active{
     background-color: #138CC0;
     color: white;
+}
+
+button a{
+    text-decoration: none;
+    color: white;
+}
+
+#recordarContraseña{
+    text-decoration: underline;
+    color: blue;
+    font-size: 12px;
 }
 
 #eleccionIdioma h2{
@@ -91,7 +114,7 @@ button:active{
 
 #formularioBusqueda{
     width: 55%;
-    background: url(../imagenes/backgraund_form.gif) repeat;
+    background: url(../imagenes/background_form.gif) repeat;
     color: white;
     padding: 20px;
     border-radius: 20px 20px 20px 20px;
@@ -109,5 +132,78 @@ button:active{
 
 #formularioBusqueda button:hover{
     background-color: #138CC0;
+    color: white;
+}
+
+.simulacionBotones{
+    padding: 5px 5px 5px 5px;
+    font-size: 15px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: #bbbbbb;
+    border-style: ridge;
+    border-width: 2px;
+}
+
+.simulacionBotones:hover{
+    background-color: #00a2e8;
+    color: white;
+}
+
+/*
+ * CLASES PARA LAS VENTANAS MODALES.
+ */
+
+.modalmask {
+    position: fixed;
+    font-family: Arial, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    pointer-events: none;
+}
+.modalmask:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.modalbox{
+    width: 400px;
+    position: relative;
+    padding: 5px 20px 13px 20px;
+    background: #fff;
+    border-radius:10px;
+    -webkit-transition: all 500ms ease-in;
+    -moz-transition: all 500ms ease-in;
+    transition: all 500ms ease-in;
+
+}
+
+.movedown {
+    margin: 0 auto;
+}
+.modalmask:target .movedown{       
+    margin:10% auto;
+}
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: 1px;
+    text-align: center;
+    top: 1px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius:20px;
+ 
+}
+ 
+.close:hover {
+    background-color: #00a2e8;
     color: white;
 }
