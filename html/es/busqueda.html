@@ -3,101 +3,173 @@
     <head>
         <title>GranaHome</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../css/style.css" type="text/css" media="all">
-        <link rel="icon" type="image/png" href="../imagenes/logo.png" />
+        <link rel="stylesheet" href="../../css/style.css" type="text/css" media="all">
+        <link rel="icon" type="image/png" href="../../imagenes/logo.png" />
     </head>
 
     <body>
 
-	<!--Comienzo de la cabecera-->
-	<header>
-	    <!--Aquí va el logo y eso, además de los botones para iniciar sesion y todo eso.-->
-	    <div id="logo">
-		<a href="../index.html">
-		    <img src="../imagenes/logo.png" title="logo GranaHome" alt="logo GranaHome"/>
-		</a>
-	    </div>
-	    <div id="identificacion">
-		<button title="Log In" name="iniciarSesion" type="button" onclick="alert('Cuadro de inicio de sesión')"> Iniciar Sesión </button>
-		<button title="Register" name="registrarse" type="button" onclick="alert('Cuadro de inicio de registro')"> Registrarse </button>
-	    </div>
-	    <hr noshade="noshade"/>
-	</header>
-	<!--Fin de la cabecera-->
+        <!--Comienzo de la cabecera-->
+        <header>
+            <!--Aquí va el logo y eso, además de los botones para iniciar sesion y todo eso.-->
+            <div id="logo">
+                <a href="../../index.html">
+                    <img src="../../imagenes/logo.png" title="GranaHome" alt="GranaHome"/>
+                </a>
+            </div>
+            <div id="identificacion">
+                <a href="#IniciarSesion" class="simulacionBotones">
+                    Iniciar Sesión
+                    <!--<button title="Log In" name="iniciarSesion" type="button"> Iniciar Sesión </button>-->
+                </a>
+                &nbsp
+                <a href="#Registrarse" class="simulacionBotones">
+                    Registrarse
+                    <!--<button title="Register" name="registrarse" type="button"> Registrarse </button>-->
+                </a>
+            </div>
+            <div id="IniciarSesion" class="modalmask">
+                <div class="modalbox movedown">
+                    <a href="" title="Cerrar" class="close">X</a>
+                    <h3>Iniciar Sesión</h3>
+                    <form>
+                        <label for="nombreUsuario">Nombre de usuario:</label>
+                        <br>
+                        <input type="text" id="nombreUsuario" name="nombre" required />
+                        <br><br>
+                        <label for="contrasena">Contraseña:</label>
+                        <br>
+                        <input type="password" id="contrasena" name="contrasena" required />
+                        <br>
+                        <a id="recordarContraseña" onclick="alert('Función para recordar contraseña')">¿Has olvidado tu contraseña?</a>
+                        <br><br>
+                        <button type="button" title="Iniciar Sesión" name="iniciarSesion" onclick="alert('Función de identificación')"> Iniciar Sesión </button>
+                    </form>
+                </div>
+            </div>
+            <div id="Registrarse" class="modalmask">
+                <div class="modalbox movedown">
+                    <a href="" title="Cerrar" class="close">X</a>
+                    <h3>Registrarse</h3>
+                    <form>
+                        <div class="izquierda">
+                            <label for="nombreUsuario2">Nombre de usuario:</label>
+                            <br>
+                            <input type="text" id="nombreUsuario2" name="nombre" required />
+                            <br><br>
+                            <label for="contrasena2">Contraseña:</label>
+                            <br>
+                            <input type="password" id="contrasena2" name="contrasena2" required />
+                            <br><br>
+                            <label for="confirmarContrasena">Confirmar contraseña:</label>
+                            <br>
+                            <input type="password" id="confirmarContrasena" name="confirmarContrasena" required />
+                            <br><br>
+                        </div>
+                        <div class="derecha">
+                            <label for="mail">E-mail:</label>
+                            <br>
+                            <input type="email" id="mail" name="mail" required />
+                            <br><br>
+                            <label for="tipoUsuario">Tipo usuario:</label>
+                            <br>
+                            <select name="tipoUsuario" id="tipoUsuario">
+                                <option value="cliente">Cliente</option>
+                                <option value="propietario">Propietario</option>
+                            </select>
+                            <br><br>
+                            <button type="button" title="Registrarse" name="registrarse" onclick="alert('Función de registro')"> Registrarse </button>
+                        </div>
+                    </form>
+                    <br><br><br><br><br><br><br><br><br><br>
+                </div>
+            </div>
+            <hr noshade="noshade"/>
+        </header>
+        <!--Fin de la cabecera-->
 
-	<!--Comienza la parte de la página-->
+        <!--Comienza la parte de la página-->
 
-	<div class="contenedorPrincipal">
-	    <form id="formularioBusqueda">
-		Destino:
-		<input type="text" name="localidad" placeholder="Ej. Granada" size="75"/>
-		<br><br>
-		Fecha de entrada:
-		<input type="date" name="fechaEntrada" onchange="alert('comprobar que la fecha sea posterior a la de hoy')"/>
-		&nbsp; &nbsp;
-		Fecha de salida:
-		<input type="date" name="fechaSalida" onchange="alert('comprobar que la fecha sea posterior a la de entrada')"/>
-		<br><br>
-		Número de habitaciones:
-		<input type="number" name="numeroHabitaciones" min="1" max="10" value="1"/>
-		<!--<br><br>-->
-		&nbsp; &nbsp;
-		Número de huespedes:
-		<input type="number" name="numeroHuespedes" min="1" max="50" value="2"/>
-		<br><br>
-		<hr />
-		<br>
-		Tipo de alojamiento:
-		<input type="checkbox" name="alojamiento" value="hotel" checked> Hotel
-		<input type="checkbox" name="alojamiento" value="apartamento" checked> Apartamento
-		<input type="checkbox" name="alojamiento" value="piso" checked> Piso
-		<input type="checkbox" name="alojamiento" value="pension" checked> Pensión/Hostal
-		<input type="checkbox" name="alojamiento" value="casaRural" checked> Casa rural
-		<br><br>
-		Puntuación mínima:
-		<select name="puntuacion">
-		    <option value="0">Indiferente</option>
-		    <option value="1">1</option>
-		    <option value="2">2</option>
-		    <option value="3">3</option>
-		    <option value="4">4</option>
-		    <option value="5">5</option>
-		    <option value="6">6</option>
-		    <option value="7">7</option>
-		    <option value="8">8</option>
-		    <option value="9">9</option>
-		</select>
-		<!--<br><br>-->
-		&nbsp; &nbsp;
-		Estrellas: 
-		<select name="estrellas">
-		    <option value="0">Indiferente</option>
-		    <option value="1">1</option>
-		    <option value="2">2</option>
-		    <option value="3">3</option>
-		    <option value="4">4</option>
-		    <option value="5">5</option>
-		</select>
-		o más
-		<br><br>
-		Precio máximo: 
-		<input type="number" name="precioMaximo" min="0" max="9999" step="5" value="" placeholder="Cualquier"/>
-		€ por noche
-		<br><br>
-		<button title="Buscar" name="buscar" type="button" onclick="alert('Funcion de busqueda...')"> Buscar </button>
-	    </form>
-	</div>
+        <div class="contenedorPrincipal">
+            <ul>
+                <li>
+                    Ordenar Por:
+                </li>
 
-	<!--Fin de la parte de la página-->
+                <li onclick="alert('aa')">
+                    Valoracion
+                </li>
+                <li>
+                    Estrellas
+                </li>
+                    
+                    
+            </ul>
+            <hr/>
+            <table class="tablaBusqueda">
+                <tr>
+                    <td>
+                        <img src="../../imagenes/alhambra_palace.jpg" alt="Alhambra Palace" />
+                    </td>
+                    <td>
+                        <h2>Alhambra Palace <img src="../../imagenes/ico_estrella_4p.png" alt="4 Estrellas" /></h2>
+                        El Alhambra Palace está situado a las afueras de las antiguas murallas de la Alhambra, y ofrece unas vistas espectaculares a la ciudad de Granada.
+                    </td>
+                    <td>
+                        Valoración:
+                        8,6
+                        <br><br>
+                        <button id="masInfo" name="masInfo">Reservar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="../../imagenes/carmen_hotel.jpg" alt="Carmen Hotel" />
+                    </td>
+                    <td>
+                        <h2>Carmen Hotel <img src="../../imagenes/ico_estrella_4p.png" alt="4 Estrellas" /></h2>
+                        El Hotel Carmen está situado en el centro de Granada y alberga una piscina en la azotea con vistas al palacio de la Alhambra. Ofrece conexión Wi-Fi gratuita y un restaurante con bar al aire libre.
+                    </td>
+                    <td>
+                        Valoración:
+                        8,1
+                        <br><br>
+                        <button id="masInfo" name="masInfo">Reservar</button>
+                    </td>
+                </tr>
 
-	<!--Comienzo del pie-->
-	<br><br>
-	<footer>
-	    <p>
-		Copyright &copy; 2015 GranaSoft
-	    </p>
-	</footer>
-	<!--Fin del pie-->
+                <tr>
+                    <td>
+                        <img src="../../imagenes/hotel_saray.jpg" alt="Hotel Saray" />
+                    </td>
+                    <td>
+                        <h2>Hotel Saray <img src="../../imagenes/ico_estrella_4p.png" alt="4 Estrellas" /></h2>
+                        El Hotel Saray se encuentra a menos de 10 minutos a pie del centro histórico de Granada y cuenta con una piscina al aire libre de temporada con terrazas y jardines con encanto.
+                    </td>
+                    <td>
+                        Valoración:
+                        8,0
+                        <br><br>
+                        <button id="masInfo" name="masInfo">Reservar</button>
+                    </td>
+                </tr>
+
+
+
+
+            </table>
+        </div>
+
+        <!--Fin de la parte de la página-->
+
+        <!--Comienzo del pie-->
+        <br><br>
+        <footer>
+            <p>
+                Copyright &copy; 2015 GranaSoft
+            </p>
+        </footer>
+        <!--Fin del pie-->
     </body>
 
 </html>
