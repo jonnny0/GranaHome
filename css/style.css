@@ -54,6 +54,15 @@ footer p{
     color: #bbbbbb;
 }
 
+.contenedorPrincipal{
+    width: 70%;
+    margin-left: 180px;
+    margin-top: 50px;
+    color: black;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
 button{
     padding: 5px 5px 5px 5px;
     font-size: 15px;
@@ -105,6 +114,10 @@ button a{
     float: right;
 }
 
+/*
+ * Página Principal
+ */
+
 #eleccionIdioma h2{
     text-align: center;
     font-size: 30px;
@@ -129,13 +142,9 @@ button a{
     margin-left: 500px;
 }
 
-.contenedorPrincipal{
-    margin-left: 170px;
-    margin-top: 50px;
-    color: black;
-    font-family: sans-serif;
-    font-size: 16px;
-}
+/*
+ * Archivo del buscador
+ */
 
 #formularioBusqueda{
     width: 55%;
@@ -158,6 +167,14 @@ button a{
 #formularioBusqueda button:hover{
     background-color: #138CC0;
     color: white;
+}
+
+/*
+ * Archivo de alojamiento
+ */
+
+.imagenAlojamiento{
+    margin-left: 7%;
 }
 
 /*
