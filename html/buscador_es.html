@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>GranaHome</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/style.css" type="text/css" media="all">
+        <link rel="icon" type="image/png" href="../imagenes/logo.png" />
+    </head>
+
+    <body>
+
+	<!--Comienzo de la cabecera-->
+	<header>
+	    <!--Aquí va el logo y eso, además de los botones para iniciar sesion y todo eso.-->
+	    <div id="logo">
+		<a href="../index.html">
+		    <img src="../imagenes/logo.png" title="GranaHome" alt="GranaHome"/>
+		</a>
+	    </div>
+	    <div id="identificacion">
+		<a href="#IniciarSesion" class="simulacionBotones">
+		    Iniciar Sesión
+		    <!--<button title="Log In" name="iniciarSesion" type="button"> Iniciar Sesión </button>-->
+		</a>
+		&nbsp
+		<a href="#Registrarse" class="simulacionBotones">
+		    Registrarse
+		    <!--<button title="Register" name="registrarse" type="button"> Registrarse </button>-->
+		</a>
+	    </div>
+	    <div id="IniciarSesion" class="modalmask">
+		<div class="modalbox movedown">
+		    <a href="" title="Cerrar" class="close">X</a>
+		    <h3>Iniciar Sesión</h3>
+		    <form>
+			<label for="nombreUsuario">Nombre de usuario:</label>
+			<br>
+			<input type="text" id="nombreUsuario" name="nombre" required />
+			<br><br>
+			<label for="contrasena">Contraseña:</label>
+			<br>
+			<input type="password" id="contrasena" name="nombre" required />
+			<br>
+			<a id="recordarContraseña" onclick="alert('Función para recordar contraseña')">¿Has olvidado tu contraseña?</a>
+			<br><br>
+			<button type="button" title="Iniciar Sesión" name="iniciarSesion" onclick="alert('Función de identificación')"> Iniciar Sesión </button>
+		    </form>
+		</div>
+	    </div>
+	    <div id="Registrarse" class="modalmask">
+		<div class="modalbox movedown">
+		    <a href="" title="Cerrar" class="close">X</a>
+		    <h2>Registrarse</h2>
+		</div>
+	    </div>
+	    <hr noshade="noshade"/>
+	</header>
+	<!--Fin de la cabecera-->
+
+	<!--Comienza la parte de la página-->
+
+	<div class="contenedorPrincipal">
+	    <form id="formularioBusqueda">
+		Destino:
+		<input type="text" name="localidad" placeholder="Ej. Granada" size="75"/>
+		<br><br>
+		Fecha de entrada:
+		<input type="date" name="fechaEntrada" onchange="alert('comprobar que la fecha sea posterior a la de hoy')"/>
+		&nbsp; &nbsp;
+		Fecha de salida:
+		<input type="date" name="fechaSalida" onchange="alert('comprobar que la fecha sea posterior a la de entrada')"/>
+		<br><br>
+		Número de habitaciones:
+		<input type="number" name="numeroHabitaciones" min="1" max="10" value="1"/>
+		<!--<br><br>-->
+		&nbsp; &nbsp;
+		Número de huespedes:
+		<input type="number" name="numeroHuespedes" min="1" max="50" value="2"/>
+		<br><br>
+		<hr />
+		<br>
+		Tipo de alojamiento:
+		<input type="checkbox" id="aloj1" name="alojamiento" value="hotel" checked>
+		<label for="aloj1"> Hotel </label>
+		<input type="checkbox" id="aloj2" name="alojamiento" value="apartamento" checked>
+		<label for="aloj2"> Apartamento </label>
+		<input type="checkbox" id="aloj3" name="alojamiento" value="piso" checked>
+		<label for="aloj3"> Piso </label>
+		<input type="checkbox" id="aloj4" name="alojamiento" value="pension" checked>
+		<label for="aloj4"> Pensión/Hostal </label>
+		<input type="checkbox" id="aloj5" name="alojamiento" value="casaRural" checked>
+		<label for="aloj5"> Casa rural </label>
+		<br><br>
+		Puntuación mínima:
+		<select name="puntuacion">
+		    <option value="0">Indiferente</option>
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		    <option value="6">6</option>
+		    <option value="7">7</option>
+		    <option value="8">8</option>
+		    <option value="9">9</option>
+		</select>
+		<!--<br><br>-->
+		&nbsp; &nbsp;
+		Estrellas: 
+		<select name="estrellas">
+		    <option value="0">Indiferente</option>
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		</select>
+		o más
+		<br><br>
+		Precio máximo: 
+		<input type="number" name="precioMaximo" min="0" max="9999" step="5" value="" placeholder="Cualquier"/>
+		€ por noche
+		<br><br>
+		<button title="Buscar" name="buscar" type="button" onclick="alert('Función de busqueda...')"><a href="busqueda_es.html"> Buscar </a> </button>
+	    </form>
+	</div>
+
+	<!--Fin de la parte de la página-->
+
+	<!--Comienzo del pie-->
+	<br><br>
+	<footer>
+	    <p>
+		Copyright &copy; 2015 GranaSoft
+	    </p>
+	</footer>
+	<!--Fin del pie-->
+    </body>
+
+</html>

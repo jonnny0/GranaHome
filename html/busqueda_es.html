@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>GranaHome</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/style.css" type="text/css" media="all">
+        <link rel="icon" type="image/png" href="../imagenes/logo.png" />
+    </head>
+
+    <body>
+
+	<!--Comienzo de la cabecera-->
+	<header>
+	    <!--Aquí va el logo y eso, además de los botones para iniciar sesion y todo eso.-->
+	    <div id="logo">
+		<a href="../index.html">
+		    <img src="../imagenes/logo.png" title="logo GranaHome" alt="logo GranaHome"/>
+		</a>
+	    </div>
+	    <div id="identificacion">
+		<button title="Log In" name="iniciarSesion" type="button" onclick="alert('Cuadro de inicio de sesión')"> Iniciar Sesión </button>
+		<button title="Register" name="registrarse" type="button" onclick="alert('Cuadro de inicio de registro')"> Registrarse </button>
+	    </div>
+	    <hr noshade="noshade"/>
+	</header>
+	<!--Fin de la cabecera-->
+
+	<!--Comienza la parte de la página-->
+
+	<div class="contenedorPrincipal">
+	    <form id="formularioBusqueda">
+		Destino:
+		<input type="text" name="localidad" placeholder="Ej. Granada" size="75"/>
+		<br><br>
+		Fecha de entrada:
+		<input type="date" name="fechaEntrada" onchange="alert('comprobar que la fecha sea posterior a la de hoy')"/>
+		&nbsp; &nbsp;
+		Fecha de salida:
+		<input type="date" name="fechaSalida" onchange="alert('comprobar que la fecha sea posterior a la de entrada')"/>
+		<br><br>
+		Número de habitaciones:
+		<input type="number" name="numeroHabitaciones" min="1" max="10" value="1"/>
+		<!--<br><br>-->
+		&nbsp; &nbsp;
+		Número de huespedes:
+		<input type="number" name="numeroHuespedes" min="1" max="50" value="2"/>
+		<br><br>
+		<hr />
+		<br>
+		Tipo de alojamiento:
+		<input type="checkbox" name="alojamiento" value="hotel" checked> Hotel
+		<input type="checkbox" name="alojamiento" value="apartamento" checked> Apartamento
+		<input type="checkbox" name="alojamiento" value="piso" checked> Piso
+		<input type="checkbox" name="alojamiento" value="pension" checked> Pensión/Hostal
+		<input type="checkbox" name="alojamiento" value="casaRural" checked> Casa rural
+		<br><br>
+		Puntuación mínima:
+		<select name="puntuacion">
+		    <option value="0">Indiferente</option>
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		    <option value="6">6</option>
+		    <option value="7">7</option>
+		    <option value="8">8</option>
+		    <option value="9">9</option>
+		</select>
+		<!--<br><br>-->
+		&nbsp; &nbsp;
+		Estrellas: 
+		<select name="estrellas">
+		    <option value="0">Indiferente</option>
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		</select>
+		o más
+		<br><br>
+		Precio máximo: 
+		<input type="number" name="precioMaximo" min="0" max="9999" step="5" value="" placeholder="Cualquier"/>
+		€ por noche
+		<br><br>
+		<button title="Buscar" name="buscar" type="button" onclick="alert('Funcion de busqueda...')"> Buscar </button>
+	    </form>
+	</div>
+
+	<!--Fin de la parte de la página-->
+
+	<!--Comienzo del pie-->
+	<br><br>
+	<footer>
+	    <p>
+		Copyright &copy; 2015 GranaSoft
+	    </p>
+	</footer>
+	<!--Fin del pie-->
+    </body>
+
+</html>
