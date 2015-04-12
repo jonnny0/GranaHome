@@ -39,6 +39,7 @@ header #identificacion{
     width: 30%;
     float: right;
     margin-top: 50px;
+    margin-bottom: 58px;
 }
 
 footer{
@@ -56,11 +57,12 @@ footer p{
 button{
     padding: 5px 5px 5px 5px;
     font-size: 15px;
-    background-color: white;
+    background-color: #00a2e8;
+    color: white;
 }
 
 button:hover{
-    background-color: #00a2e8;
+    background-color: #138CC0;
     color: white;
 }
 
@@ -74,10 +76,33 @@ button a{
     color: white;
 }
 
+.simulacionBotones{
+    padding: 5px 5px 5px 5px;
+    font-size: 15px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: #bbbbbb;
+    border-style: ridge;
+    border-width: 2px;
+}
+
+.simulacionBotones:hover{
+    background-color: #00a2e8;
+    color: white;
+}
+
 #recordarContraseña{
     text-decoration: underline;
     color: blue;
     font-size: 12px;
+}
+
+.izquierda{
+    float: left;
+}
+
+.derecha{
+    float: right;
 }
 
 #eleccionIdioma h2{
@@ -132,21 +157,6 @@ button a{
 
 #formularioBusqueda button:hover{
     background-color: #138CC0;
-    color: white;
-}
-
-.simulacionBotones{
-    padding: 5px 5px 5px 5px;
-    font-size: 15px;
-    background-color: white;
-    border-radius: 5px;
-    border-color: #bbbbbb;
-    border-style: ridge;
-    border-width: 2px;
-}
-
-.simulacionBotones:hover{
-    background-color: #00a2e8;
     color: white;
 }
 
