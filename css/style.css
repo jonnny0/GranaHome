@@ -169,12 +169,17 @@ button a{
     color: white;
 }
 
+.tablaBusqueda tr{
+    margin-bottom: 1px solid #ccc;
+}
+
 /*
  * Archivo de alojamiento
  */
 
 .imagenAlojamiento{
-    margin-left: 7%;
+    margin-left: 6%;
+    margin-bottom: 30px;
 }
 
 /*
