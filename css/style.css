@@ -296,3 +296,12 @@ button a{
     background-color: #00a2e8;
     color: white;
 }
+
+
+#tablaCaracteristicas td {
+    padding: 15px;
+}
+
+.negrita {
+    font-weight: bold;
+}
