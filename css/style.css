@@ -298,8 +298,17 @@ button a{
 }
 
 
-#tablaCaracteristicas td {
+.tablaCaracteristicas td {
     padding: 15px;
+}
+
+.separacion {
+    padding-bottom: 15px;
+}
+
+.tablaHabitaciones td {
+    padding-right: 25px; 
+    
 }
 
 .negrita {
