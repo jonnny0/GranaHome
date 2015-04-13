@@ -84,28 +84,34 @@
                     <br><br><br><br><br><br><br><br><br><br>
                 </div>
             </div>
-            <hr noshade="noshade"/>
+            <br class="clearfloat"/>
+	    <hr noshade="noshade"/>
         </header>
         <!--Fin de la cabecera-->
 
         <!--Comienza la parte de la página-->
 
         <div class="contenedorPrincipal">
-            <ul>
-                <li>
-                    Ordenar Por:
-                </li>
+	    <div id="menuOrdenarPor">
 
-                <li onclick="alert('aa')">
-                    Valoracion
-                </li>
-                <li>
-                    Estrellas
-                </li>
-                    
-                    
-            </ul>
-            <hr/>
+		<ul>
+		    <li id="titulo">
+			Ordenar Por:
+		    </li>
+
+		    <li id="active" onclick="">
+			Valoración
+		    </li>
+		    <li onclick="">
+			Estrellas
+		    </li>
+		    <li onclick="">
+			Precio
+		    </li>
+		</ul>
+
+	    </div>
+	    <br class="clearfloat"/>
             <table class="tablaBusqueda">
                 <tr>
                     <td>
@@ -153,10 +159,6 @@
                         <button id="masInfo" name="masInfo">Reservar</button>
                     </td>
                 </tr>
-
-
-
-
             </table>
         </div>
 

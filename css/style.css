@@ -100,6 +100,14 @@ button a{
     color: white;
 }
 
+.clearfloat{
+    clear: both;
+    height: 0;
+    font-size: 1px;
+    line-height: 0px;
+    margin-bottom: 20px;
+}
+
 #recordarContraseña{
     text-decoration: underline;
     color: blue;
@@ -147,12 +155,12 @@ button a{
  */
 
 #formularioBusqueda{
-    width: 70%;
+    width: 80%;
     background: url(../imagenes/background_form.gif) repeat;
     color: white;
     padding: 20px;
     border-radius: 20px 20px 20px 20px;
-    margin-left: 15%;
+    margin-left: 8%;
 }
 
 #formularioBusqueda button{
@@ -174,6 +182,42 @@ button a{
     padding-bottom: 10px;
     border-top: 1px solid black;
     /*border: 5px;*/
+}
+
+/*
+ * Archivo de los resultados de busqueda
+ */
+
+#menuOrdenarPor #titulo{
+    background-color: #138CC0;
+    color: white;
+}
+
+#menuOrdenarPor #active{
+    background-color: #18bbff;
+    color: white;
+}
+
+#menuOrdenarPor ul li{
+    list-style: none;
+    background-color: #CCCCCC;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 15px;
+    /*border-radius: 5px 5px 5px 5px;*/
+    /*margin: 2px;*/
+    display: block; 
+}
+
+#menuOrdenarPor ul li:hover{
+    background-color: #18bbff;
+    color: white;
+}
+
+#menuOrdenarPor ul > li{
+    float:left;
+    margin-bottom: 20px;
 }
 
 /*
