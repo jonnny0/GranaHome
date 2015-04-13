@@ -3,30 +3,124 @@
     <head>
         <title>GranaHome</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../css/style.css" type="text/css" media="all">
-        <link rel="icon" type="image/png" href="../imagenes/logo.png" />
+        <link rel="stylesheet" href="../../css/style.css" type="text/css" media="all">
+        <link rel="icon" type="image/png" href="../../imagenes/logo.png" />
     </head>
 
     <body>
 	<!--Comienzo de la cabecera-->
-	<header>
-	    <!--Aquí va el logo y eso, además de los botones para iniciar sesion y todo eso.-->
-	    <div id="logo">
-		<a href="../index.html">
-		    <img src="../imagenes/logo.png" title="logo GranaHome" alt="logo GranaHome"/>
-		</a>
-	    </div>
-	    <div id="identificacion">
-		<button title="Log In" name="iniciarSesion" type="button" onclick="alert('Cuadro de inicio de sesión')"> Iniciar Sesión </button>
-		<button title="Register" name="registrarse" type="button" onclick="alert('Cuadro de inicio de registro')"> Registrarse </button>
-	    </div>
-	    <hr noshade="noshade"/>
-	</header>
-	<!--Fin de la cabecera-->
+        <header>
+            <!--Aquí va el logo y eso, además de los botones para iniciar sesion y todo eso.-->
+            <div id="logo">
+                <a href="../../index.html">
+                    <img src="../../imagenes/logo.png" title="GranaHome" alt="GranaHome"/>
+                </a>
+            </div>
+            <div id="identificacion">
+                <a href="#IniciarSesion" class="simulacionBotones">
+                    Iniciar Sesión
+                    <!--<button title="Log In" name="iniciarSesion" type="button"> Iniciar Sesión </button>-->
+                </a>
+                &nbsp
+                <a href="#Registrarse" class="simulacionBotones">
+                    Registrarse
+                    <!--<button title="Register" name="registrarse" type="button"> Registrarse </button>-->
+                </a>
+            </div>
+            <div id="IniciarSesion" class="modalmask">
+                <div class="modalbox movedown">
+                    <a href="" title="Cerrar" class="close">X</a>
+                    <h3>Iniciar Sesión</h3>
+                    <form>
+                        <label for="nombreUsuario">Nombre de usuario:</label>
+                        <br>
+                        <input type="text" id="nombreUsuario" name="nombre" required />
+                        <br><br>
+                        <label for="contrasena">Contraseña:</label>
+                        <br>
+                        <input type="password" id="contrasena" name="contrasena" required />
+                        <br>
+                        <a id="recordarContraseña" onclick="alert('Función para recordar contraseña')">¿Has olvidado tu contraseña?</a>
+                        <br><br>
+                        <button type="button" title="Iniciar Sesión" name="iniciarSesion" onclick="alert('Función de identificación')"> Iniciar Sesión </button>
+                    </form>
+                </div>
+            </div>
+            <div id="Registrarse" class="modalmask">
+                <div class="modalbox movedown">
+                    <a href="" title="Cerrar" class="close">X</a>
+                    <h3>Registrarse</h3>
+                    <form>
+                        <div class="izquierda">
+                            <label for="nombreUsuario2">Nombre de usuario:</label>
+                            <br>
+                            <input type="text" id="nombreUsuario2" name="nombre" required />
+                            <br><br>
+                            <label for="contrasena2">Contraseña:</label>
+                            <br>
+                            <input type="password" id="contrasena2" name="contrasena2" required />
+                            <br><br>
+                            <label for="confirmarContrasena">Confirmar contraseña:</label>
+                            <br>
+                            <input type="password" id="confirmarContrasena" name="confirmarContrasena" required />
+                            <br><br>
+                        </div>
+                        <div class="derecha">
+                            <label for="mail">E-mail:</label>
+                            <br>
+                            <input type="email" id="mail" name="mail" required />
+                            <br><br>
+                            <label for="tipoUsuario">Tipo usuario:</label>
+                            <br>
+                            <select name="tipoUsuario" id="tipoUsuario">
+                                <option value="cliente">Cliente</option>
+                                <option value="propietario">Propietario</option>
+                            </select>
+                            <br><br>
+                            <button type="button" title="Registrarse" name="registrarse" onclick="alert('Función de registro')"> Registrarse </button>
+                        </div>
+                    </form>
+                    <br><br><br><br><br><br><br><br><br><br>
+                </div>
+            </div>
+            <hr noshade="noshade"/>
+        </header>
+        <!--Fin de la cabecera-->
 
 	<!--Comienza la parte de la página-->
 
 	<div class="contenedorPrincipal">
+	    <h2>
+		Hotel Alhambra Palace
+		<img src="../../imagenes/ico_estrella_4p.png" title="4 Estrellas" alt="4 Estrellas"/>
+	    </h2>
+	    <p id="direccion">
+		Plaza Arquitecto García de Paredes, 1, Centro de Granada, 18009 Granada, España
+	    </p>
+	    <div class="imagenAlojamiento">
+		<img src="../../imagenes/hotelAlhambraPalace.jpg" title="Hotel" alt="Hotel"/>
+	    </div>
+	    <h4> Descripción detallada </h4>
+	    <p class="resumen">
+		El Alhambra Palace está situado a las afueras de las antiguas murallas de la Alhambra, y ofrece unas
+		vistas espectaculares a la ciudad de Granada. Dispone de habitaciones elegantes con una decoración de
+		inspiración árabe, conexión Wi-Fi gratuita y TV vía satélite.
+		<br/><br/>
+		El hotel cuenta con un restaurante a la carta que sirve comida andaluza. También hay un bar con una
+		terraza con unas vistas impresionantes a Granada y a Sierra Nevada.
+		<br/><br/>
+		La recepción del Hotel Alhambra Palace está abierta las 24 horas. Hay un cajero automático en el hotel,
+		así como servicio de cambio de divisa. Justo enfrente del hotel encontrará una parada de autobús que le
+		llevará al centro de la ciudad o a la Alhambra.
+		<br/><br/>
+		La Alhambra está a menos de 10 minutos a pie, a través de una pequeña zona boscosa. Este hotel se
+		encuentra de 10 minutos a pie del barrio árabe medieval del Albayzín, declarado Patrimonio de la
+		Humanidad por la UNESCO.
+		<br/><br/>
+		Centro de Granada es una opción genial para los viajeros interesados en compras, comida y historia.
+	    </p>
+	    <h4> Características</h4>
+	   
 	    
 	</div>
 
