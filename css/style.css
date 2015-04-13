@@ -26,20 +26,23 @@ header hr{
 }
 
 header #logo{
-    width: 70%;
+    width: 30%;
     float: left;
 }
 
-header #logoPaginaInicial{
-    width: 100%;
+header #extras{
+    width: 40%;
+    margin-top: 50px;
+    margin-bottom: 58px;
+    text-align: center;
     float: left;
 }
 
 header #identificacion{
     width: 30%;
-    float: right;
     margin-top: 50px;
     margin-bottom: 58px;
+    float: right;
 }
 
 footer{
@@ -218,6 +221,10 @@ button a{
 #menuOrdenarPor ul > li{
     float:left;
     margin-bottom: 20px;
+}
+
+.tablaBusqueda .descripcion{
+    padding: 20px;
 }
 
 /*
