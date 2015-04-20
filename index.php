@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <title></title>
+        <title>GranaHome</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+        <link rel="icon" type="image/png" href="imagenes/logo.png" />
     </head>
+
     <body>
+
+	<!--Comienzo de la cabecera-->
+        <header>
         <?php
-        // put your code here
+        include('php/header.php');
         ?>
+        </header>
+	<!--Fin de la cabecera-->
+
+	<!--Comienza la parte de la página-->
+        <div class="contenedorPrincipal">
+        <?php
+        include('php/main_content.php');
+        ?>
+        </div>
+
+	<!--Fin de la parte de la página-->
+
+	<!--Comienzo del pie-->
+	<br><br>
+	<footer>
+        <?php
+        include('php/footer.php');
+        ?>
+	</footer>
+	<!--Fin del pie-->
     </body>
+
 </html>
