@@ -1,0 +1,37 @@
+<div id="registrarse" class="modalmask">
+    <div class="modalbox movedown">
+        <a href="" title="Cerrar" class="close">X</a>
+        <h2>Registrarse</h2>
+        <form>
+            <div class="izquierda">
+                <label for="nombreUsuario2">Nombre de usuario:</label>
+                <br>
+                <input type="text" id="nombreUsuario2" name="nombre" required />
+                <br><br>
+                <label for="contrasena2">Contraseña:</label>
+                <br>
+                <input type="password" id="contrasena2" name="contrasena2" required />
+                <br><br>
+                <label for="confirmarContrasena">Confirmar contraseña:</label>
+                <br>
+                <input type="password" id="confirmarContrasena" name="confirmarContrasena" required />
+                <br><br>
+            </div>
+            <div class="derecha">
+                <label for="mail">E-mail:</label>
+                <br>
+                <input type="email" id="mail" name="mail" required />
+                <br><br>
+                <label for="tipoUsuario">Tipo usuario:</label>
+                <br>
+                <select name="tipoUsuario" id="tipoUsuario">
+                    <option value="cliente">Cliente</option>
+                    <option value="propietario">Propietario</option>
+                </select>
+                <br><br>
+                <button type="button" title="Registrarse" name="registrarse" onclick="alert('Función de registro')"> Registrarse </button>
+            </div>
+        </form>
+        <br><br><br><br><br><br><br><br><br>
+    </div>
+</div>

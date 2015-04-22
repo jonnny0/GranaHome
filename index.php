@@ -8,32 +8,39 @@
     </head>
 
     <body>
+        <?php
+        if (isset($_GET['sec'])) {
+            $seccion = $_GET['sec'];
+        } else {
+            $seccion = '0';
+        }
+        ?>
 
-	<!--Comienzo de la cabecera-->
+        <!--Comienzo de la cabecera-->
         <header>
-        <?php
-        include('php/header.php');
-        ?>
+            <?php
+            include('php/header.php');
+            ?>
         </header>
-	<!--Fin de la cabecera-->
+        <!--Fin de la cabecera-->
 
-	<!--Comienza la parte de la página-->
+        <!--Comienza la parte de la página-->
         <div class="contenedorPrincipal">
-        <?php
-        include('php/main_content.php');
-        ?>
+            <?php
+            include('php/main_content.php');
+            ?>
         </div>
 
-	<!--Fin de la parte de la página-->
+        <!--Fin de la parte de la página-->
 
-	<!--Comienzo del pie-->
-	<br><br>
-	<footer>
-        <?php
-        include('php/footer.php');
-        ?>
-	</footer>
-	<!--Fin del pie-->
+        <!--Comienzo del pie-->
+        <br><br>
+        <footer>
+            <?php
+            include('php/footer.php');
+            ?>
+        </footer>
+        <!--Fin del pie-->
     </body>
 
 </html>

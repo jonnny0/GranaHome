@@ -48,6 +48,8 @@ header #identificacion{
 footer{
     background: url(../imagenes/background_footer.jpg) repeat;
     padding: 20px;
+    margin-left: 13%;
+    margin-right: 13%;
 }
 
 footer p{
@@ -58,8 +60,8 @@ footer p{
 }
 
 .contenedorPrincipal{
-    width: 72%;
-    margin-left: 180px;
+    margin-left: 13%;
+    margin-right: 13%;
     margin-top: 50px;
     color: black;
     font-family: sans-serif;
@@ -158,12 +160,12 @@ button a{
  */
 
 #formularioBusqueda{
-    width: 80%;
+    width: 70%;
     background: url(../imagenes/background_form.gif) repeat;
     color: white;
     padding: 20px;
     border-radius: 20px 20px 20px 20px;
-    margin-left: 8%;
+    margin-left: 12%;
 }
 
 #formularioBusqueda button{
