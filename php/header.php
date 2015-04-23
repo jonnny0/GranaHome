@@ -7,7 +7,26 @@
 </div>
 <!--Fin del Logo-->
 
-
+<!--Botones para Volver Atras-->
+<div id="extras">
+    <?php
+    switch ($seccion) {
+        case 'alojamiento':
+            ?>
+            <a href="javascript:history.go(-1)" class="simulacionBotones">
+                Volver a los resultados
+            </a>
+        <?php
+        case 'busqueda'
+            ?>
+            <a href="index.php?sec=buscador" class="simulacionBotones">
+                Volver al buscador
+            </a>
+        <?php
+    }
+    ?>
+</div>
+<!--Fin de Botones para Volver Atras-->
 
 <!--Botones de Identificación y Opciones de Cuenta-->
 <div id="identificacion">
@@ -29,26 +48,7 @@
 </div>
 <!--Fin de Botones de Identificación y Opciones de Cuenta-->
 
-<!--Botones para Volver Atras-->
-<div id="extras">
-    <?php
-    switch ($seccion) {
-        case 'alojamiento':
-            ?>
-            <a href="javascript:history.go(-1)" class="simulacionBotones">
-                Volver a los resultados
-            </a>
-        <?php
-        case 'busqueda'
-            ?>
-            <a href="index.php?sec=buscador" class="simulacionBotones">
-                Volver al buscador
-            </a>
-        <?php
-    }
-    ?>
-</div>
-<!--Fin de Botones para Volver Atras-->
+
 
 <br class="clearfloat"/>
 <hr noshade="noshade"/>

@@ -32,15 +32,15 @@ header #logo{
 
 header #extras{
     /*width: 40%;*/
-    margin-top: 60px;
+    margin-top: 50px;
     margin-bottom: 58px;
     text-align: center;
-    float: right;
+    float: left;
 }
 
 header #identificacion{
     /*width: 30%;*/
-    margin-top: 60px;
+    margin-top: 50px;
     margin-bottom: 58px;
     margin-right: 160px;
     float: right;
@@ -99,7 +99,7 @@ button a{
     border-color: #bbbbbb;
     border-style: ridge;
     border-width: 2px;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .simulacionBotones:hover{
@@ -236,7 +236,7 @@ button a{
  */
 
 .imagenAlojamiento{
-    margin-right: 36%;
+    margin-left: 6%;
     margin-bottom: 30px;
 }
 
