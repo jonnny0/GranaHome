@@ -10,6 +10,9 @@ switch ($seccion) {
     case 'alojamiento':
         include 'html/es/alojamiento.html';
         break;
+    case 'opciones_usuario':
+        include 'php/opciones_usuario.php';
+        break;
     default:
         include 'html/eleccion.html';
         break;

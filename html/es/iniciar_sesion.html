@@ -2,18 +2,19 @@
     <div class="modalbox movedown">
         <a href="" title="Cerrar" class="close">X</a>
         <h2>Iniciar Sesión</h2>
-        <form>
+        <form action="php/comprobar_usuario.php" method="POST">
             <label for="nombreUsuario">Nombre de usuario:</label>
             <br>
-            <input type="text" id="nombreUsuario" name="nombre" required />
+            <input type="text" id="nombreUsuario" name="nombreUsuario" required />
             <br><br>
-            <label for="contrasena">Contraseña:</label>
+            <label for="passwordUsuario">Contraseña:</label>
             <br>
-            <input type="password" id="contrasena" name="contrasena" required />
+            <input type="password" id="passwordUsuario" name="passwordUsuario" required />
             <br>
             <a id="recordarContraseña" onclick="alert('Función para recordar contraseña')">¿Has olvidado tu contraseña?</a>
             <br><br>
-            <button type="button" title="Iniciar Sesión" name="iniciarSesion" onclick="alert('Función de identificación')"> Iniciar Sesión </button>
+            <button type="submit" title="Iniciar Sesión" name="iniciarSesion"> Iniciar Sesión </button>
         </form>
     </div>
 </div>
+
