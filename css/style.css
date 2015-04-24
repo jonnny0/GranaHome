@@ -31,7 +31,7 @@ header #logo{
 }
 
 header #extras{
-    /*width: 40%;*/
+    width: 30%;
     margin-top: 66px;
     margin-bottom: 58px;
     text-align: center;
@@ -39,21 +39,19 @@ header #extras{
 }
 
 header #identificado{
-    /*width: 30%;*/
+    width: 25%;
     margin-top: 30px;
     margin-bottom: 58px;
     margin-right: 160px;
     float: right;
-    text-align: center;
 }
 
 header #NoIdentificado{
-    /*width: 30%;*/
+    width: 25%;
     margin-top: 66px;
     margin-bottom: 58px;
     margin-right: 160px;
     float: right;
-    text-align: center;
 }
 
 footer{
@@ -71,8 +69,8 @@ footer p{
 }
 
 .contenedorPrincipal{
-    margin-left: 13%;
-    margin-right: 13%;
+    margin-left: 7%;
+    margin-right: 7%;
     margin-top: 50px;
     color: black;
     font-family: sans-serif;
@@ -109,7 +107,7 @@ button a{
     border-color: #bbbbbb;
     border-style: ridge;
     border-width: 2px;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .simulacionBotones:hover{
@@ -149,7 +147,7 @@ button a{
 }
 
 #eleccionIdioma #imgLeft{
-    margin-left: 325px;
+    margin-left: 450px;
 }
 
 #eleccionIdioma #imgRight{
@@ -164,7 +162,7 @@ button a{
 }
 
 .adaptabilidad{
-    margin-left: 320px;
+    margin-left: 440px;
 }
 
 /*

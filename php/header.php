@@ -30,8 +30,8 @@
 
 
 <!--Botones de Identificación y Opciones de Cuenta-->
-
-    <?php
+<?php
+if ($seccion != 'eleccion') {
     if (isset($_SESSION['nombreUsuario'])) {
         echo '<div id="identificado">';
         echo '<strong>' . $_SESSION['nombreUsuario'] . '</strong> (' . $_SESSION['tipoUsuario'] . ')<br /><br />';
@@ -44,11 +44,12 @@
         echo '<a href="#IniciarSesion" class="simulacionBotones">Iniciar Sesión</a>';
         echo '<a href="#registrarse" class="simulacionBotones">Registrarse</a>';
     }
-    ?>
-    <?php
-    include 'html/es/iniciar_sesion.html';
-    include 'html/es/registrarse.html';
-    ?>
+}
+?>
+<?php
+include 'html/es/iniciar_sesion.html';
+include 'html/es/registrarse.html';
+?>
 </div>
 <!--Fin de Botones de Identificación y Opciones de Cuenta-->
 

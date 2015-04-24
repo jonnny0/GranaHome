@@ -13,7 +13,7 @@
         if (isset($_GET['sec'])) {
             $seccion = $_GET['sec'];
         } else {
-            $seccion = '0';
+            $seccion = 'eleccion';
         }
         ?>
 
