@@ -17,6 +17,10 @@
         }
         ?>
 
+        <?php
+        include('php/conexion_bd.php');
+        ?>
+
         <!--Comienzo de la cabecera-->
         <header>
             <?php
