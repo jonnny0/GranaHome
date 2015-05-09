@@ -69,8 +69,8 @@ footer p{
 }
 
 .contenedorPrincipal{
-    margin-left: 7%;
-    margin-right: 7%;
+    margin-left: 14%;
+    margin-right: 14%;
     margin-top: 50px;
     color: black;
     font-family: sans-serif;
@@ -147,7 +147,7 @@ button a{
 }
 
 #eleccionIdioma #imgLeft{
-    margin-left: 450px;
+    margin-left: 355px;
 }
 
 #eleccionIdioma #imgRight{
@@ -162,7 +162,7 @@ button a{
 }
 
 .adaptabilidad{
-    margin-left: 440px;
+    margin-left: 345px;
 }
 
 /*
@@ -170,12 +170,12 @@ button a{
  */
 
 #formularioBusqueda{
-    width: 70%;
+    width: 75%;
     background: url(../imagenes/background_form.gif) repeat;
     color: white;
     padding: 20px;
     border-radius: 20px 20px 20px 20px;
-    margin-left: 12%;
+    margin-left: 10%;
 }
 
 #formularioBusqueda button{
