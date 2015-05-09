@@ -15,7 +15,7 @@ $usuario = $fila['nombre_usuario'];
 <script src="js/formularios.js"></script>
 <div class="box_modificar_datos_usuario movedown">
     <h2>Modificar datos de usuario</h2>
-    <form  method="post" action="php/modificar_datos_usuario.php" onsubmit="return comprueba_formulario(this)">
+    <form  method="post" action="php/actualizar_datos_usuario.php" onsubmit="return comprueba_formulario(this)">
         <div class="izquierda">
             <label for="nombre_usuario_3">Nombre de usuario:</label>
             <br>
@@ -24,11 +24,11 @@ $usuario = $fila['nombre_usuario'];
             ?><br><br>
             <label for="password_3">Contraseña:</label>
             <br>
-            <input type="password" id="password_3" name="password" maxlength="20" required />
+            <input type="password" id="password_3" name="password" maxlength="20" />
             <br><br>
             <label for="confirmar_contrasena_3">Confirmar contraseña:</label>
             <br>
-            <input type="password" id="confirmar_contrasena_3" name="confirmar_contrasena" maxlength="20" required />
+            <input type="password" id="confirmar_contrasena_3" name="confirmar_password" maxlength="20" />
             <br><br>
         </div>
         <div class="derecha">
