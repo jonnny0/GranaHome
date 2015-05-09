@@ -17,10 +17,10 @@ switch ($seccion) {
         include 'html/es/nuevo_alojamiento.html';
         break;
     case 'modificar_alojamiento':
-        include 'html/es/modificar_alojamiento.html';
+        include 'php/modificar_alojamiento.php';
         break;
     case 'modificar_datos_usuario':
-        include 'html/es/modificar_datos_usuario.html';
+        include 'php/modificar_datos_usuario.php';
         break;
     default:
         include 'html/eleccion.html';

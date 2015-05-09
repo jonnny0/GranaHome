@@ -330,7 +330,7 @@ button a{
 /*
  * modificar datos usuario
  */
-.modal_box_modificar_datos_usuario {
+.box_modificar_datos_usuario {
     width: 400px;
     position: relative;
     padding: 5px 20px 13px 20px;
