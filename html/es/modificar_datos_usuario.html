@@ -1,0 +1,39 @@
+
+<script src="js/formularios.js"></script>
+
+<div id="registrarse">
+    <div class="modal_box_modificar_datos_usuario movedown">
+        <h2>Modificar datos de usuario</h2>
+        <form  method="post" action="php/modificar_datos_usuario.php" onsubmit="return comprueba_formulario(this)">
+            <div class="izquierda">
+                <label for="nombre_usuario_3">Nombre de usuario:</label>
+                <br>
+                <input type="text" id="nombre_usuario_3" name="nombre_usuario" maxlength="20" required />
+                <br><br>
+                <label for="password_3">Contraseña:</label>
+                <br>
+                <input type="password" id="password_3" name="password" maxlength="20" required />
+                <br><br>
+                <label for="confirmar_contrasena_3">Confirmar contraseña:</label>
+                <br>
+                <input type="password" id="confirmar_contrasena_3" name="confirmar_contrasena" maxlength="20" required />
+                <br><br>
+            </div>
+            <div class="derecha">
+                <label for="mail_3">E-mail:</label>
+                <br>
+                <input type="email" id="mail_3" name="mail"  maxlength="50" required />
+                <br><br>
+                <label for="tipo_usuario">Tipo usuario:</label>
+                <br>
+                <select name="tipo_usuario" id="tipo_usuario">
+                    <option value="cliente">Cliente</option>
+                    <option value="propietario">Propietario</option>
+                </select>
+                <br><br>
+                <button type="submit" title="Registrarse" name="registrarse"> Registrarse </button>
+            </div>
+        </form>
+        <br><br><br><br><br><br><br><br><br>
+    </div>
+</div>
