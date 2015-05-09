@@ -1,7 +1,7 @@
 <?php
 
 // Recibimos como parámetro el comando SQL
-function conexionBD($pregunta) {
+function conexionBD($consulta_sql) {
 
     //Creamos una conexion remota
     $conexion = mysql_connect('localhost', 'root');
@@ -18,13 +18,11 @@ function conexionBD($pregunta) {
 
 
     // Ejecutamos el código SQL
-    $resultado = mysql_query($pregunta, $conexion);// or die(mysql_error());
+    $resultado = mysql_query($consulta_sql, $conexion);// or die(mysql_error());
 
 
     if ($resultado == FALSE) {
-        echo '<br>Se siente, no se pudo realizar la consulta: ' . $pregunta . '<br>' . mysql_error();
-        mysql_close($conexion);
-        exit();
+        echo '<br>Se siente, no se pudo realizar la operación: ' . $consulta_sql . '<br>' . mysql_error();        
     }
     
     mysql_close($conexion);

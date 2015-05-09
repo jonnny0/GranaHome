@@ -1,0 +1,22 @@
+<div id="iniciar_sesion_error" class="modalmask">
+    <div class="modalbox movedown">
+        <a href="" title="Cerrar" class="close">X</a>
+        <h2>Iniciar Sesión</h2>
+        <strong>Nombre de usuario / contraseña incorrectos</strong>
+        <br /><br />
+        <form action="php/iniciar_sesion.php" method="POST">
+            <label for="nombreUsuario">Nombre de usuario:</label>
+            <br>
+            <input type="text" id="nombreUsuario" name="nombreUsuario" maxlength="20" required />
+            <br><br>
+            <label for="passwordUsuario">Contraseña:</label>
+            <br>
+            <input type="password" id="passwordUsuario" name="passwordUsuario" maxlength="20" required />
+            <br>
+            <a id="recordarContraseña" onclick="alert('Función para recordar contraseña')">¿Has olvidado tu contraseña?</a>
+            <br><br>
+            <button type="submit" title="Iniciar Sesión" name="iniciarSesion"> Iniciar Sesión </button>
+        </form>
+
+    </div>
+</div>

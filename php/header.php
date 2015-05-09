@@ -48,6 +48,7 @@ if ($seccion != 'eleccion') {
 ?>
 <?php
 include 'html/es/iniciar_sesion.html';
+include 'html/es/iniciar_sesion_error.html';
 include 'html/es/registrarse.html';
 ?>
 </div>
