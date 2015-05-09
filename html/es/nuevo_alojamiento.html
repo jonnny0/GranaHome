@@ -1,0 +1,33 @@
+<div class="box_modificar_datos_usuario movedown">
+    <h2>Datos para insertar un nuevo alojamiento</h2>
+    <form method="post" action="php/insertarAlojamiento.php">
+	<label for="nombre_alojamiento">Nombre del alojamiento: </label>
+	<input type="text" id="nombre_usuario" name="nombre_usuario" maxlength="50" required />
+	<br><br>
+	<label for="telefono">Telefono de contacto: </label>
+	<input type="number" id="telefono" name="telefono" required/>
+	<br><br>
+	<label for="direccion">Dirección: </label>
+	<input type="text" id="direccion" maxlength="100" name="direccion" required/>
+	<br><br>
+	<label for="localidad">Localidad: </label>
+	<input type="text" id="localidad" maxlength="50" name="localidad" required/>
+	<br><br>
+	<label for="descripcion_breve">Descripción breve (Máximo 200 caracteres): </label>
+	<input type="text" id="descripcion_breve" maxlength="200" name="descripcion_breve" required/>
+	<br><br>
+	<label for="descripcion_detallada">Descripción detallada (Máximo 1000 caracteres): </label>
+	<input type="text" id="descripcion_detallada" maxlength="1000" name="descripcion_detallada" required/>
+	<br><br>
+	<label for="tipo_alojamiento">Tipo Alojamiento: </label>
+	<select name="tipo_alojamiento" id="tipo_alojamiento">
+	    <option value="hotel">Hotel</option>
+	    <option value="apartamento">Apartamento</option>
+	    <option value="pension/hostal">Pension/Hostal</option>
+	    <option value="piso">Piso</option>
+	    <option value="casa_rural">Casa Rural</option>
+	</select>
+	<br><br>
+	<button type="submit" title="Añadir Hotel" name="anadir_hotel"> Añadir Hotel </button>
+    </form>
+</div>
