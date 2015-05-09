@@ -17,11 +17,9 @@ if (!$resultado) {
             location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
         </script>';
 } else {
-    $_SESSION['nombre_usario'] = $_POST['nombre_usuario'];
+    $_SESSION['nombre_usuario'] = $_POST['nombre_usuario'];
     $_SESSION['tipo_usuario'] = $_POST['tipo_usuario'];
-//    header('Location: ' . $_SERVER['HTTP_REFERER']);
     echo '<script>
-            alert("Exito");
             location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
         </script>';
 }
