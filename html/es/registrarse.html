@@ -1,26 +1,30 @@
+
+
+<script src="js/formularios.js"></script>
+
 <div id="registrarse" class="modalmask">
     <div class="modalbox movedown">
         <a href="" title="Cerrar" class="close">X</a>
         <h2>Registrarse</h2>
-        <form>
+        <form  method="post" action="php/registrarse.php" onsubmit="return comprueba_formulario(this)">
             <div class="izquierda">
                 <label for="nombreUsuario2">Nombre de usuario:</label>
                 <br>
-                <input type="text" id="nombreUsuario2" name="nombre" required />
+                <input type="text" id="nombreUsuario2" name="nombre_usuario" maxlength="20" required />
                 <br><br>
                 <label for="contrasena2">Contraseña:</label>
                 <br>
-                <input type="password" id="contrasena2" name="contrasena2" required />
+                <input type="password" id="contrasena2" name="contrasena2" maxlength="20" required />
                 <br><br>
                 <label for="confirmarContrasena">Confirmar contraseña:</label>
                 <br>
-                <input type="password" id="confirmarContrasena" name="confirmarContrasena" required />
+                <input type="password" id="confirmarContrasena" name="confirmarContrasena" maxlength="20" required />
                 <br><br>
             </div>
             <div class="derecha">
                 <label for="mail">E-mail:</label>
                 <br>
-                <input type="email" id="mail" name="mail" required />
+                <input type="email" id="mail" name="mail"  maxlength="50" required />
                 <br><br>
                 <label for="tipoUsuario">Tipo usuario:</label>
                 <br>
@@ -29,7 +33,7 @@
                     <option value="propietario">Propietario</option>
                 </select>
                 <br><br>
-                <button type="button" title="Registrarse" name="registrarse" onclick="alert('Función de registro')"> Registrarse </button>
+                <button type="submit" title="Registrarse" name="registrarse"> Registrarse </button>
             </div>
         </form>
         <br><br><br><br><br><br><br><br><br>
