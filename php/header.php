@@ -32,9 +32,9 @@
 <!--Botones de Identificación y Opciones de Cuenta-->
 <?php
 if ($seccion != 'eleccion') {
-    if (isset($_SESSION['nombreUsuario'])) {
+    if (isset($_SESSION['nombre_usuario'])) {
         echo '<div id="identificado">';
-        echo '<strong>' . $_SESSION['nombreUsuario'] . '</strong> (' . $_SESSION['tipoUsuario'] . ')<br /><br />';
+        echo '<strong>' . $_SESSION['nombre_usuario'] . '</strong> (' . $_SESSION['tipo_usuario'] . ')<br /><br />';
         echo '<a href="index.php?sec=opciones_usuario" class="simulacionBotones">'
         . 'Opciones de usuario</a>';
         echo '<a href="php/cerrar_sesion.php" class="simulacionBotones">'
