@@ -16,6 +16,9 @@ switch ($seccion) {
     case 'nuevo_alojamiento':
         include 'php/nuevo_alojamiento.php';
         break;
+    case 'nueva_habitacion':
+        include 'php/nueva_habitacion.php';
+        break;
     case 'modificar_alojamiento':
         include 'php/modificar_alojamiento.php';
         break;

@@ -416,3 +416,10 @@ textArea{
     display: inline;
 }
 
+/*
+ * Modificar un alojamiento
+ */
+#selector{
+    text-align: center;
+    font-size: 16px;
+}
