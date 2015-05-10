@@ -29,4 +29,9 @@ switch ($seccion) {
         include 'html/eleccion.html';
         break;
 }
+
+include 'html/es/recordar_password.html';
+include 'html/es/usuario_encontrado.html';
+include 'html/es/usuario_no_encontrado.html';
+
 ?>
