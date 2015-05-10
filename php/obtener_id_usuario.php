@@ -1,6 +1,6 @@
 <?php
 
-include_once '/conexion_bd.php';
+include_once 'conexion_bd.php';
 
 function obtener_id_usuario($nombre_usuario) {
 

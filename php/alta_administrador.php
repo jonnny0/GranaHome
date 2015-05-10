@@ -5,7 +5,7 @@
     <div class="opciones_usuario modificar_datos_usuario movedown">
         <h2>Dar de alta administrador</h2>
         <hr>
-        <form  method="post" action="php/actualizar_datos_usuario.php" onsubmit="return comprueba_formulario(this)">
+        <form  method="post" action="php/registrarse.php" onsubmit="return comprueba_formulario(this)">
             <div class="izquierda">
                 <label for="nombreUsuario2">Nombre de usuario:</label>
                 <br>
@@ -24,9 +24,6 @@
                 <label for="mail">E-mail:</label>
                 <br>
                 <input type="email" id="mail" name="mail"  maxlength="50" required />
-                <br><br>
-                <label for="tipo_usuario">Tipo usuario:</label>
-                <br>
                 <input type="hidden" name="tipo_usuario" value="administrador" />               
                 <br><br>
                 <button type="submit" title="Registrarse" name="registrarse"> Registrar </button>

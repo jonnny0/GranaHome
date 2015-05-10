@@ -31,8 +31,8 @@ switch ($seccion) {
     case 'comentar':
         include 'php/comentar.php';
         break;
-    case 'validar_alojamiento':
-        include 'php/validar_alojamiento.php';
+    case 'validar_alojamientos':
+        include 'php/validar_alojamientos.php';
         break;
     case 'alta_administrador':
         include 'php/alta_administrador.php';
