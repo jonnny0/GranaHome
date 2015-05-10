@@ -21,7 +21,7 @@ if ($id_propietario != -1) {
     $resultado = conexionBD($consulta);
 
     if ($resultado) {
-      echo '<div id="selector">';
+        echo '<div id="selector">';
 //        echo '<label for="alojamiento_seleccionado">Selecciona el alojamiento: </label>';
         echo '<select name="alojamiento_seleccionado" id="alojamiento_seleccionado" onchange="actualizar(this)">';
         echo '<option value="-1"> Selecciona alojamiento</option>';
