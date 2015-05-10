@@ -15,16 +15,16 @@ if ($id == -1) {
         </script>';
 } else {
     $error = false;
-    $tipo_alojamiento = $_POST['tipo_alojamiento'];
+    $id_alojamiento = $_POST['id_alojamiento'];
 
-    $consulta = 'INSERT INTO alojamiento (id_propietario, nombre_alojamiento, descripcion_breve, descripcion_detallada, telefono, direccion, localidad) VALUES ('
-            . $id . ', "'
-            . $_POST['nombre_alojamiento'] . '", "'
-            . $_POST['descripcion_breve'] . '", "'
-            . $_POST['descripcion_detallada'] . '", '
-            . $_POST['telefono'] . ', "'
-            . $_POST['direccion'] . '", "'
-            . $_POST['localidad'] . '") ';
+    $consulta = 'UPDATE alojamiento SET '
+            . 'nombre_alojamiento="' . $_POST['nombre_alojamiento'] . '", '
+            . 'descripcion_breve="' . $_POST['descripcion_breve'] . '", '
+            . 'descripcion_detallada="' . $_POST['descripcion_detallada'] . '", '
+            . 'direccion="' . $_POST['direccion'] . '", '
+            . 'localidad="' . $_POST['localidad'] . '", '
+            . 'telefono=' . $_POST['telefono'] . ' '
+            . 'WHERE id_alojamiento=' . $id_alojamiento;
 
     $resultado = conexionBD($consulta);
 
@@ -38,14 +38,9 @@ if ($id == -1) {
         if (!$resultado) {
             $error = true;
         } else {
-            $fila = mysql_fetch_array($resultado);
-            $id_alojamiento = $fila['id_alojamiento'];
+            $consulta = 'DELETE FROM alojamiento_tiene_caracteristica WHERE id_alojamiento=' . $id_alojamiento;
 
-            if ($tipo_alojamiento == "piso" || $tipo_alojamiento == "casa_rural") {
-                $resultado = alojamiento_completo($id_alojamiento, $tipo_alojamiento, $_POST['precio']);
-            } else {
-                $resultado = alojamiento_habitacion($id_alojamiento, $tipo_alojamiento);
-            }
+            $resultado = conexionBD($consulta);
 
             if (!$resultado) {
                 $error = true;
@@ -57,36 +52,19 @@ if ($id == -1) {
                     $error = true;
                 } else {
                     echo '<script>
-                        alert("El alojamiento ha sido añadido.");
-                        location.href= "../index.php?sec=opciones_usuario";
-                    </script>';
+                    alert("El alojamiento ha sido actualizado.");
+                    location.href= "../index.php?sec=opciones_usuario";
+                </script>';
                 }
             }
         }
     }
     if ($error) {
         echo '<script>
-            alert("No se ha podido insertar el alojamiento.");
+            alert("No se ha podido actualizar el alojamiento.");
             location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
         </script>';
     }
-}
-
-function alojamiento_completo($id, $tipo, $precio) {
-    $consulta = 'INSERT INTO alquiler_completo (id_alojamiento_completo, tipo_alquiler_completo, precio) VALUES ('
-            . $id . ', "'
-            . $tipo . '", "'
-            . $precio . '") ';
-    $resultado = conexionBD($consulta);
-    return $resultado;
-}
-
-function alojamiento_habitacion($id, $tipo) {
-    $consulta = 'INSERT INTO alquiler_habitaciones (id_alojamiento_habitaciones, tipo_alquiler_habitacion) VALUES ('
-            . $id . ', "'
-            . $tipo . '") ';
-    $resultado = conexionBD($consulta);
-    return $resultado;
 }
 
 function alojamiento_tiene_caracteristicas($id_alojamiento, $caracteristicas) {
@@ -105,4 +83,5 @@ function alojamiento_tiene_caracteristicas($id_alojamiento, $caracteristicas) {
     }
     return true;
 }
+
 ?>

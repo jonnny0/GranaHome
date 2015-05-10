@@ -16,6 +16,9 @@ switch ($seccion) {
     case 'nuevo_alojamiento':
         include 'php/nuevo_alojamiento.php';
         break;
+    case 'nueva_habitacion':
+        include 'php/nueva_habitacion.php';
+        break;
     case 'modificar_alojamiento':
         include 'php/modificar_alojamiento.php';
         break;
@@ -42,4 +45,5 @@ switch ($seccion) {
 include 'html/es/recordar_password.html';
 include 'html/es/usuario_encontrado.html';
 include 'html/es/usuario_no_encontrado.html';
+
 ?>
