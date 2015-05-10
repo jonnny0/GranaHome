@@ -22,6 +22,18 @@ switch ($seccion) {
     case 'modificar_datos_usuario':
         include 'php/modificar_datos_usuario.php';
         break;
+    case 'ver_reservas':
+        include 'php/ver_reservas.php';
+        break;
+    case 'comentar':
+        include 'php/comentar.php';
+        break;
+    case 'validar_alojamiento':
+        include 'php/validar_alojamiento.php';
+        break;
+    case 'alta_administrador':
+        include 'php/alta_administrador.php';
+        break;
     default:
         include 'html/eleccion.html';
         break;
@@ -30,5 +42,4 @@ switch ($seccion) {
 include 'html/es/recordar_password.html';
 include 'html/es/usuario_encontrado.html';
 include 'html/es/usuario_no_encontrado.html';
-
 ?>

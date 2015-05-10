@@ -1,8 +1,10 @@
 <?php
 
 include_once './conexion_bd.php';
-session_start();
 
+if (!isset($_SESSION['nombre_usuario'])) {
+    session_start();
+}
 //comprobación de que el usuario exista
 $consulta = 'SELECT * FROM usuario WHERE nombre_usuario="' . $_POST['nombre_usuario'] . '" AND password="' . $_POST['password'] . '"';
 
