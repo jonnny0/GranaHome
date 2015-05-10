@@ -26,7 +26,7 @@ function check_password(f) {
     return true;
 }
 
-/*función que comprueba el formulario de envío de mensaje*/
+/*función que comprueba si el email está bien formado o no*/
 function comprueba_mail(f) {
     var re = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
     if (!re.test(f.mail.value)) {
@@ -34,4 +34,15 @@ function comprueba_mail(f) {
         return false;
     }
     return true;
+}
+
+
+function validar_tipo_alojamiento(select) {
+    if (select.value == "piso" || select.value == "casa_rural") {
+        document.getElementById("precio").innerHTML = '<label for="precio_noche">Precio por noche: </label>' +
+                '<input type="number" step="any" id="precio_noche" name="precio" required/>';
+    } else {
+        document.getElementById("precio").innerHTML = "";
+    }
+    actualizar_precio();
 }

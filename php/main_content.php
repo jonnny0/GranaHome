@@ -14,7 +14,7 @@ switch ($seccion) {
         include 'php/opciones_usuario.php';
         break;
     case 'nuevo_alojamiento':
-        include 'html/es/nuevo_alojamiento.html';
+        include 'php/nuevo_alojamiento.php';
         break;
     case 'modificar_alojamiento':
         include 'php/modificar_alojamiento.php';

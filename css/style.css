@@ -57,6 +57,7 @@ header #NoIdentificado{
 footer{
     background: url(../imagenes/background_footer.jpg) repeat;
     padding: 20px;
+    margin-top: 30px;
     margin-left: 13%;
     margin-right: 13%;
 }
@@ -176,6 +177,13 @@ button a{
     padding: 20px;
     border-radius: 20px 20px 20px 20px;
     margin-left: 10%;
+}
+
+#formularioBusqueda hr{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: white;
+    padding: 1px;
 }
 
 #formularioBusqueda button{
@@ -326,12 +334,85 @@ button a{
 .negrita {
     font-weight: bold;
 }
+/*
+ * Opciones de usuario
+ */
+.opciones_usuario h2{
+    text-align: center;
+}
+
+.opciones_usuario h3{
+    text-align: center;
+}
+
+.opciones_usuario hr{
+    margin-bottom: 25px;
+    background-color: black;
+    height: 3px;
+}
+
+#menuOpcionesUsuario #active{
+    background-color: #18bbff;
+    color: white;
+}
+
+#menuOpcionesUsuario ul li{
+    list-style: none;
+    background-color: #CCCCCC;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 15px;
+    /*border-radius: 10px;*/
+    margin: 2px;
+    display: block; 
+}
+
+#menuOpcionesUsuario ul li:hover{
+    background-color: #18bbff;
+    color: white;
+}
+
+#menuOpcionesUsuario ul > li{
+    float:left;
+    margin-bottom: 20px;
+}
+
+#menuOpcionesUsuario a{
+    text-decoration: none;
+    color: black;
+}
+
+#menuOpcionesUsuario a:hover{
+    color: white;
+}
 
 /*
  * modificar datos usuario
  */
-.box_modificar_datos_usuario {
+.modificar_datos_usuario {
     width: 400px;
     position: relative;
     padding: 5px 20px 13px 20px;
 }
+
+/*
+ * Insertar un alojamiento
+ */
+
+.insertar_alojamiento {
+    width: 70%;
+    position: relative;
+    padding: 5px 20px 13px 20px;
+    font-size: 15px;
+}
+
+textArea{
+    resize: none;
+    padding: 9px;
+}
+
+#precio{
+    display: inline;
+}
+

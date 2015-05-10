@@ -1,6 +1,6 @@
 <?php
 
-include './conexion_bd.php';
+include_once './conexion_bd.php';
 session_start();
 
 $consulta = 'INSERT INTO usuario (nombre_usuario, password, mail, tipo_usuario) VALUES ("'

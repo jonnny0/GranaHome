@@ -1,5 +1,5 @@
 <?php
-include './conexion_bd.php';
+include_once './conexion_bd.php';
 session_start();
 
 ESTO NO HACE NAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

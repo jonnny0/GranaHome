@@ -1,6 +1,6 @@
 <?php
 
-include './conexion_bd.php';
+include_once './conexion_bd.php';
 session_start();
 
 //comprobación de que el usuario exista
