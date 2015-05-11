@@ -4,6 +4,14 @@ include_once 'conexion_bd.php';
 
 function obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo, $fecha_inicio, $fecha_fin) {
 
+    $n_habitaciones_total = obtener_total_habitaciones($id_alojamiento, $id_tipo);
+
+    $n_habitaciones_reservadas = obtener_habitaciones_reservadas($id_alojamiento, $id_tipo, $fecha_inicio, $fecha_fin);
+    
+    return $n_habitaciones_total - $n_habitaciones_reservadas;
+}
+
+function obtener_total_habitaciones($id_alojamiento, $id_tipo){
     $consulta_n_habitaciones = 'SELECT * FROM habitacion WHERE id_tipo_habitacion=' . $id_tipo . ' AND '
             . 'id_alojamiento=' . $id_alojamiento;
     $resultado_n_habitaciones = conexionBD($consulta_n_habitaciones);
@@ -11,33 +19,31 @@ function obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo, $f
     if (!$resultado_n_habitaciones) {
         error();
     }
-    
-    $n_habitaciones_total = mysql_num_rows($resultado_n_habitaciones);
 
-    $consulta_hay_reservadas = 'SELECT * FROM cliente_reserva, reserva_habitacion, habitacion WHERE '
-            . 'habitacion.id_tipo_habitacion=' . $id_alojamiento . ' AND '
-            . 'habitacion.id_alojamiento=' . $id_tipo . ' AND '
-            . 'habitacion.id_habitacion=reserva_habitacion.id_habitacion AND '
-            . 'reserva_habitacion.id_reserva=cliente_reserva.id_reserva AND '
-            . '(cliente_reserva.fecha_inicio>=' . $fecha_inicio . ' AND '
-            . 'cliente_reserva.fecha_inicio<=' . $fecha_fin . ') OR '
-            . '(cliente_reserva.fecha_fin>=' . $fecha_inicio . ' AND '
-            . 'cliente_reserva.fecha_fin<=' . $fecha_fin . ')';
+    return mysql_num_rows($resultado_n_habitaciones);
+}
+
+function obtener_habitaciones_reservadas($id_alojamiento, $id_tipo, $fecha_inicio, $fecha_fin){
+    $consulta_hay_reservadas = "SELECT * FROM cliente_reserva, reserva_habitacion, habitacion WHERE "
+            . "habitacion.id_alojamiento=" . $id_alojamiento . " AND "
+            . "habitacion.id_tipo_habitacion=" . $id_tipo . " AND "
+            . "habitacion.id_habitacion=reserva_habitacion.id_habitacion AND "
+            . "cliente_reserva.id_reserva=reserva_habitacion.id_reserva AND ( "
+            . "(cliente_reserva.fecha_inicio>='" . $fecha_inicio . "' AND "
+            . "cliente_reserva.fecha_inicio<='" . $fecha_fin . "') OR "
+            . "(cliente_reserva.fecha_fin>='" . $fecha_inicio . "' AND "
+            . "cliente_reserva.fecha_fin<='" . $fecha_fin . "') )";
 
     $resultado_hay_reservadas = conexionBD($consulta_hay_reservadas);
-    
+
     if (!$resultado_hay_reservadas) {
         error();
     }
-    
-    $n_habitaciones_reservadas = mysql_num_rows($resultado_hay_reservadas);
-    
-    echo '<script>
-        alert( "hay: ' . $n_habitaciones_total . ' reservadas: ' . $n_habitaciones_reservadas . ' quedan disponibles: '
-            . ($n_habitaciones_total-$n_habitaciones_reservadas) . '");
-    </script>';
-    return $n_habitaciones_total-$n_habitaciones_reservadas;
+
+    return mysql_num_rows($resultado_hay_reservadas);
 }
+
+
 
 function error() {
     return -1;
