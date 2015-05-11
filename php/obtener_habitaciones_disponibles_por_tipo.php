@@ -33,8 +33,8 @@ function obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo, $f
     $n_habitaciones_reservadas = mysql_num_rows($resultado_hay_reservadas);
     
     echo '<script>
-        alert( hay: ' . $resultado_n_habitaciones . ' reservadas: ' . $resultado_hay_reservadas . ' quedan disponibles: '
-            . ($n_habitaciones_total-$n_habitaciones_reservadas) . '
+        alert( "hay: ' . $resultado_n_habitaciones . ' reservadas: ' . $resultado_hay_reservadas . ' quedan disponibles: '
+            . ($n_habitaciones_total-$n_habitaciones_reservadas) . '");
     </script>';
     return $n_habitaciones_total-$n_habitaciones_reservadas;
 }
