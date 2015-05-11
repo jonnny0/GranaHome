@@ -9,7 +9,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
 if (isset($_POST['id_tipo_habitacion'])) {
     $id_tipo_habitacion = $_POST['id_tipo_habitacion'];
     if ($id_tipo_habitacion == -1) {
-        echo '<h2>Nuevo tipo de habitación</h2>';
+        echo '<h2>Nuevo tipo de habitación a crear</h2>';
         echo '<hr/>';
         echo '<label for = "nombre_tipo_alojamiento">Nombre del tipo de habitación: </label>';
         echo '<input type = "text" size = "60" id = "nombre_tipo_alojamiento" name = "nombre_tipo_alojamiento" maxlength = "50" required />';
@@ -44,7 +44,7 @@ if (isset($_POST['id_tipo_habitacion'])) {
         if ($resultado) {
             $fila = mysql_fetch_array($resultado);
 
-            echo '<h2>Datos del tipo de la habitación</h2>';
+            echo '<h2>Datos del tipo de la habitación a crear</h2>';
             echo '<hr/>';
             echo '<label for = "nombre_tipo_alojamiento">Nombre del tipo de habitación: </label>';
             echo '<input type = "text" size = "60" id = "nombre_tipo_alojamiento" name = "nombre_tipo_alojamiento" value="' . $fila['nombre_tipo'] . '" disabled />';

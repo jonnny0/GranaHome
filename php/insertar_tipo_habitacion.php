@@ -57,7 +57,7 @@ if ($id_propietario == -1) {
         $error = true;
     } else {
         echo '<script>
-                alert("Las habitaciones han sido añadidas.");
+                alert("Las habitaciones han sido creadas.");
                 location.href= "../index.php?sec=opciones_usuario";
             </script>';
     }
@@ -70,6 +70,12 @@ if ($error) {
 }
 
 function insertar_habitaciones($id_alojamiento, $id_tipo_habitacion, $numero) {
+    $consulta = 'DELETE FROM habitacion WHERE id_alojamiento=' . $id_alojamiento . ' AND '
+            . 'id_tipo_habitacion=' . $id_tipo_habitacion;
+    $resultado = conexionBD($consulta);
+    if (!$resultado) {
+        return false;
+    }
     for ($i = 0; $i < $numero; $i++) {
         $consulta = 'INSERT INTO habitacion (id_alojamiento, id_tipo_habitacion) VALUES ('
                 . $id_alojamiento . ', '
