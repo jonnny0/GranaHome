@@ -57,42 +57,87 @@ function comprueba_formulario_tipo_habitacion(formulario) {
     return correcto;
 }
 
-function verificar_fecha_entrada(fecha){
+function cambiar_un_dia_mas(fecha_a_cambiar, fecha_actual) {
+    var next_day = fecha_actual;
+    next_day.setDate(fecha_actual.getDate() + 1);
+
+    var next_day_str = next_day.getFullYear() + "-";
+    if (next_day.getMonth() + 1 < 10) {
+        next_day_str += "0";
+    }
+    next_day_str += (next_day.getMonth() + 1) + "-";
+    if (next_day.getDate() < 10) {
+        next_day_str += "0";
+    }
+    next_day_str += next_day.getDate();
+//        document.getElementById("fecha_salida").setAttribute('value', next_day_str);
+    document.getElementById(fecha_a_cambiar).value = next_day_str;
+}
+
+function verificar_fecha_entrada(fecha) {
     return verificar_fecha_entrada(fecha, false);
 }
 
 function verificar_fecha_entrada(fecha, cambiar) {
     var fecha_actual = new Date();
-    var fecha_introducida = new Date(fecha.value);
-    if (fecha_introducida < fecha_actual) {
+    var fecha_entrada = new Date(fecha.value);
+    if (fecha_entrada < fecha_actual) {
         alert("La fecha tiene que ser posterior a hoy");
+        cambiar_un_dia_mas("fecha_entrada", fecha_actual);
+        cambiar_un_dia_mas("fecha_salida", new Date(fecha.value));
         return false;
-    } else if(cambiar){
-        var next_day = new Date(fecha.value);
-        next_day.setDate(fecha_introducida.getDate() + 1);
-
-        var next_day_str = next_day.getFullYear() + "-";
-        if (next_day.getMonth() + 1 < 10) {
-            next_day_str += "0";
+    } else if (cambiar) {
+        var fecha_salida_value = document.getElementById("fecha_salida").value;
+        if (fecha_salida_value !== "") {
+            var fecha_salida = new Date(fecha_salida_value);
+            if (fecha_entrada >= fecha_salida) {
+                cambiar_un_dia_mas("fecha_salida", fecha_entrada);
+            }
+        } else {
+            cambiar_un_dia_mas("fecha_salida", fecha_entrada);
         }
-        next_day_str += (next_day.getMonth() + 1) + "-";
-        if (next_day.getDate() < 10) {
-            next_day_str += "0";
-        }
-        next_day_str += next_day.getDate();
-//        document.getElementById("fecha_salida").setAttribute('value', next_day_str);
-        document.getElementById("fecha_salida").value=next_day_str;
     }
     return true;
 }
 
 function verificar_fecha_salida(fecha) {
+    return verificar_fecha_salida(fecha, false);
+}
+
+function verificar_fecha_salida(fecha, cambiar) {
     var fecha_entrada = document.getElementById("fecha_entrada");
     var fecha_entrada_date = new Date(fecha_entrada.value);
     var fecha_introducida = new Date(fecha.value);
     if (fecha_introducida < fecha_entrada_date) {
         alert("La fecha tiene que ser posterior a la de entrada");
+        if (cambiar) {
+            cambiar_un_dia_mas("fecha_salida", fecha_entrada_date);
+        }
         return false;
+    } else if (cambiar) {
+        cambiar_un_dia_mas("fecha_salida", fecha_introducida);
     }
     return true;
+}
+
+function verificar_buscador(formulario) {
+    var correcto = verificar_fecha_entrada(formulario.fecha_entrada);
+    if (correcto) {
+        correcto = verificar_fecha_salida(formulario.fecha_salida);
+    }
+    return correcto;
+}
+
+function verificar_tipo_alojamiento(checkbox){
+    var tipo_alojamientos = document.getElementsByName(checkbox.name);
+    var n_checked = 0;
+    for (var i = 0; i<tipo_alojamientos.length; i++){
+        if(tipo_alojamientos[i].checked){
+            n_checked++;
+        }
+    }
+    if(n_checked == 0){
+        alert("Al menos tiene que haber un tipo de alojamiento marcado.");
+        checkbox.checked = true;
+    }
 }
