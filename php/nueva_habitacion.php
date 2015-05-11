@@ -17,7 +17,9 @@ if (!isset($_SESSION['nombre_usuario'])) {
 
 $id_propietario = obtener_id_usuario($_SESSION['nombre_usuario']);
 if ($id_propietario != -1) {
-    $consulta_hotel = 'SELECT id_alojamiento, nombre_alojamiento FROM alojamiento WHERE id_propietario=' . $id_propietario;
+    $consulta_hotel = 'SELECT alojamiento.id_alojamiento, alojamiento.nombre_alojamiento FROM alojamiento, alquiler_habitaciones '
+            . 'WHERE id_propietario=' . $id_propietario . ' AND '
+            . 'alojamiento.id_alojamiento=alquiler_habitaciones.id_alojamiento_habitaciones';
     $resultado_hotel = conexionBD($consulta_hotel);
     echo '<form method = "post" action = "php/insertar_tipo_habitacion.php" onsubmit="return comprueba_formulario_tipo_habitacion(this)">';
     if ($resultado_hotel) {
