@@ -36,7 +36,6 @@ function comprueba_mail(f) {
     return true;
 }
 
-
 function validar_tipo_alojamiento(select) {
     if (select.value == "piso" || select.value == "casa_rural") {
         document.getElementById("precio").innerHTML = '<label for="precio_noche">Precio por noche: </label>' +
@@ -45,4 +44,15 @@ function validar_tipo_alojamiento(select) {
         document.getElementById("precio").innerHTML = "";
     }
     actualizar_precio();
+}
+
+function comprueba_formulario_tipo_habitacion(formulario){
+    var correcto;
+    if(formulario.alojamiento_seleccionado.value != -1){
+        correcto = true;
+    }else{
+        alert("Tienes que seleccionar un alojamiento.");
+        correcto = false;
+    }
+    return correcto;
 }
