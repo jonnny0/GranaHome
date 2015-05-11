@@ -9,7 +9,7 @@ switch ($seccion) {
         break;
     case 'alojamiento':
 //        $id_alojamiento = $_POST['id_alojamiento'];
-        $id_alojamiento = 17;
+        $id_alojamiento = 28;
         include 'php/alojamiento.php';
         break;
     case 'opciones_usuario':
