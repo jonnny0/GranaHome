@@ -3,7 +3,7 @@ function comprueba_formulario(f) {
         if (check_password(f)) {
             return true;
         }
-        
+
     }
     return false;
 }
@@ -16,7 +16,7 @@ function check_password(f) {
         alert("Las contraseñas no coinciden.");
         return false;
     }
-    if(password1.length == 0){
+    if (password1.length == 0) {
         return true;
     }
     if (password1.length < 8) {
@@ -36,7 +36,6 @@ function comprueba_mail(f) {
     return true;
 }
 
-
 function validar_tipo_alojamiento(select) {
     if (select.value == "piso" || select.value == "casa_rural") {
         document.getElementById("precio").innerHTML = '<label for="precio_noche">Precio por noche: </label>' +
@@ -45,4 +44,55 @@ function validar_tipo_alojamiento(select) {
         document.getElementById("precio").innerHTML = "";
     }
     actualizar_precio();
+}
+
+function comprueba_formulario_tipo_habitacion(formulario) {
+    var correcto;
+    if (formulario.alojamiento_seleccionado.value != -1) {
+        correcto = true;
+    } else {
+        alert("Tienes que seleccionar un alojamiento.");
+        correcto = false;
+    }
+    return correcto;
+}
+
+function verificar_fecha_entrada(fecha){
+    return verificar_fecha_entrada(fecha, false);
+}
+
+function verificar_fecha_entrada(fecha, cambiar) {
+    var fecha_actual = new Date();
+    var fecha_introducida = new Date(fecha.value);
+    if (fecha_introducida < fecha_actual) {
+        alert("La fecha tiene que ser posterior a hoy");
+        return false;
+    } else if(cambiar){
+        var next_day = new Date(fecha.value);
+        next_day.setDate(fecha_introducida.getDate() + 1);
+
+        var next_day_str = next_day.getFullYear() + "-";
+        if (next_day.getMonth() + 1 < 10) {
+            next_day_str += "0";
+        }
+        next_day_str += (next_day.getMonth() + 1) + "-";
+        if (next_day.getDate() < 10) {
+            next_day_str += "0";
+        }
+        next_day_str += next_day.getDate();
+//        document.getElementById("fecha_salida").setAttribute('value', next_day_str);
+        document.getElementById("fecha_salida").value=next_day_str;
+    }
+    return true;
+}
+
+function verificar_fecha_salida(fecha) {
+    var fecha_entrada = document.getElementById("fecha_entrada");
+    var fecha_entrada_date = new Date(fecha_entrada.value);
+    var fecha_introducida = new Date(fecha.value);
+    if (fecha_introducida < fecha_entrada_date) {
+        alert("La fecha tiene que ser posterior a la de entrada");
+        return false;
+    }
+    return true;
 }

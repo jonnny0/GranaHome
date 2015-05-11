@@ -1,22 +1,22 @@
 <form method="post" action="php/buscar.php" id="formularioBusqueda">
     Destino:
-    <input type="text" name="localidad" placeholder="Ej. Granada" size="75"/>
+    <input type="text" name="localidad" maxlength="50" placeholder="Ej. Granada" size="75" required=""/>
     <br><br>
     Fecha de entrada:
-    <input type="date" name="fechaEntrada" onchange="alert('comprobar que la fecha sea posterior a la de hoy')"/>
+    <input type="date" id="fecha_entrada" name="fecha_entrada" value="" onchange="verificar_fecha_entrada(this,true)" required/>
     &nbsp; &nbsp;
     Fecha de salida:
-    <input type="date" name="fechaSalida" onchange="alert('comprobar que la fecha sea posterior a la de entrada')"/>
+    <input type="date" id="fecha_salida" name="fecha_salida" value="" onchange="verificar_fecha_salida(this)" required/>
     <br><br>
     Número de habitaciones:
-    <input type="number" name="numeroHabitaciones" min="1" max="10" value="1"/>
+    <input type="number" name="numero_habitaciones" min="1" max="10" value="1" required/>
     <!--<br><br>-->
     &nbsp; &nbsp;
     Número de huespedes:
-    <input type="number" name="numeroHuespedes" min="1" max="50" value="2"/>
-    
+    <input type="number" name="numero_huespedes" min="1" max="50" value="2" required/>
+
     <hr />
-    
+
     Tipo de alojamiento:
     <input type="checkbox" id="aloj1" name="alojamiento" value="hotel" checked>
     <label for="aloj1"> Hotel </label>
@@ -56,10 +56,8 @@
     o más
     <br><br>
     Precio máximo: 
-    <input type="number" name="precioMaximo" min="0" max="9999" step="5" value="" placeholder="Cualquier"/>
+    <input type="number" name="precio_maximo" min="0" max="9999" step="5" value="" placeholder="Cualquier"/>
     € por noche
     <br><br>
-    <a href="index.php?sec=busqueda"> 
-	<button type="button" title="Buscar" name="buscar"> Buscar </button>
-    </a>
+    <button type="submit" title="Buscar" name="buscar"> Buscar </button>
 </form>
