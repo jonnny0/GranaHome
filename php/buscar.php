@@ -29,10 +29,11 @@ echo $_POST['puntuacion'];
 echo '<br>';
 echo $_POST['estrellas'];
 echo '<br>';
-if ($_POST['precio_maximo'] == "")
+if ($_POST['precio_maximo'] == "") {
     echo "cualquier precio";
-else
+} else {
     echo $_POST['precio_maximo'];
+}
 echo '<br>';
 
 
