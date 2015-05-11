@@ -19,9 +19,9 @@ function obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo, $f
             . 'habitacion.id_alojamiento=' . $id_tipo . ' AND '
             . 'habitacion.id_habitacion=reserva_habitacion.id_habitacion AND '
             . 'reserva_habitacion.id_reserva=cliente_reserva.id_reserva AND '
-            . '(cliente_reserva.fecha_inicio>=' . $fecha_inicio . ' OR '
-            . 'cliente_reserva.fecha_inicio<=' . $fecha_fin . ') AND '
-            . '(cliente_reserva.fecha_fin>=' . $fecha_inicio . ' OR '
+            . '(cliente_reserva.fecha_inicio>=' . $fecha_inicio . ' AND '
+            . 'cliente_reserva.fecha_inicio<=' . $fecha_fin . ') OR '
+            . '(cliente_reserva.fecha_fin>=' . $fecha_inicio . ' AND '
             . 'cliente_reserva.fecha_fin<=' . $fecha_fin . ')';
 
     $resultado_hay_reservadas = conexionBD($consulta_hay_reservadas);
