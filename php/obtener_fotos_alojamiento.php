@@ -2,10 +2,6 @@
 
 include_once 'php/conexion_bd.php';
 
-//if(!isset($_SESSION['nombre_usuario'])){
-//    session_start();
-//}
-
 function obtener_fotos_alojamiento($id){
     $consulta = "SELECT url FROM foto_alojamiento WHERE id_alojamiento=" . $id;
     

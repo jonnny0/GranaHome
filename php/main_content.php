@@ -5,7 +5,8 @@ switch ($seccion) {
         include 'html/es/buscador.html';
         break;
     case 'busqueda':
-        include 'html/es/busqueda.html';
+//        include 'html/es/busqueda.html';
+        include 'php/busqueda.php';
         break;
     case 'alojamiento':
 //        $id_alojamiento = $_POST['id_alojamiento'];

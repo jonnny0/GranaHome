@@ -52,7 +52,7 @@ if ($id_propietario != -1) {
     }
     echo '&nbsp;&nbsp;';
     echo '<label for="numero_habitaciones">Numero de habitaciones: </label>';
-    echo '<input type="number" id="numero_habitaciones" max="9999" name="numero_habitaciones" required/>';
+    echo '<input type="number" id="numero_habitaciones" min="1" max="9999" name="numero_habitaciones" required/>';
 
 }
 ?>
