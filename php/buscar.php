@@ -6,7 +6,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
     session_start();
 }
 
-$consulta = 'SELECT alojamiento....';
+$consulta = 'SELECT * FROM alojamiento WHERE ...................';
 
 echo $_POST['localidad'];
 echo '<br>';
