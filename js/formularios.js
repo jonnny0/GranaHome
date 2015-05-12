@@ -141,3 +141,12 @@ function verificar_tipo_alojamiento(checkbox){
         checkbox.checked = true;
     }
 }
+
+function actualizar_precio_reserva(n_habitaciones){
+    var precio = 0.0;
+    for(var i = 0; i<n_habitaciones; i++){
+        precio += parseFloat(document.getElementById("numero_habitaciones_" + i).value);
+    }
+    document.getElementById("precio_total").innerHTML = precio + " €";
+    
+}
