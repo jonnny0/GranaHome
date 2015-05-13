@@ -78,8 +78,8 @@ if (!$resultado) {
             echo '<h2>Reservar</h2>';
 
             echo '<form method="post" action="php/crear_reserva.php">';
-                echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
-                echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
+                echo '<input type="hidden" name="id_alojamiento" value="' . $id_alojamiento . '"/>';
+                echo '<input type="hidden" name="tipo_alquiler" value="' . $fila['tipo_alquiler'] . '"/>';
                 echo '<table>';
                 echo '<tr>';
                     echo '<td name="precio_total">Precio ' . $fila_alojamiento_completo['precio'] . ' € &nbsp;&nbsp;&nbsp;</td>';
