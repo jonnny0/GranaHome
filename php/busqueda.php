@@ -28,7 +28,7 @@ foreach ($_SESSION['ids_alojamientos_buscados'] as $fila_alojamiento) {
         }else{
             echo '<h2> ' . $fila_alojamiento['nombre_alojamiento'] . ' <img src="imagenes/ico_estrella_4.png" alt="4 Estrellas" /></h2>';
         }
-            echo '<i> ' . $fila_alojamiento['direccion'] . ', '  . $fila_alojamiento['localidad'] . ', España </i>';
+            echo '<i> ' . $fila_alojamiento['direccion'] . ', '  . $fila_alojamiento['localidad'] . ' </i>';
             echo '<br><br>';
             echo $fila_alojamiento['descripcion_breve'];
         echo '</td>';

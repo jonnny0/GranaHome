@@ -72,6 +72,8 @@ while ($fila_alojamiento = mysql_fetch_array($resultado_alojamientos)) {
 };
 
 $_SESSION['ids_alojamientos_buscados'] = $lista_ids;
+$_SESSION['fecha_inicio'] = $_POST['fecha_entrada'];
+$_SESSION['fecha_fin'] = $_POST['fecha_salida'];
 
 header('Location: ../index.php?sec=busqueda');
 ?>

@@ -80,8 +80,6 @@ if (!$resultado) {
             echo '<form method="post" action="php/crear_reserva.php">';
                 echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
                 echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
-                echo '<input type="hidden" name="fecha_inicio" value=' . $fila['fecha_entrada'] . '/>';
-                echo '<input type="hidden" name="fecha_fin" value=' . $fila['fecha_salida'] . '/>';
                 echo '<table>';
                 echo '<tr>';
                     echo '<td name="precio_total">Precio ' . $fila_alojamiento_completo['precio'] . ' € &nbsp;&nbsp;&nbsp;</td>';
@@ -110,8 +108,6 @@ if (!$resultado) {
             echo '<form method="post" action="php/crear_reserva.php">';
             echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
             echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
-            echo '<input type="hidden" name="fecha_inicio" value=' . $fila['fecha_entrada'] . '/>';
-            echo '<input type="hidden" name="fecha_fin" value=' . $fila['fecha_salida'] . '/>';
             echo '<table class="tablaHabitaciones">';
 
             while ($fila = mysql_fetch_array($resultado)) {
