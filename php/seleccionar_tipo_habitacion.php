@@ -20,6 +20,19 @@ if (isset($_POST['id_tipo_habitacion'])) {
         echo '<label for="precio_noche">Precio por noche: </label>';
         echo '<input type="number" min = "0" step="any" id="precio_noche" name="precio" required/>';
         echo '<br><br>';
+        echo '<label for="num_fotos">Número de imágenes: </label>';
+        echo '<select name="num_fotos" id="num_fotos" onchange="add_campos_imagenes(this)">';
+        echo '<option value="1">1</option>';
+        echo '<option value="2">2</option>';
+        echo '<option value="3">3</option>';
+        echo '<option value="4">4</option>';
+        echo '<option value="5">5</option>';
+        echo '</select>';
+        echo '<br><br>';
+        echo '<label for="foto0">Introduce el nombre de la imagen 1: </label>';
+        echo '<input type="text" id="foto0" name="foto0" maxlength="50" size="50" required/>';
+        echo '<div id="mas_imagenes"></div>';
+        echo '<br>';
 
         $consulta = 'SELECT * FROM caracteristica_tipo_habitacion';
         $resultado = conexionBD($consulta);
@@ -55,6 +68,7 @@ if (isset($_POST['id_tipo_habitacion'])) {
             echo '<label for="precio_noche">Precio por noche: </label>';
             echo '<input type="number" min = "0" step="any" id="precio_noche" name="precio" value="' . $fila['precio'] . '" disabled/>';
             echo '<br><br>';
+
         }
 
         $consulta = 'SELECT * FROM caracteristica_tipo_habitacion';
