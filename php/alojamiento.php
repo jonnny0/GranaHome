@@ -67,18 +67,31 @@ if (!$resultado) {
     echo '</p>';
 
     if (!$es_alquiler_por_habitaciones) {
-        echo '<h2>Reservar</h2>';
         
-        echo '<form>';
-            echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
-            echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
-            echo '<table>';
-            echo '<tr>';
-                echo '<td>Precio </td>';
-                echo '<td><button type="submit" id="reservar" name="reservar">Reservar</button></td>';
-            echo '</tr>';
-            echo '</table>';
-        echo '</form>';
+        $consulta_alojamiento_completo = "SELECT precio FROM alquiler_completo WHERE id_alojamiento_completo=" . $id_alojamiento;
+        
+        $resultado_alojamiento_completo = conexionBD($consulta_alojamiento_completo);
+        
+        if ($resultado_alojamiento_completo){
+            $fila_alojamiento_completo = mysql_fetch_array($resultado_alojamiento_completo);
+            
+            echo '<h2>Reservar</h2>';
+
+            echo '<form method="post" action="php/crear_reserva.php">';
+                echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
+                echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
+                echo '<input type="hidden" name="fecha_inicio" value=' . $fila['fecha_entrada'] . '/>';
+                echo '<input type="hidden" name="fecha_fin" value=' . $fila['fecha_salida'] . '/>';
+                echo '<table>';
+                echo '<tr>';
+                    echo '<td name="precio_total">Precio ' . $fila_alojamiento_completo['precio'] . ' € &nbsp;&nbsp;&nbsp;</td>';
+                echo '</tr>';
+                echo '<tr>';
+                    echo '<td><button type="submit" id="reservar" name="reservar">Reservar</button></td>';
+                echo '</tr>';
+                echo '</table>';
+            echo '</form>';
+        }
     } else {
 
         echo '<h2>Habitaciones disponibles</h2>';
@@ -94,9 +107,11 @@ if (!$resultado) {
         } else {
             $n_habitaciones = mysql_num_rows($resultado);
             $i_habitacion = 0;
-            echo '<form>';
+            echo '<form method="post" action="php/crear_reserva.php">';
             echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
             echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
+            echo '<input type="hidden" name="fecha_inicio" value=' . $fila['fecha_entrada'] . '/>';
+            echo '<input type="hidden" name="fecha_fin" value=' . $fila['fecha_salida'] . '/>';
             echo '<table class="tablaHabitaciones">';
 
             while ($fila = mysql_fetch_array($resultado)) {

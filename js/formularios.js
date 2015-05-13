@@ -39,7 +39,7 @@ function comprueba_mail(f) {
 function validar_tipo_alojamiento(select) {
     if (select.value == "piso" || select.value == "casa_rural") {
         document.getElementById("precio").innerHTML = '<label for="precio_noche">Precio por noche: </label>' +
-                '<input type="number" step="any" id="precio_noche" name="precio" required/>';
+                '<input type="number" step="any" min="1" max="9999" id="precio_noche" name="precio" required/>';
     } else {
         document.getElementById("precio").innerHTML = "";
     }

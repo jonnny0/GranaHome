@@ -56,6 +56,7 @@ $consulta_alojamientos = "SELECT * FROM (
 ) AS `tabla_alojamientos`
 WHERE `localidad`='" . $_POST['localidad'] . "'
 AND  (" . $tipo_alojamientos_str . ") ";
+
 if ($_POST['puntuacion'] != 0) {
     $consulta_alojamientos = $consulta_alojamientos . " AND `puntuacion`>=" . $_POST['puntuacion'];
 }

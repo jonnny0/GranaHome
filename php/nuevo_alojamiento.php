@@ -8,6 +8,22 @@ if (!isset($_SESSION['nombre_usuario'])) {
     <h2>Datos para insertar un nuevo alojamiento</h2>
     <hr/>
     <form method="post" action="php/insertar_alojamiento.php">
+        <label for="tipo_alojamiento">Tipo Alojamiento: </label>
+        <select name="tipo_alojamiento" id="tipo_alojamiento" onchange="validar_tipo_alojamiento(this)">
+            <option value="hotel">Hotel</option>
+            <option value="apartamento">Apartamento</option>
+            <option value="pension/hostal">Pension/Hostal</option>
+            <option value="piso">Piso</option>
+            <option value="casa_rural">Casa Rural</option>
+        </select>
+
+        &nbsp;&nbsp;
+        <p id="precio"></p>
+        <!--	Estas dos lineas aparecen cuando se marca Piso o Casa Rural  -->
+        <!--	<label for="precio_noche">Precio por noche: </label>
+                <input type="number" step="any" id="precio_noche" name="precio" required/>-->
+
+        <br><br>
         <label for="nombre_alojamiento">Nombre del alojamiento: </label>
         <input type="text" size="60" id="nombre_alojamiento" name="nombre_alojamiento" maxlength="50" required />
         <br><br>
@@ -33,22 +49,6 @@ if (!isset($_SESSION['nombre_usuario'])) {
         <input type="text" id="foto0" name="foto0" maxlength="50" size="50" required/>
         <div id='mas_imagenes'></div>
         <br>
-        <label for="tipo_alojamiento">Tipo Alojamiento: </label>
-        <select name="tipo_alojamiento" id="tipo_alojamiento" onchange="validar_tipo_alojamiento(this)">
-            <option value="hotel">Hotel</option>
-            <option value="apartamento">Apartamento</option>
-            <option value="pension/hostal">Pension/Hostal</option>
-            <option value="piso">Piso</option>
-            <option value="casa_rural">Casa Rural</option>
-        </select>
-
-        &nbsp;&nbsp;
-        <p id="precio"></p>
-        <!--	Estas dos lineas aparecen cuando se marca Piso o Casa Rural  -->
-        <!--	<label for="precio_noche">Precio por noche: </label>
-                <input type="number" step="any" id="precio_noche" name="precio" required/>-->
-
-        <br><br>
         <label for="descripcion_breve">Descripción breve (Máximo 200 caracteres): </label>
         <br>
         <textarea id="descripcion_breve" cols="85" rows="2" maxlength="200" name="descripcion_breve" required></textarea>

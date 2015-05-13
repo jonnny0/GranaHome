@@ -278,6 +278,7 @@ button a{
     -ms-interpolation-mode: bicubic;
     max-width: 100%;
     max-height: 150px;
+    cursor:pointer;
 }
 
 #foto_principal{
