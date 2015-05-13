@@ -1,6 +1,6 @@
 <?php
 
-include_once 'php/conexion_bd.php';
+include_once 'conexion_bd.php';
 
 function obtener_fotos_alojamiento($id) {
     $consulta = "SELECT url FROM foto_alojamiento WHERE id_alojamiento=" . $id;

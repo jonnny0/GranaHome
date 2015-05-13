@@ -1,7 +1,7 @@
 <?php
 
 include_once 'conexion_bd.php';
-include_once './obtener_fotos_alojamiento.php';
+include_once 'obtener_fotos_alojamiento.php';
 
 if (!isset($_SESSION['nombre_usuario'])) {
     session_start();

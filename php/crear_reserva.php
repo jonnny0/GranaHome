@@ -1,6 +1,7 @@
 <?php
 
 include_once './conexion_bd.php';
+include_once './obtener_habitaciones_disponibles_por_tipo.php';
 
 foreach ($_POST as $nombre_campo => $valor) {
     print $nombre_campo . "---" . $valor . "<br>";
@@ -36,64 +37,55 @@ if (isset($_SESSION['nombre_usuario']) && $_SESSION['tipo_usuario'] == 'cliente'
         if ($es_alquiler_por_habitaciones) {
             $id_reserva = reservar($fila['id_cliente'], $_POST['id_alojamiento'], $_SESSION['fecha_inicio'], $_SESSION['fecha_fin']);
             echo "<br><br>ID_reserva: " . $id_reserva;
-            if ($resultado == -1) {
+            if ($id_reserva == -1) {
                 echo '<script>
                 alert("ERROR: No se ha podido hacer la reserva.");
                 location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
                 </script>';
             } else {
 
-                $consulta = 'SELECT * FROM tipo_habitacion';
-                $resultado_numero_tipo_habitacion = conexionBD($consulta);
+                $consulta_tipos = "SELECT DISTINCT habitacion.id_tipo_habitacion, precio FROM habitacion, tipo_habitacion WHERE "
+                        . "habitacion.id_tipo_habitacion=tipo_habitacion.id_tipo_habitacion AND "
+                        . "habitacion.id_alojamiento=" . $_POST['id_alojamiento'];
 
-                while ($fila = mysql_fetch_array($resultado_numero_tipo_habitacion)) {
-                    echo "<br><br>ID_HAB:" . $_POST[$fila['id_tipo_habitacion']] . "<br><br>";
-                    if (isset($_POST[$fila['id_tipo_habitacion']])) {
-                        //reservo el número de veces que diga el select
-                        for ($i = 0; $i < $_POST[$fila['id_tipo_habitacion']]; $i++) {
-                            $resultado_reserva_habitacion = reservar_habitacion($id_reserva, $_POST['id_alojamiento'], $_POST[$fila['id_tipo_habitacion']]);
-                            if (!$resultado_reserva_habitacion) {
-//                                echo '<script>
-//                            alert("ERROR: No se ha podido hacer la reserva.");
-//                            location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
-//                            </script>';
+                $resultado_tipos = conexionBD($consulta_tipos);
+                if ($resultado_tipos) {
+                    while ($fila_tipos = mysql_fetch_array($resultado_tipos)) {
+                        $id_tipo_habitacion = $fila_tipos['id_tipo_habitacion'];
+                        $n_habitaciones = (float) $_POST[$id_tipo_habitacion];
+                        $n_habitaciones = $n_habitaciones / $fila_tipos['precio'];
+                        echo "<br> " . $id_tipo_habitacion . "----" . $n_habitaciones . "<br>";
+                        if ($n_habitaciones != 0) {
+                            $exito = reservar_habitacion($id_reserva, $_SESSION['fecha_inicio'], $_SESSION['fecha_fin'], $_POST['id_alojamiento'], $id_tipo_habitacion, $n_habitaciones);
+                            if (!$exito) {
+                                echo '<script>
+                                        alert("No se ha podido reservar alguna habitación.");
+                                </script>';
                             }
                         }
                     }
-//                                                    echo '<script>
-//                            alert("ERROR: No se ha podido hacer la reserva.");
-//                            location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
-//                            </script>';
-                    
+                    if ($exito) {
+                        echo '<script>
+                            alert("Se han reservado todas las habitaciones con éxito.");
+                            location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
+                        </script>';
+                    }
                 }
-
-//            $consulta = 'SELECT * FROM tipo_habitacion WHERE id_tipo_habitacion="' . $_POST['id_tipo_habitacion'] . '"';
-//            $resultado_precio_habitacion = conexionBD($consulta);
-//            $fila = mysql_fetch_array($resultado_precio_habitacion);
-
-//                echo '<script>
-//                alert("La reserva se ha realizado correctamente.");
-//                location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
-//                </script>';
             }
             //el tipo de reserva no es por habitaciones
         } else {
             $resultado = reservar($fila['id_cliente'], $_POST['id_alojamiento'], $_SESSION['fecha_inicio'], $_SESSION['fecha_fin']);
 
-            if (!$resultado) {
-                $resultado = reservar($fila['id_cliente'], $_POST['id_alojamiento'], $_SESSION['fecha_inicio'], $_SESSION['fecha_fin']);
-
-                if ($resultado == -1) {
-                    echo '<script>
-                    alert("ERROR: No se ha podido hacer la reserva.");
-                    location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
-                    </script>';
-                } else {
-                    echo '<script>
-                    alert("La reserva se ha realizado correctamente.");
-                    location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
-                    </script>';
-                }
+            if ($resultado == -1) {
+                echo '<script>
+                alert("ERROR: No se ha podido hacer la reserva.");
+                location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
+                </script>';
+            } else {
+                echo '<script>
+                alert("La reserva se ha realizado correctamente.");
+                location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
+                </script>';
             }
         }
     } else {
@@ -127,7 +119,7 @@ function reservar($id_cliente, $id_alojamiento, $fecha_inicio, $fecha_fin) {
         //Envio la consulta a MySQL.
         $resultado = conexionBD($consulta);
 
-            echo "fila     "  . mysql_num_rows($resultado); 
+        echo "fila     " . mysql_num_rows($resultado);
         if (!$resultado) {
             return -1;
         } else {
@@ -138,15 +130,32 @@ function reservar($id_cliente, $id_alojamiento, $fecha_inicio, $fecha_fin) {
     }
 }
 
-function reservar_habitacion($id_reserva, $id_alojamiento, $id_habitacion) {
+function reservar_habitacion($id_reserva, $fecha_inicio, $fecha_fin, $id_alojamiento, $id_tipo_habitacion, $n_habitaciones) {
 
-    $consulta = 'INSERT INTO reserva_habitacion (id_reserva, id_alojamiento, id_habitacion) VALUES (' . $id_reserva . ', ' . $id_alojamiento . ', ' . $id_habitacion . ')';
-    
-    $resultado = conexionBD($consulta);
-    if (!$resultado) {
-        return false;
+    $resultado = obtener_id_habitaciones_libres_reserva($id_alojamiento, $id_tipo_habitacion, $fecha_inicio, $fecha_fin);
+
+    if ($resultado) {
+        $i = 0;
+        while ($fila = mysql_fetch_array($resultado)) {
+            if ($i < $n_habitaciones) {
+                echo "Habitacion libre: " . $fila['id_habitacion'] . "<br>";
+                $consulta_insert = 'INSERT INTO reserva_habitacion (id_reserva, id_alojamiento, id_habitacion) VALUES ('
+                        . $id_reserva . ', ' . $id_alojamiento . ', ' . $fila['id_habitacion'] . ')';
+                $resultado_insert = conexionBD($consulta_insert);
+                if (!$resultado_insert) {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+            $i++;
+        }
+        if($i == $n_habitaciones){
+            return true;
+        }else{
+            return false;
+        }
     }
-    return true;
 }
 
 ?>
