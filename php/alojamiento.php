@@ -106,8 +106,8 @@ if (!$resultado) {
             $n_habitaciones = mysql_num_rows($resultado);
             $i_habitacion = 0;
             echo '<form method="post" action="php/crear_reserva.php">';
-            echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
-            echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
+            echo '<input type="hidden" name="id_alojamiento" value="' . $id_alojamiento . '"/>';
+            echo '<input type="hidden" name="tipo_alquiler" value="' . $fila['tipo_alquiler'] . '"/>';
             echo '<table class="tablaHabitaciones">';
 
             while ($fila = mysql_fetch_array($resultado)) {
@@ -155,7 +155,7 @@ if (!$resultado) {
                             Número Habitaciones:
                         </td>
                         <td class="separacion">';
-                    echo '<select name="numero_habitaciones_' . $id_tipo_habitacion . '" id="numero_habitaciones_'
+                    echo '<select name="' . $id_tipo_habitacion . '" id="numero_habitaciones_'
                     . $i_habitacion . '" onchange="actualizar_precio_reserva(' . $n_habitaciones . ')">';
                     for ($i = 0; $i <= $n_habitaciones_disponibles and $i <= 10; $i++) {
                         echo '<option value="' . $i * $fila_tipo_habitacion['precio'] . '">' . $i . '</option>';
