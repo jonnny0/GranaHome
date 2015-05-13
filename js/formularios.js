@@ -38,10 +38,19 @@ function comprueba_mail(f) {
 
 function validar_tipo_alojamiento(select) {
     if (select.value == "piso" || select.value == "casa_rural") {
-        document.getElementById("precio").innerHTML = '<label for="precio_noche">Precio por noche: </label>' +
-                '<input type="number" step="any" min="1" max="9999" id="precio_noche" name="precio" required/>';
+        document.getElementById("num_estrellas").innerHTML = '';
+        document.getElementById("capacidad_y_precio").innerHTML = ''
+                + '<label for="precio_noche">Precio por noche: </label>'
+                + '<input type="number" step="any" min="1" max="9999" id="precio_noche" name="precio" required/>'
+                + '&nbsp;&nbsp;'
+                + '<label for="capacidad">Capacidad: </label>'
+                + '<input type="number" min="1" max="50" id="capacidad" name="capacidad" required/>'
+                + '<br>';
     } else {
-        document.getElementById("precio").innerHTML = "";
+        document.getElementById("capacidad_y_precio").innerHTML = '';
+        document.getElementById("num_estrellas").innerHTML = ''
+                + '<label for="numero_estrellas">Numero de Estrellas </label>'
+                + '<input type="number" min="1" max="5" id="numero_estrellas" name="numero_estrellas" required/>'
     }
     actualizar_precio();
 }
@@ -161,7 +170,7 @@ function actualizar_precio_reserva(n_habitaciones) {
     document.getElementById("precio_total").innerHTML = precio + " €";
 }
 
-function cambiar_foto_principal(nueva){
+function cambiar_foto_principal(nueva) {
     var foto = document.getElementById("foto_principal");
     foto.src = nueva.src;
 }

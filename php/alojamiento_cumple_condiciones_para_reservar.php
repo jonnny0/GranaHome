@@ -13,11 +13,12 @@ function alojamiento_cumple_condiciones_para_reservar($id_alojamiento, $tipo_alq
     return $libre;
 }
 
-function alojamiento_completo_cumple_condiciones_para_reservar($id_alojamiento, $capacidad, $fecha_inicio, $fecha_fin) {
+function alojamiento_completo_cumple_condiciones_para_reservar($id_alojamiento, $capacidad, $fecha_inicio, $fecha_fin, $capacidad) {
     $libre = false;
     alert($id_alojamiento);
     $consulta_esta_reservada = "SELECT * FROM cliente_reserva, alquiler_completo WHERE "
-            . "alquiler_completo.id_alojamiento_completo=cliente_reserva.id_alojamiento" . " AND "
+            . "alquiler_completo.id_alojamiento_completo=cliente_reserva.id_alojamiento" . ' AND '
+            . 'capacidad>=' . $capacidad . " AND "
             . "cliente_reserva.id_alojamiento=" . $id_alojamiento . " AND ( "
             . "(cliente_reserva.fecha_inicio>='" . $fecha_inicio . "' AND "
             . "cliente_reserva.fecha_inicio<'" . $fecha_fin . "') OR "

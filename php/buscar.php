@@ -36,30 +36,40 @@ if ($_POST['precio_maximo'] == "") {
     echo $_POST['precio_maximo'];
 }
 echo '<br>';
-
-$consulta_alojamientos = "SELECT * FROM (
+$consulta_alojamientos_completos = "
     SELECT `alojamiento`.`id_alojamiento`, `nombre_alojamiento`, `descripcion_breve`, `direccion`, `localidad`,`tipo_alquiler_completo` AS 'tipo_alquiler', AVG(`puntuacion`) AS 'puntuacion'
     FROM `alojamiento`
     INNER JOIN `alquiler_completo` ON `alquiler_completo`.`id_alojamiento_completo`=`alojamiento`.`id_alojamiento`
     LEFT JOIN `cliente_reserva` ON `cliente_reserva`.`id_alojamiento`=`alojamiento`.`id_alojamiento`"
 //    WHERE `id_administrador` IS NOT NULL
-        . "GROUP BY `id_alojamiento`
+        . "GROUP BY `id_alojamiento` ";
 
-    UNION
-
+$consulta_alojamientos_habitaciones = "
     SELECT `alojamiento`.`id_alojamiento`, `nombre_alojamiento`, `descripcion_breve`, `direccion`, `localidad`,`tipo_alquiler_habitacion` AS 'tipo_alquiler', AVG(`puntuacion`) AS 'puntuacion'
     FROM `alojamiento`
     INNER JOIN `alquiler_habitaciones` ON `alquiler_habitaciones`.`id_alojamiento_habitaciones`=`alojamiento`.`id_alojamiento`
-    LEFT JOIN `cliente_reserva` ON `cliente_reserva`.`id_alojamiento`=`alojamiento`.`id_alojamiento`"
+    LEFT JOIN `cliente_reserva` ON `cliente_reserva`.`id_alojamiento`=`alojamiento`.`id_alojamiento`";
 //    WHERE `id_administrador` IS NOT NULL
-        . "GROUP BY `id_alojamiento`
-) AS `tabla_alojamientos`
-WHERE `localidad`='" . $_POST['localidad'] . "'
-AND  (" . $tipo_alojamientos_str . ") ";
+// CUANDO SE DESCOMENTE ESTA LINEA SE TIENE Q INTERCAMBIAR LAS DE ABAJO
+if ($_POST['estrellas'] != 0) {
+//    $consulta_alojamientos_habitaciones = $consulta_alojamientos_habitaciones . " AND `numero_estrellas`>=" . $_POST['numero_estrellas'];
+    $consulta_alojamientos_habitaciones = $consulta_alojamientos_habitaciones . " WHERE `numero_estrellas`>=" . $_POST['numero_estrellas'];
+}
+$consulta_alojamientos_habitaciones = $consulta_alojamientos_habitaciones . "GROUP BY `id_alojamiento` ";
+
+
+$consulta_alojamientos = "SELECT * FROM ( "
+        . $consulta_alojamientos_completos
+        . " UNION "
+        . $consulta_alojamientos_habitaciones
+        . ") AS `tabla_alojamientos`"
+        . "WHERE `localidad`='" . $_POST['localidad'] . "' "
+        . " AND  (" . $tipo_alojamientos_str . ") ";
 
 if ($_POST['puntuacion'] != 0) {
     $consulta_alojamientos = $consulta_alojamientos . " AND `puntuacion`>=" . $_POST['puntuacion'];
 }
+
 $consulta_alojamientos = $consulta_alojamientos . " ORDER BY `puntuacion` DESC";
 
 $resultado_alojamientos = conexionBD($consulta_alojamientos);

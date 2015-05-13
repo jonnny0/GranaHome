@@ -42,9 +42,9 @@ if ($id == -1) {
             $id_alojamiento = $fila['id_alojamiento'];
 
             if ($tipo_alojamiento == "piso" || $tipo_alojamiento == "casa_rural") {
-                $resultado = alojamiento_completo($id_alojamiento, $tipo_alojamiento, $_POST['precio']);
+                $resultado = alojamiento_completo($id_alojamiento, $tipo_alojamiento, $_POST['capacidad'], $_POST['precio']);
             } else {
-                $resultado = alojamiento_habitacion($id_alojamiento, $tipo_alojamiento);
+                $resultado = alojamiento_habitacion($id_alojamiento, $tipo_alojamiento, $_POST['numero_estrellas']);
             }
 
             if (!$resultado) {
@@ -80,19 +80,21 @@ if ($id == -1) {
     }
 }
 
-function alojamiento_completo($id, $tipo, $precio) {
-    $consulta = 'INSERT INTO alquiler_completo (id_alojamiento_completo, tipo_alquiler_completo, precio) VALUES ('
+function alojamiento_completo($id, $tipo, $capacidad, $precio) {
+    $consulta = 'INSERT INTO alquiler_completo (id_alojamiento_completo, tipo_alquiler_completo, capacidad, precio) VALUES ('
             . $id . ', "'
-            . $tipo . '", "'
+            . $tipo . '", '
+            . $capacidad . ', "'
             . $precio . '") ';
     $resultado = conexionBD($consulta);
     return $resultado;
 }
 
-function alojamiento_habitacion($id, $tipo) {
-    $consulta = 'INSERT INTO alquiler_habitaciones (id_alojamiento_habitaciones, tipo_alquiler_habitacion) VALUES ('
+function alojamiento_habitacion($id, $tipo, $n_estrellas) {
+    $consulta = 'INSERT INTO alquiler_habitaciones (id_alojamiento_habitaciones, tipo_alquiler_habitacion, numero_estrellas) VALUES ('
             . $id . ', "'
-            . $tipo . '") ';
+            . $tipo . '", '
+            . $n_estrellas . ') ';
     $resultado = conexionBD($consulta);
     return $resultado;
 }

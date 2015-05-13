@@ -16,14 +16,16 @@ if (!isset($_SESSION['nombre_usuario'])) {
             <option value="piso">Piso</option>
             <option value="casa_rural">Casa Rural</option>
         </select>
-
-        &nbsp;&nbsp;
-        <p id="precio"></p>
+        
+        <p id="num_estrellas">
+            <label for="numero_estrellas">Numero de Estrellas </label>
+            <input type="number" min="1" max="5" id="numero_estrellas" name="numero_estrellas" required/>
+        </p>
+        <p id="capacidad_y_precio"></p>
         <!--	Estas dos lineas aparecen cuando se marca Piso o Casa Rural  -->
         <!--	<label for="precio_noche">Precio por noche: </label>
                 <input type="number" step="any" id="precio_noche" name="precio" required/>-->
 
-        <br><br>
         <label for="nombre_alojamiento">Nombre del alojamiento: </label>
         <input type="text" size="60" id="nombre_alojamiento" name="nombre_alojamiento" maxlength="50" required />
         <br><br>
