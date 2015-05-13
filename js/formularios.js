@@ -114,7 +114,7 @@ function verificar_fecha_salida(fecha, cambiar) {
             cambiar_un_dia_mas("fecha_salida", fecha_entrada_date);
         }
         return false;
-    } else if (cambiar) {
+    } else if (fecha.value == "") {
         cambiar_un_dia_mas("fecha_salida", fecha_introducida);
     }
     return true;
@@ -128,25 +128,40 @@ function verificar_buscador(formulario) {
     return correcto;
 }
 
-function verificar_tipo_alojamiento(checkbox){
+function verificar_tipo_alojamiento(checkbox) {
     var tipo_alojamientos = document.getElementsByName(checkbox.name);
     var n_checked = 0;
-    for (var i = 0; i<tipo_alojamientos.length; i++){
-        if(tipo_alojamientos[i].checked){
+    for (var i = 0; i < tipo_alojamientos.length; i++) {
+        if (tipo_alojamientos[i].checked) {
             n_checked++;
         }
     }
-    if(n_checked == 0){
+    if (n_checked == 0) {
         alert("Al menos tiene que haber un tipo de alojamiento marcado.");
         checkbox.checked = true;
     }
 }
 
-function actualizar_precio_reserva(n_habitaciones){
+function add_campos_imagenes(select) {
+    var campos = '';
+    for (var i = 1; i < select.value; i++) {
+        campos += '<br>'
+                + '<label for="foto' + i + '"> Introduce el nombre de la imagen ' + (i + 1) + ': </label>'
+                + '<input type="text" id="foto' + i + '" name="foto' + i + '" maxlength = "50" size = "50" required />'
+                + '<br>';
+    }
+    document.getElementById("mas_imagenes").innerHTML = campos;
+}
+
+function actualizar_precio_reserva(n_habitaciones) {
     var precio = 0.0;
-    for(var i = 0; i<n_habitaciones; i++){
+    for (var i = 0; i < n_habitaciones; i++) {
         precio += parseFloat(document.getElementById("numero_habitaciones_" + i).value);
     }
     document.getElementById("precio_total").innerHTML = precio + " €";
-    
+}
+
+function cambiar_foto_principal(nueva){
+    var foto = document.getElementById("foto_principal");
+    foto.src = nueva.src;
 }

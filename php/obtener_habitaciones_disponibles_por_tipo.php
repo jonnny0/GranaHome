@@ -30,8 +30,8 @@ function obtener_habitaciones_reservadas($id_alojamiento, $id_tipo, $fecha_inici
             . "habitacion.id_habitacion=reserva_habitacion.id_habitacion AND "
             . "cliente_reserva.id_reserva=reserva_habitacion.id_reserva AND ( "
             . "(cliente_reserva.fecha_inicio>='" . $fecha_inicio . "' AND "
-            . "cliente_reserva.fecha_inicio<='" . $fecha_fin . "') OR "
-            . "(cliente_reserva.fecha_fin>='" . $fecha_inicio . "' AND "
+            . "cliente_reserva.fecha_inicio<'" . $fecha_fin . "') OR "
+            . "(cliente_reserva.fecha_fin>'" . $fecha_inicio . "' AND "
             . "cliente_reserva.fecha_fin<='" . $fecha_fin . "') )";
 
     $resultado_hay_reservadas = conexionBD($consulta_hay_reservadas);

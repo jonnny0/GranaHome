@@ -15,6 +15,11 @@
         } else {
             $seccion = 'eleccion';
         }
+        if (isset($_GET['aloj'])) {
+            $id_alojamiento = $_GET['aloj'];
+        }else{
+            $id_alojamiento = false;
+        }
         ?>
 
         <?php

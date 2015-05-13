@@ -18,8 +18,21 @@ if (!isset($_SESSION['nombre_usuario'])) {
         <input type="text" id="localidad" maxlength="50" name="localidad" required/>
         &nbsp;&nbsp;
         <label for="telefono">Telefono de contacto: </label>
-        <input type="number" max="999999999" id="telefono" name="telefono" required/>
+        <input type="number" min="100000000" max="999999999" id="telefono" name="telefono" required/>
         <br><br>
+        <label for="num_fotos">Número de imágenes: </label>
+        <select name="num_fotos" id="num_fotos" onchange="add_campos_imagenes(this)">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br><br>
+        <label for="foto0">Introduce el nombre de la imagen 1: </label>
+        <input type="text" id="foto0" name="foto0" maxlength="50" size="50" required/>
+        <div id='mas_imagenes'></div>
+        <br>
         <label for="tipo_alojamiento">Tipo Alojamiento: </label>
         <select name="tipo_alojamiento" id="tipo_alojamiento" onchange="validar_tipo_alojamiento(this)">
             <option value="hotel">Hotel</option>

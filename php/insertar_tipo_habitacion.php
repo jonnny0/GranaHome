@@ -76,14 +76,13 @@ function insertar_habitaciones($id_alojamiento, $id_tipo_habitacion, $numero) {
     if (!$resultado) {
         return false;
     }
-    for ($i = 0; $i < $numero; $i++) {
-        $consulta = 'INSERT INTO habitacion (id_alojamiento, id_tipo_habitacion) VALUES ('
-                . $id_alojamiento . ', '
-                . $id_tipo_habitacion . ') ';
-        $resultado = conexionBD($consulta);
-        if (!$resultado) {
-            return false;
-        }
+    $consulta = 'INSERT INTO habitacion (id_alojamiento, id_tipo_habitacion) VALUES (' . $id_alojamiento . ', ' . $id_tipo_habitacion . ')';
+    for ($i = 1; $i < $numero; $i++) {
+        $consulta = $consulta . ', (' . $id_alojamiento . ', ' . $id_tipo_habitacion . ')';
+    }
+    $resultado = conexionBD($consulta);
+    if (!$resultado) {
+        return false;
     }
     return true;
 }
@@ -91,15 +90,14 @@ function insertar_habitaciones($id_alojamiento, $id_tipo_habitacion, $numero) {
 function tipo_habitacion_tiene_caracteristicas($id_tipo_habitacion, $caracteristicas) {
     if (!empty($caracteristicas)) {
         $n_caracteristicas = count($caracteristicas);
-//        $consulta = "";
-        for ($i = 0; $i < $n_caracteristicas; $i++) {
-            $consulta = 'INSERT INTO tipo_habitacion_tiene_caracteristica (id_tipo_habitacion, id_caracteristica_tipo_habitacion) VALUES ('
-                    . $id_tipo_habitacion . ', '
-                    . $caracteristicas[$i] . '); ';
-            $resultado = conexionBD($consulta);
-            if (!$resultado) {
-                return false;
-            }
+        $consulta = 'INSERT INTO tipo_habitacion_tiene_caracteristica (id_tipo_habitacion, id_caracteristica_tipo_habitacion) '
+                . 'VALUES (' . $id_tipo_habitacion . ', ' . $caracteristicas[0] . ')';
+        for ($i = 1; $i < $n_caracteristicas; $i++) {
+            $consulta = $consulta . ', (' . $id_tipo_habitacion . ', ' . $caracteristicas[$i] . ')';
+        }
+        $resultado = conexionBD($consulta);
+        if (!$resultado) {
+            return false;
         }
     }
     return true;

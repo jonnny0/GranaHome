@@ -56,10 +56,13 @@ if ($id == -1) {
                 if (!$resultado) {
                     $error = true;
                 } else {
-                    echo '<script>
-                        alert("El alojamiento ha sido añadido.");
-                        location.href= "../index.php?sec=opciones_usuario";
-                    </script>';
+                    $n_fotos = $_POST['num_fotos'];
+                    for ($i = 0; $i < $n_fotos; $i++) {
+                        $url = "imagenes/" . $_POST['nombre_alojamiento'] . "/" . $_POST['foto'.$i];
+                        if(!insertar_imagen($id_alojamiento, $url)){
+                            $error = true;
+                        }
+                    }
                 }
             }
         }
@@ -68,6 +71,11 @@ if ($id == -1) {
         echo '<script>
             alert("No se ha podido insertar el alojamiento.");
             location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
+        </script>';
+    }else{
+        echo '<script>
+            alert("El alojamiento ha sido añadido.");
+            location.href= "../index.php?sec=opciones_usuario";
         </script>';
     }
 }
@@ -104,5 +112,11 @@ function alojamiento_tiene_caracteristicas($id_alojamiento, $caracteristicas) {
         }
     }
     return true;
+}
+
+function insertar_imagen($id_alojamiento, $url){
+    $consulta = 'INSERT INTO foto_alojamiento (id_alojamiento, url) VALUES (' . $id_alojamiento . ', "' . $url . '")';
+    $resultado = conexionBD($consulta);
+    return $resultado;
 }
 ?>

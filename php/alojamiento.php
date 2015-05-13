@@ -1,10 +1,19 @@
 <?php
+
 include_once 'conexion_bd.php';
 include_once 'obtener_habitaciones_disponibles_por_tipo.php';
+include_once 'php/obtener_fotos_alojamiento.php';
 
 //$id_alojamiento = $_POST['id_alojamiento'];
-
-$consulta = 'SELECT * FROM alojamiento WHERE id_alojamiento=' . $id_alojamiento;
+//$consulta = 'SELECT * FROM alojamiento WHERE id_alojamiento=' . $id_alojamiento;
+$consulta = "
+    SELECT nombre_alojamiento, descripcion_detallada, direccion, localidad, tipo_alquiler_completo AS tipo_alquiler
+    FROM alojamiento, alquiler_completo
+    WHERE id_alojamiento=id_alojamiento_completo AND id_alojamiento=" . $id_alojamiento . "
+    UNION
+    SELECT nombre_alojamiento, descripcion_detallada, direccion, localidad, tipo_alquiler_habitacion AS tipo_alquiler
+    FROM alojamiento, alquiler_habitaciones
+    WHERE id_alojamiento=id_alojamiento_habitaciones AND id_alojamiento=" . $id_alojamiento;
 
 $resultado = conexionBD($consulta);
 
@@ -15,110 +24,149 @@ if (!$resultado) {
         </script>';
 } else {
     $fila = mysql_fetch_array($resultado);
-    echo '<h1> ' . $fila['nombre_alojamiento'] . ' imagen estrellas</h1>';
-    ?>
-    <div class="imagenAlojamiento">
-        imagen alojamiento
-    </div>
-    <h2> Descripción detallada</h2>
-    <p class="resumen">
-        <?php
-        echo $fila['descripcion_detallada'];
-        ?>
-    </p>
-    <h2>Habitaciones disponibles</h2>
-    <?php
-    $consulta = 'SELECT DISTINCT id_tipo_habitacion FROM habitacion WHERE id_alojamiento=' . $id_alojamiento;
-
-    $resultado = conexionBD($consulta);
-
-    if (!$resultado) {
-        echo '<script>
-            alert("ERROR: No se ha podido mostrar el alojamiento seleccionado.");
-            location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
-        </script>';
+    if ($fila['tipo_alquiler'] == 'piso' || $fila['tipo_alquiler'] == 'casa_rural') {
+        $es_alquiler_por_habitaciones = false;
     } else {
-        $n_habitaciones = mysql_num_rows($resultado);
-        $i_habitacion = 0;
+        $es_alquiler_por_habitaciones = true;
+    }
+
+    if ($es_alquiler_por_habitaciones) {
+        echo '<h1> ' . $fila['nombre_alojamiento'] . ' <img src="imagenes/ico_estrella_4.png" alt="4 Estrellas" /></h1>';
+    } else {
+        echo '<h1> ' . $fila['nombre_alojamiento'] . ' </h1>';
+    }
+
+    echo '<p id="direccion">';
+    echo '<i> ' . $fila['direccion'] . ', ' . $fila['localidad'] . ', España </i>';
+    echo '</p>';
+
+    echo '<div class="centrado_horizontal">';
+    echo '<img id="foto_principal" src="' . obtener_foto_alojamiento($id_alojamiento) . '" alt="Foto ' . $fila['nombre_alojamiento'] . '" />';
+    echo '</div>';
+
+    $fotos = obtener_array_fotos_alojamiento($id_alojamiento);
+    echo '<table class="tablaFotoAlojamientos">';
+    echo '<tr>';
+    $pos = [3, 1, 0, 2, 4];
+    for ($i = 0; $i < 5; $i++) {
+        echo '<td>';
+        if ($fotos[$pos[$i]]) {
+            echo '<div class="centrado_horizontal">';
+            echo '<img src="' . $fotos[$pos[$i]] . '" alt="Foto ' . $fila['nombre_alojamiento'] . '" onclick="cambiar_foto_principal(this)"/>';
+            echo '</div>';
+        }
+        echo '</td>';
+    }
+    echo '</tr>';
+    echo '</table>';
+
+
+    echo '<h2> Descripción detallada </h2>';
+    echo '<p class="resumen">';
+    echo $fila['descripcion_detallada'];
+    echo '</p>';
+
+    if (!$es_alquiler_por_habitaciones) {
+        echo '<h2>Reservar</h2>';
+        
         echo '<form>';
-        echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
-        echo '<input type="hidden" name="tipo_alquiler" value=' . $_POST['tipo_alquiler'] . '/>';
-        echo '<table class="tablaHabitaciones">';
+            echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
+            echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
+            echo '<table>';
+            echo '<tr>';
+                echo '<td>Precio </td>';
+                echo '<td><button type="submit" id="reservar" name="reservar">Reservar</button></td>';
+            echo '</tr>';
+            echo '</table>';
+        echo '</form>';
+    } else {
 
-        while ($fila = mysql_fetch_array($resultado)) {
-            $id_tipo_habitacion = $fila['id_tipo_habitacion'];
-            $consulta_tipo_habitacion = 'SELECT * FROM tipo_habitacion WHERE id_tipo_habitacion=' . $id_tipo_habitacion;
-            $resultado_tipo_habitacion = conexionBD($consulta_tipo_habitacion);
+        echo '<h2>Habitaciones disponibles</h2>';
 
-            if (!$resultado_tipo_habitacion) {
-                echo '<script>
+        $consulta = 'SELECT DISTINCT id_tipo_habitacion FROM habitacion WHERE id_alojamiento=' . $id_alojamiento;
+        $resultado = conexionBD($consulta);
+
+        if (!$resultado) {
+            echo '<script>
                 alert("ERROR: No se ha podido mostrar el alojamiento seleccionado.");
                 location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
-                </script>';
-            } else {
-                $fila_tipo_habitacion = mysql_fetch_array($resultado_tipo_habitacion);
+            </script>';
+        } else {
+            $n_habitaciones = mysql_num_rows($resultado);
+            $i_habitacion = 0;
+            echo '<form>';
+            echo '<input type="hidden" name="id_alojamiento" value=' . $id_alojamiento . '/>';
+            echo '<input type="hidden" name="tipo_alquiler" value=' . $fila['tipo_alquiler'] . '/>';
+            echo '<table class="tablaHabitaciones">';
 
-                $n_habitaciones_disponibles = obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo_habitacion, '2015-05-15', '2015-06-15');
+            while ($fila = mysql_fetch_array($resultado)) {
+                $id_tipo_habitacion = $fila['id_tipo_habitacion'];
+                $consulta_tipo_habitacion = 'SELECT * FROM tipo_habitacion WHERE id_tipo_habitacion=' . $id_tipo_habitacion;
+                $resultado_tipo_habitacion = conexionBD($consulta_tipo_habitacion);
 
-                echo '<tr>
-                <td class="negrita">
-                    Nombre:
-                </td>
-                <td colspan="5">';
-                echo $fila_tipo_habitacion['nombre_tipo'];
-                echo '</td>
-                </tr>
-                <tr>
-                    <td class="negrita separacion">
-                        Capacidad:
-                    </td>
-                    <td class="separacion">';
-                echo $fila_tipo_habitacion['capacidad'];
-                if ($fila_tipo_habitacion['capacidad'] == 1) {
-                    echo ' Persona';
+                if (!$resultado_tipo_habitacion) {
+                    echo '<script>
+                        alert("ERROR: No se ha podido mostrar el alojamiento seleccionado.");
+                        location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
+                    </script>';
                 } else {
-                    echo ' Personas';
-                }
-                echo '</td>
-                <td class="negrita separacion">
-                    Precio:
-                </td>
-                <td class="separacion">';
-                echo $fila_tipo_habitacion['precio'] . ' €';
-                echo '</td>
-                <td class="negrita separacion">
-                    Número Habitaciones:
-                </td>
-                <td class="separacion">';
+                    $fila_tipo_habitacion = mysql_fetch_array($resultado_tipo_habitacion);
 
-                echo '<select name="numero_habitaciones_' . $id_tipo_habitacion . '" id="numero_habitaciones_' . $i_habitacion . '" onchange="actualizar_precio_reserva('. $n_habitaciones .')">';
-                for ($i = 0; $i <= $n_habitaciones_disponibles and $i <= 10; $i++) {
+                    $n_habitaciones_disponibles = obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo_habitacion, '2015-05-15', '2015-06-15');
 
-                    echo '<option value="' . $i * $fila_tipo_habitacion['precio'] . '">' . $i . '</option>';
+                    echo '<tr>
+                        <td class="negrita">
+                            Nombre:
+                        </td>
+                        <td colspan="5">';
+                    echo $fila_tipo_habitacion['nombre_tipo'];
+                    echo '</td>
+                    </tr>
+                    <tr>
+                        <td class="negrita separacion">
+                            Capacidad:
+                        </td>
+                        <td class="separacion">';
+                    echo $fila_tipo_habitacion['capacidad'];
+                    if ($fila_tipo_habitacion['capacidad'] == 1) {
+                        echo ' Persona';
+                    } else {
+                        echo ' Personas';
+                    }
+                    echo '</td>
+                        <td class="negrita separacion">
+                            Precio:
+                        </td>
+                        <td class="separacion">';
+                    echo $fila_tipo_habitacion['precio'] . ' €';
+                    echo '</td>
+                        <td class="negrita separacion">
+                            Número Habitaciones:
+                        </td>
+                        <td class="separacion">';
+                    echo '<select name="numero_habitaciones_' . $id_tipo_habitacion . '" id="numero_habitaciones_'
+                    . $i_habitacion . '" onchange="actualizar_precio_reserva(' . $n_habitaciones . ')">';
+                    for ($i = 0; $i <= $n_habitaciones_disponibles and $i <= 10; $i++) {
+                        echo '<option value="' . $i * $fila_tipo_habitacion['precio'] . '">' . $i . '</option>';
+                    }
+                    $i_habitacion++;
+                    echo '</select>';
+                    echo '</td>';
+                    echo '</tr>';
                 }
-                $i_habitacion = $i_habitacion +1;
-                echo '</select>';
-                echo '</td></tr>';
             }
+            echo '<tr>
+                <td></td>
+                <td></td>
+                <td class="negrita">Precio:</td>
+                <td id="precio_total" colspan="2">0 €</td>
+                <td><button type="submit" id="reservar" name="reservar">Reservar</button></td></tr>';
+            echo '</table>';
+            echo '</form>';
         }
-        echo '<tr>
-            <td></td>
-            <td></td>
-            <td class="negrita">Precio:</td>
-            <td id="precio_total" colspan="2">0 €</td>
-            <td><button type="submit" id="reservar" name="reservar">Reservar</button></td></tr>';
-        echo '</table>';
-        echo '</form>';
     }
-    ?>
-    <table class="tablaHabitaciones">
 
-
-    </table>
-
-    <h2>Características</h2>
-    <?php
-    echo '<h3> Características </h3>';
+    echo '<h2>Características</h2>';
 
     $consulta = 'SELECT * FROM caracteristica_alojamiento';
     $resultado = conexionBD($consulta);
@@ -139,302 +187,32 @@ if (!$resultado) {
         while ($fila = mysql_fetch_array($resultado_hotel)) {
             $id_caract = $fila['id_caracteristica_alojamiento'];
             echo '<script> 
-                        var caracteristica = document.getElementById("caract" + ' . $id_caract . ');
-                        caracteristica.checked = 1;
-                    </script>';
+                    var caracteristica = document.getElementById("caract" + ' . $id_caract . ');
+                    caracteristica.checked = 1;
+                </script>';
         }
     }
-    ?>
 
-    <h2>Comentarios</h2>
-    <table>
-        <?php
-        $consulta = 'SELECT * FROM cliente_reserva WHERE id_alojamiento="' . $id_alojamiento . '" AND id_alojamiento IS NOT NULL';
-        $resultado = conexionBD($consulta);
+    echo '<h2>Comentarios</h2>';
+    echo '<table>';
 
-        if ($resultado and mysql_num_rows($resultado) > 0) {
-            while ($fila = mysql_fetch_array($resultado)) {
-                echo '<tr><td>';
-                echo $fila['comentario'];
-                echo '</td></tr>';
-            }
-        }
-        ?>
+    $consulta_comentarios = "SELECT puntuacion, comentario, nombre_usuario FROM cliente_reserva, usuario "
+            . "WHERE id_cliente = id_usuario AND id_alojamiento=" . $id_alojamiento . " AND puntuacion IS NOT NULL";
+    $resultado_comentarios = conexionBD($consulta_comentarios);
 
-    </table>
-
-
-    <?php
+    while ($fila_comentarios = mysql_fetch_array($resultado_comentarios)) {
+        echo '<tr>';
+        echo '<td class="negrita">';
+        echo $fila_comentarios['nombre_usuario'] . ' &nbsp;&nbsp;&nbsp;&nbsp; Valoración: ' . $fila_comentarios['puntuacion'];
+        echo '</td>';
+        echo '</tr>';
+        echo '<tr>';
+        echo '<td>';
+        echo $fila_comentarios['comentario'];
+        echo '<br/><br/>';
+        echo '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
 }
 ?>
-<hr><hr><hr>
-
-<h1>
-    Hotel Alhambra Palace
-    <img src="imagenes/ico_estrella_4p.png" title="4 Estrellas" alt="4 Estrellas"/>
-</h1>
-<p id="direccion">
-    Plaza Arquitecto García de Paredes, 1, Centro de Granada, 18009 Granada, España
-</p>
-<div class="imagenAlojamiento">
-    <img src="imagenes/hotelAlhambraPalace.jpg" title="Hotel" alt="Hotel"/>
-</div>
-<h2> Descripción detallada </h2>
-<p class="resumen">
-    El Alhambra Palace está situado a las afueras de las antiguas murallas de la Alhambra, y ofrece unas
-    vistas espectaculares a la ciudad de Granada. Dispone de habitaciones elegantes con una decoración de
-    inspiración árabe, conexión Wi-Fi gratuita y TV vía satélite.
-    <br/><br/>
-    El hotel cuenta con un restaurante a la carta que sirve comida andaluza. También hay un bar con una
-    terraza con unas vistas impresionantes a Granada y a Sierra Nevada.
-    <br/><br/>
-    La recepción del Hotel Alhambra Palace está abierta las 24 horas. Hay un cajero automático en el hotel,
-    así como servicio de cambio de divisa. Justo enfrente del hotel encontrará una parada de autobús que le
-    llevará al centro de la ciudad o a la Alhambra.
-    <br/><br/>
-    La Alhambra está a menos de 10 minutos a pie, a través de una pequeña zona boscosa. Este hotel se
-    encuentra de 10 minutos a pie del barrio árabe medieval del Albayzín, declarado Patrimonio de la
-    Humanidad por la UNESCO.
-    <br/><br/>
-    Centro de Granada es una opción genial para los viajeros interesados en compras, comida y historia.
-</p>
-<h2>Habitaciones disponibles</h2>
-<table class="tablaHabitaciones">
-    <tr>
-        <td class="negrita">
-            Nombre:
-        </td>
-        <td colspan="5">
-            Prometeus
-        </td>
-    </tr>
-    <tr>
-        <td class="negrita separacion">
-            Capacidad:
-        </td>
-        <td class="separacion">
-            1 Persona
-        </td>
-        <td class="negrita separacion">
-            Precio:
-        </td>
-        <td class="separacion">
-            30€
-        </td>
-        <td class="negrita separacion">
-            Número Habitaciones:
-        </td>
-        <td class="separacion">
-            <select name="numeroHabitaciones" id="NumeroHabitaciones">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </td>
-    </tr>
-
-
-    <tr>
-        <td class="negrita">
-            Nombre:
-        </td>
-        <td>
-            Zeus
-        </td>
-    </tr>
-    <tr>
-        <td class="negrita separacion">
-            Capacidad:
-        </td>
-        <td class="separacion">
-            2 Personas
-        </td>
-        <td class="negrita separacion">
-            Precio:
-        </td>
-        <td class="separacion">
-            50€
-        </td>
-        <td class="negrita separacion">
-            Número Habitaciones:
-        </td>
-        <td class="separacion">
-            <select name="numeroHabitaciones2" id="NumeroHabitaciones2">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </td>
-    </tr>
-
-    <tr>
-        <td class="negrita">
-            Nombre:
-        </td>
-        <td>
-            Atenea
-        </td>
-    </tr>
-    <tr>
-        <td class="negrita separacion">
-            Capacidad:
-        </td>
-        <td class="separacion">
-            3 Persona
-        </td>
-        <td class="negrita separacion">
-            Precio:
-        </td>
-        <td class="separacion">
-            80€
-        </td>
-        <td class="negrita separacion">
-            Número Habitaciones:
-        </td>
-        <td class="separacion">
-            <select name="numeroHabitaciones3" id="NumeroHabitaciones3">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-        </td>
-    </tr>
-
-    <tr>
-        <td class="negrita">
-            Nombre:
-        </td>
-        <td>
-            Ariel
-        </td>
-    </tr>
-    <tr>
-        <td class="negrita separacion">
-            Capacidad:
-        </td>
-        <td class="separacion">
-            4 Persona
-        </td>
-        <td class="negrita separacion">
-            Precio:
-        </td>
-        <td class="separacion">
-            100€
-        </td>
-        <td class="negrita separacion">
-            Número Habitaciones:
-        </td>
-        <td class="separacion">
-            <select name="numeroHabitaciones4" id="NumeroHabitaciones4">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><button id="reservar" name="reservar">Reservar</button></td>
-    </tr>
-</table>
-
-<h2>Características</h2>
-<table class="tablaCaracteristicas">
-    <tr>
-        <td class="negrita">
-            Wifi Gratis:
-        </td>
-        <td>
-            Si
-        </td>
-        <td class="negrita">
-            Piscina:
-        </td>
-        <td>
-            Si
-        </td>
-        <td class="negrita">
-            Recepción 24H:
-        </td>
-        <td>
-            Si
-        </td>
-        <td class="negrita">
-            Aire Acondicionado:
-        </td>
-        <td>
-            Si
-        </td>
-    </tr>
-    <tr>
-        <td class="negrita">
-            Terraza:
-        </td>
-        <td>
-            Si
-        </td>
-        <td class="negrita">
-            Barbacoa:
-        </td>
-        <td>
-            No
-        </td>
-        <td class="negrita">
-            Cocina:
-        </td>
-        <td>
-            No
-        </td>
-        <td class="negrita">
-            Caja fuerte:
-        </td>
-        <td>
-            Si
-        </td>
-    </tr>
-</table>
-<h2>Comentarios</h2>
-<table>
-    <tr>
-        <td class="negrita">
-            Manuel &nbsp;&nbsp;&nbsp;&nbsp; Valoración: 7.2
-        </td>
-    </tr>
-    <tr>
-        <td>
-            El hotel es una maravilla, la gente es muy amable. 
-            Las habitaciones están muy limpias.
-            La ubicación es espectacular. Bonitas Vistas del atardecer en la terraza, alejados del ruido de la ciudad y con fácil acceso en coche tanto para llegar como para salir.
-        </td>
-    </tr>
-
-    <tr>
-        <td class="negrita">
-            <br>Laura &nbsp;&nbsp;&nbsp;&nbsp; Valoración: 6.2
-        </td>
-    </tr>
-    <tr>
-        <td>
-            No hay parking. Sin embargo el personal me encontro un hueco en la plaza. Fueron muy amables.
-        </td>
-    </tr>
-
-
-</table>

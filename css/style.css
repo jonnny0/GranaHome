@@ -138,6 +138,11 @@ button a{
     float: right;
 }
 
+.centrado_horizontal{
+    display: flex;
+    justify-content: center;
+}
+
 /*
  * Página Principal
  */
@@ -200,13 +205,6 @@ button a{
     color: white;
 }
 
-.tablaBusqueda td {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-top: 1px solid black;
-    /*border: 5px;*/
-}
-
 /*
  * Archivo de los resultados de busqueda
  */
@@ -247,13 +245,46 @@ button a{
     padding: 20px;
 }
 
+.tablaBusqueda td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid black;
+    /*border: 5px;*/
+}
+
+.tablaBusqueda img{
+    -ms-interpolation-mode: bicubic;
+    max-width: 200px;
+    max-height: 200px;
+}
+
 /*
  * Archivo de alojamiento
  */
 
-.imagenAlojamiento{
-    margin-left: 6%;
-    margin-bottom: 30px;
+
+
+.tablaFotoAlojamientos{
+    width: 100%;
+}
+
+.tablaFotoAlojamientos td{
+    width: 100px;
+    height: 150px;
+}
+
+.tablaFotoAlojamientos img{
+    /*margin-bottom: 30px;*/
+    -ms-interpolation-mode: bicubic;
+    max-width: 100%;
+    max-height: 150px;
+}
+
+#foto_principal{
+    margin-bottom: 10px;
+    -ms-interpolation-mode: bicubic;
+    max-width: 100%;
+    max-height: 500px;
 }
 
 .resumen{
@@ -309,9 +340,9 @@ button a{
     text-decoration: none;
     font-weight: bold;
     border-radius:20px;
- 
+
 }
- 
+
 .close:hover {
     background-color: #00a2e8;
     color: white;
@@ -328,7 +359,11 @@ button a{
 
 .tablaHabitaciones td {
     padding-right: 25px; 
-    
+
+}
+
+.texto_centrado{
+    text-align: center;
 }
 
 .negrita {
@@ -349,11 +384,6 @@ button a{
     margin-bottom: 25px;
     background-color: black;
     height: 3px;
-}
-
-#menuOpcionesUsuario #active{
-    background-color: #18bbff;
-    color: white;
 }
 
 #menuOpcionesUsuario ul li{
@@ -384,6 +414,7 @@ button a{
 }
 
 #menuOpcionesUsuario a:hover{
+    background-color: #18bbff;
     color: white;
 }
 
