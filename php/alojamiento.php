@@ -1,10 +1,17 @@
-<?php
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+<script type="text/javascript">
+    function datos_habitacion(id) {
+        $("#detalles_habitacion").load("php/habitacion.php", {id_habitacion: id});
+    }
+    ;
+</script>
 
+<?php
 include_once 'conexion_bd.php';
 include_once 'alojamiento_cumple_condiciones_para_reservar.php';
 include_once 'obtener_fotos_alojamiento.php';
-include_once 'habitacion.php';
 
+echo '<div id="detalles_habitacion"> </div>';
 //$id_alojamiento = $_POST['id_alojamiento'];
 //$consulta = 'SELECT * FROM alojamiento WHERE id_alojamiento=' . $id_alojamiento;
 $consulta = "
@@ -122,19 +129,19 @@ if (!$resultado) {
         } else {
             $n_habitaciones = mysql_num_rows($resultado);
             $i_habitacion = 0;
-            
+
             echo '<form method="post" action="php/crear_reserva.php">';
             echo '<input type="hidden" name="id_alojamiento" value="' . $id_alojamiento . '"/>';
             echo '<input type="hidden" name="tipo_alquiler" value="' . $fila['tipo_alquiler'] . '"/>';
             echo '<table class="tablaHabitaciones">';
 
             $hay_habitaciones_libres = false;
-            
+
             while ($fila = mysql_fetch_array($resultado)) {
                 $id_tipo_habitacion = $fila['id_tipo_habitacion'];
                 $consulta_tipo_habitacion = 'SELECT * FROM tipo_habitacion WHERE id_tipo_habitacion=' . $id_tipo_habitacion;
                 $resultado_tipo_habitacion = conexionBD($consulta_tipo_habitacion);
-                
+
                 if (!$resultado_tipo_habitacion) {
                     echo '<script>
                         alert("ERROR: No se ha podido mostrar el alojamiento seleccionado.");
@@ -145,12 +152,12 @@ if (!$resultado) {
 
                     $n_habitaciones_disponibles = obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo_habitacion, $fecha_inicio, $fecha_fin);
 
-                    echo '<tr onclick="datos_habitacion(' . $id_tipo_habitacion . ');">
+                    echo '<tr onmouseenter="datos_habitacion(' . $id_tipo_habitacion . ');">
                         <td class="negrita">
                             Nombre:
                         </td>
                         <td colspan="5">';
-                    echo "<a href='index.php?sec=alojamiento&aloj=" . $id_alojamiento . "&id_hab=" . $id_tipo_habitacion . "#detalle_habitacion'>" . $fila_tipo_habitacion['nombre_tipo'] . "</a>";
+                    echo "<a href='#detalle_habitacion'>" . $fila_tipo_habitacion['nombre_tipo'] . "</a>";
 //                    echo $fila_tipo_habitacion['nombre_tipo'] ;
                     echo '</td>
                     </tr>
@@ -188,12 +195,11 @@ if (!$resultado) {
                             echo '<option value="' . $i * $fila_tipo_habitacion['precio'] . '">' . $i . '</option>';
                         }
                     }
-                    echo '<p id="datos_habitacion_' . $id_tipo_habitacion . '"> </p>';
-                    
-                    $i_habitacion++;
+
                     echo '</select>';
                     echo '</td>';
                     echo '</tr>';
+                    $i_habitacion++;
                 }
             }
             echo '<tr>
@@ -203,7 +209,7 @@ if (!$resultado) {
                 <td id="precio_total" name="precio_total" colspan="2">0 €</td>';
             if ($hay_habitaciones_libres) {
                 echo '<td><button type="submit" id="reservar" name="reservar">Reservar</button></td></tr>';
-            }else{
+            } else {
                 echo '<td><button type="submit" id="reservar" name="reservar" disabled>Agotadas</button></td></tr>';
             }
             echo '</table>';

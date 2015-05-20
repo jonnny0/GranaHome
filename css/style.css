@@ -241,6 +241,10 @@ button a{
     margin-bottom: 20px;
 }
 
+.tablaBusqueda{
+    width: 100%;
+}
+
 .tablaBusqueda .descripcion{
     padding: 20px;
 }
@@ -472,24 +476,9 @@ textArea{
  * MODALES HABITACIÓN
  */
 
-.modalmask_habitacion {
-    position: fixed;
-    font-family: Arial, sans-serif;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 99999;
-    opacity:1;
-    pointer-events: auto;
-}
-/*.modalmask:target {
-    opacity:1;
-    pointer-events: auto;
-}
-.modalbox{
-    width: 400px;
+
+.modalbox_habitacion{
+    width: 70%;
     position: relative;
     padding: 5px 20px 13px 20px;
     background: #fff;
@@ -499,28 +488,59 @@ textArea{
     transition: all 500ms ease-in;
 }
 
-.movedown {
-    margin: 0 auto;
+.moveright_habitacion {
+    /*margin: 0 auto;*/
+    margin-top: 2%;
+    margin-left: 0px;
+    
 }
-.modalmask:target .movedown{       
-    margin:10% auto;
+.modalmask:target .moveright_habitacion{       
+    /*margin:2% auto;*/
+    margin-top: 2%;
+    margin-left: 13%;
 }
-.close {
-    background: #606061;
-    color: #FFFFFF;
-    line-height: 25px;
-    position: absolute;
-    right: 1px;
+
+#detalle_habitacion h2{
     text-align: center;
-    top: 1px;
-    width: 24px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius:20px;
+}
 
-}*/
+#detalle_habitacion hr{
+    margin-bottom: 25px;
+    background-color: black;
+    height: 3px;
+}
 
-.close:hover {
-    background-color: #00a2e8;
-    color: white;
+#foto_habitacion_principal{
+    margin-bottom: 10px;
+    -ms-interpolation-mode: bicubic;
+    max-width: 100%;
+    max-height: 250px;
+}
+
+#lista_img_habitaciones_izquierda{
+    width: 30%;
+    float: left;
+}
+
+#div_img_habitacion_principal{
+    width: 70%;
+    float: right;
+}
+
+.tablaFotoHabitaciones{
+    width: 100%;
+}
+
+.tablaFotoHabitaciones td{
+    height: 83px;
+}
+
+.tablaFotoHabitaciones img{
+    -ms-interpolation-mode: bicubic;
+    max-height: 83px;
+    cursor:pointer;
+}
+
+#tabla_caracteristicas_habitacion{
+    width: 100%;
 }

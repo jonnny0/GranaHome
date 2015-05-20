@@ -188,3 +188,8 @@ function comentar_reserva(id_reserva) {
     document.getElementById("reserva_"+id_reserva+"_der").innerHTML = formulario2;
     document.getElementById("reserva_"+id_reserva+"_bot").innerHTML = formulario3;
 }
+
+function cambiar_foto_habitacion_principal(nueva) {
+    var foto = document.getElementById("foto_habitacion_principal");
+    foto.src = nueva.src;
+}
