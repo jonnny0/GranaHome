@@ -1,57 +1,36 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <title>GranaHome</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-        <link rel="icon" type="image/png" href="imagenes/logo.png" />
-    </head>
+<?php
+include_once './php/epiphany/Epi.php';
 
-    <body>
-        <?php
-        session_start();
-        if (isset($_GET['sec'])) {
-            $seccion = $_GET['sec'];
-        } else {
-            $seccion = 'buscador';
-//            $seccion = 'eleccion';
-        }
-        if (isset($_GET['aloj'])) {
-            $id_alojamiento = $_GET['aloj'];
-        }else{
-            $id_alojamiento = false;
-        }
-        ?>
+Epi::init('api');
 
-        <?php
-        include('php/conexion_bd.php');
-        ?>
+getRoute()->get('/', 'default_func');
+getRoute()->get('/hoteles', 'list_func');
+getRoute()->get('/hotel', 'list_func');
+getRoute()->post('/hoteles', 'metodo_post');
+getRoute()->get('/reserva', 'reservar');
+getRoute()->get('/hoteles/(\w+)/huespedes/(\d+)', 'list_func_parametros');
+getRoute()->run();
 
-        <!--Comienzo de la cabecera-->
-        <header>
-            <?php
-            include('php/header.php');
-            ?>
-        </header>
-        <!--Fin de la cabecera-->
 
-        <!--Comienza la parte de la página-->
-        <div class="contenedorPrincipal">
-            <?php
-            include('php/main_content.php');
-            ?>
-        </div>
+function default_func(){
+    include_once './index_GranaHome.php';
+}
 
-        <!--Fin de la parte de la página-->
+function list_func(){
+//    return array('id' => 'Estos son los hoteles disponibles');
+    echo "Estos son los hoteles disponibles";
+    return "Estos son los hoteles disponibles";
+}
 
-        <!--Comienzo del pie-->
-        <br><br>
-        <footer>
-            <?php
-            include('php/footer.php');
-            ?>
-        </footer>
-        <!--Fin del pie-->
-    </body>
+function list_func_parametros($param, $param2){
+    echo "Se pide mostrar los hoteles de " . $param . " para " . $param2 . " personas";
+}
 
-</html>
+function metodo_post(){
+    echo "Metodo post " . $_REQUEST['alojamiento']; 
+}
+
+function reservar(){
+    $value = array('n_imgs' => 2, 'img' => array('http://localhost/GranaHome_api/imagenes/hotel_prueba2.jpg','http://localhost/GranaHome_api/imagenes/hotel_prueba.jpg'));
+    echo json_encode($value);
+}
