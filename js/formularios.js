@@ -174,3 +174,7 @@ function cambiar_foto_principal(nueva) {
     var foto = document.getElementById("foto_principal");
     foto.src = nueva.src;
 }
+
+function comentar_reserva(id_reserva) {
+    document.getElementById("reserva_"+id_reserva).innerHTML = "hola";
+}
