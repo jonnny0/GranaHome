@@ -176,5 +176,15 @@ function cambiar_foto_principal(nueva) {
 }
 
 function comentar_reserva(id_reserva) {
-    document.getElementById("reserva_"+id_reserva).innerHTML = "hola";
+//    var formulario1 = '<form action="php/registrar_comentario.php" method="post">';
+    formulario1 = '<label for="puntuacion">Puntuación: </label>'
+    formulario1 += '<input type="number" min=0 max=10 id="puntuacion" name="puntuacion" maxlength="20" required />';
+    var formulario2 = '<label for="comentario">Comentario:</label>'
+    formulario2 += '<br /><textarea id="comentar" name="comentario" required ></textarea> ';
+    formulario2 += '<input type="hidden" name="id_reserva" value="' + id_reserva + '" />';
+    var formulario3 = '<button type="submit" title="Añadir valoración" name="anadir_valoracion"> Añadir valoración </button>';
+//    formulario3 += '</form>';
+    document.getElementById("reserva_"+id_reserva+"_izq").innerHTML = formulario1;
+    document.getElementById("reserva_"+id_reserva+"_der").innerHTML = formulario2;
+    document.getElementById("reserva_"+id_reserva+"_bot").innerHTML = formulario3;
 }
