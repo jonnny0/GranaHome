@@ -26,7 +26,7 @@ foreach ($_SESSION['ids_alojamientos_buscados'] as $fila_alojamiento) {
         if($fila_alojamiento['tipo_alquiler'] == 'piso' || $fila_alojamiento['tipo_alquiler'] == 'casa_rural'){
             echo '<h2> ' . $fila_alojamiento['nombre_alojamiento'] . ' </h2>';
         }else{
-            echo '<h2> ' . $fila_alojamiento['nombre_alojamiento'] . ' <img src="imagenes/ico_estrella_4.png" alt="4 Estrellas" /></h2>';
+            echo '<h2> ' . $fila_alojamiento['nombre_alojamiento'] . ' <img src=' . obtener_imagen_estrellas($fila_alojamiento['id_alojamiento']) .' /></h2>';
         }
             echo '<i> ' . $fila_alojamiento['direccion'] . ', '  . $fila_alojamiento['localidad'] . ' </i>';
             echo '<br><br>';

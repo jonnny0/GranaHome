@@ -28,7 +28,7 @@ if (!empty($tipo_alojamientos)) {
 }
 echo $_POST['puntuacion'];
 echo '<br>';
-echo $_POST['estrellas'];
+echo $_POST['numero_estrellas'];
 echo '<br>';
 if ($_POST['precio_maximo'] == "") {
     echo "cualquier precio";
@@ -51,9 +51,9 @@ $consulta_alojamientos_habitaciones = "
     LEFT JOIN `cliente_reserva` ON `cliente_reserva`.`id_alojamiento`=`alojamiento`.`id_alojamiento`";
 //    WHERE `id_administrador` IS NOT NULL
 // CUANDO SE DESCOMENTE ESTA LINEA SE TIENE Q INTERCAMBIAR LAS DE ABAJO
-if ($_POST['estrellas'] != 0) {
+if ($_POST['numero_estrellas'] != 0) {
 //    $consulta_alojamientos_habitaciones = $consulta_alojamientos_habitaciones . " AND `numero_estrellas`>=" . $_POST['numero_estrellas'];
-    $consulta_alojamientos_habitaciones = $consulta_alojamientos_habitaciones . " WHERE `numero_estrellas`>=" . $_POST['numero_estrellas'];
+//    $consulta_alojamientos_habitaciones = $consulta_alojamientos_habitaciones . " WHERE `numero_estrellas`>=" . $_POST['numero_estrellas'];
 }
 $consulta_alojamientos_habitaciones = $consulta_alojamientos_habitaciones . "GROUP BY `id_alojamiento` ";
 
@@ -76,8 +76,11 @@ $resultado_alojamientos = conexionBD($consulta_alojamientos);
 
 $lista_ids = [];
 while ($fila_alojamiento = mysql_fetch_array($resultado_alojamientos)) {
-    if (alojamiento_cumple_condiciones_para_reservar($fila_alojamiento['id_alojamiento'], $fila_alojamiento['tipo_alquiler'], $_POST['numero_huespedes'], $_POST['fecha_entrada'], $_POST['fecha_salida'])) {
+    echo "<br>" . $fila_alojamiento['id_alojamiento'];
+    if (alojamiento_cumple_condiciones_para_reservar($fila_alojamiento['id_alojamiento'], $fila_alojamiento['tipo_alquiler'],
+            $_POST['numero_habitaciones'], $_POST['numero_huespedes'], $_POST['fecha_entrada'], $_POST['fecha_salida'], $_POST['numero_estrellas'])) {
         array_push($lista_ids, $fila_alojamiento);
+        echo " --> incluido";
     }
 };
 

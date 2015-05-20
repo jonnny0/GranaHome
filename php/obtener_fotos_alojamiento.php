@@ -36,4 +36,17 @@ function obtener_array_fotos_alojamiento($id) {
     return $fotos;
 }
 
+function obtener_imagen_estrellas($id_alojamiento){
+    $consulta_estrellas = "SELECT numero_estrellas FROM alquiler_habitaciones WHERE id_alojamiento_habitaciones=" . $id_alojamiento;
+    $resultado_estrellas = conexionBD($consulta_estrellas);
+    
+    if($resultado_estrellas){
+        $fila = mysql_fetch_array($resultado_estrellas);
+        $estrellas = $fila['numero_estrellas'];
+        return '"imagenes/ico_estrella_' . $estrellas . '.png" alt="' . $estrellas . ' Estrellas" ';
+    }else{
+        return "";
+    }
+}
+
 ?>

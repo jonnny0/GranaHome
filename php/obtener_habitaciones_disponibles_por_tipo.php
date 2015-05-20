@@ -8,7 +8,7 @@ function obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo, $f
 
     $n_habitaciones_reservadas = obtener_numero_habitaciones_reservadas($id_alojamiento, $id_tipo, $fecha_inicio, $fecha_fin);
     
-    return $n_habitaciones_total - $n_habitaciones_reservadas;
+    return ($n_habitaciones_total - $n_habitaciones_reservadas);
 }
 
 function obtener_numero_total_habitaciones($id_alojamiento, $id_tipo){
@@ -45,10 +45,8 @@ function obtener_habitaciones_reservadas($id_alojamiento, $id_tipo, $fecha_inici
             . "habitacion.id_tipo_habitacion=" . $id_tipo . " AND "
             . "habitacion.id_habitacion=reserva_habitacion.id_habitacion AND "
             . "cliente_reserva.id_reserva=reserva_habitacion.id_reserva AND ( "
-            . "(cliente_reserva.fecha_inicio>='" . $fecha_inicio . "' AND "
-            . "cliente_reserva.fecha_inicio<'" . $fecha_fin . "') OR "
-            . "(cliente_reserva.fecha_fin>'" . $fecha_inicio . "' AND "
-            . "cliente_reserva.fecha_fin<='" . $fecha_fin . "') )";
+            . "('" . $fecha_inicio . "'>=fecha_inicio AND '" . $fecha_inicio . "'<fecha_fin) OR "
+            . "('" . $fecha_fin . "'>fecha_inicio AND '" . $fecha_fin . "'<=fecha_fin) ) ";
 
     $resultado_hay_reservadas = conexionBD($consulta_hay_reservadas);
 

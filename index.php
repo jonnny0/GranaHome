@@ -13,7 +13,8 @@
         if (isset($_GET['sec'])) {
             $seccion = $_GET['sec'];
         } else {
-            $seccion = 'eleccion';
+            $seccion = 'buscador';
+//            $seccion = 'eleccion';
         }
         if (isset($_GET['aloj'])) {
             $id_alojamiento = $_GET['aloj'];

@@ -1,8 +1,8 @@
 <?php
 
 include_once 'conexion_bd.php';
-include_once 'obtener_habitaciones_disponibles_por_tipo.php';
-include_once 'php/obtener_fotos_alojamiento.php';
+include_once 'alojamiento_cumple_condiciones_para_reservar.php';
+include_once 'obtener_fotos_alojamiento.php';
 
 //$id_alojamiento = $_POST['id_alojamiento'];
 //$consulta = 'SELECT * FROM alojamiento WHERE id_alojamiento=' . $id_alojamiento;
@@ -29,6 +29,18 @@ if (!$resultado) {
     } else {
         $es_alquiler_por_habitaciones = true;
     }
+
+    if (isset($_SESSION['fecha_inicio'])) {
+        $fecha_inicio = $_SESSION['fecha_inicio'];
+    } else {
+        $fecha_inicio = '0000-00-00';
+    }
+    if (isset($_SESSION['fecha_fin'])) {
+        $fecha_fin = $_SESSION['fecha_fin'];
+    } else {
+        $fecha_inicio = '0000-00-00';
+    }
+
 
     if ($es_alquiler_por_habitaciones) {
         echo '<h1> ' . $fila['nombre_alojamiento'] . ' <img src="imagenes/ico_estrella_4.png" alt="4 Estrellas" /></h1>';
@@ -67,27 +79,31 @@ if (!$resultado) {
     echo '</p>';
 
     if (!$es_alquiler_por_habitaciones) {
-        
+
         $consulta_alojamiento_completo = "SELECT precio FROM alquiler_completo WHERE id_alojamiento_completo=" . $id_alojamiento;
-        
+
         $resultado_alojamiento_completo = conexionBD($consulta_alojamiento_completo);
-        
-        if ($resultado_alojamiento_completo){
+
+        if ($resultado_alojamiento_completo) {
             $fila_alojamiento_completo = mysql_fetch_array($resultado_alojamiento_completo);
-            
+
             echo '<h2>Reservar</h2>';
 
             echo '<form method="post" action="php/crear_reserva.php">';
-                echo '<input type="hidden" name="id_alojamiento" value="' . $id_alojamiento . '"/>';
-                echo '<input type="hidden" name="tipo_alquiler" value="' . $fila['tipo_alquiler'] . '"/>';
-                echo '<table>';
-                echo '<tr>';
-                    echo '<td name="precio_total">Precio ' . $fila_alojamiento_completo['precio'] . ' € &nbsp;&nbsp;&nbsp;</td>';
-                echo '</tr>';
-                echo '<tr>';
-                    echo '<td><button type="submit" id="reservar" name="reservar">Reservar</button></td>';
-                echo '</tr>';
-                echo '</table>';
+            echo '<input type="hidden" name="id_alojamiento" value="' . $id_alojamiento . '"/>';
+            echo '<input type="hidden" name="tipo_alquiler" value="' . $fila['tipo_alquiler'] . '"/>';
+            echo '<table>';
+            echo '<tr>';
+            echo '<td name="precio_total">Precio ' . $fila_alojamiento_completo['precio'] . ' € &nbsp;&nbsp;&nbsp;</td>';
+            echo '</tr>';
+            echo '<tr>';
+            if (alojamiento_completo_libre($id_alojamiento, $fecha_inicio, $fecha_fin)) {
+                echo '<td><button type="submit" id="reservar" name="reservar">Reservar</button></td>';
+            } else {
+                echo '<td><button type="submit" id="reservar" name="reservar" disabled>Agotado</button></td>';
+            }
+            echo '</tr>';
+            echo '</table>';
             echo '</form>';
         }
     } else {
@@ -110,11 +126,13 @@ if (!$resultado) {
             echo '<input type="hidden" name="tipo_alquiler" value="' . $fila['tipo_alquiler'] . '"/>';
             echo '<table class="tablaHabitaciones">';
 
+            $hay_habitaciones_libres = false;
+            
             while ($fila = mysql_fetch_array($resultado)) {
                 $id_tipo_habitacion = $fila['id_tipo_habitacion'];
                 $consulta_tipo_habitacion = 'SELECT * FROM tipo_habitacion WHERE id_tipo_habitacion=' . $id_tipo_habitacion;
                 $resultado_tipo_habitacion = conexionBD($consulta_tipo_habitacion);
-
+                
                 if (!$resultado_tipo_habitacion) {
                     echo '<script>
                         alert("ERROR: No se ha podido mostrar el alojamiento seleccionado.");
@@ -123,7 +141,7 @@ if (!$resultado) {
                 } else {
                     $fila_tipo_habitacion = mysql_fetch_array($resultado_tipo_habitacion);
 
-                    $n_habitaciones_disponibles = obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo_habitacion, '2015-05-15', '2015-06-15');
+                    $n_habitaciones_disponibles = obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo_habitacion, $fecha_inicio, $fecha_fin);
 
                     echo '<tr>
                         <td class="negrita">
@@ -155,10 +173,17 @@ if (!$resultado) {
                             Número Habitaciones:
                         </td>
                         <td class="separacion">';
-                    echo '<select name="' . $id_tipo_habitacion . '" id="numero_habitaciones_'
-                    . $i_habitacion . '" onchange="actualizar_precio_reserva(' . $n_habitaciones . ')">';
-                    for ($i = 0; $i <= $n_habitaciones_disponibles and $i <= 10; $i++) {
-                        echo '<option value="' . $i * $fila_tipo_habitacion['precio'] . '">' . $i . '</option>';
+                    if ($n_habitaciones_disponibles == 0) {
+                        echo '<select name="' . $id_tipo_habitacion . '" id="numero_habitaciones_'
+                        . $i_habitacion . '" onchange="actualizar_precio_reserva(' . $n_habitaciones . ')" disabled>';
+                        echo '<option value="0"> Agotada </option>';
+                    } else {
+                        $hay_habitaciones_libres = true;
+                        echo '<select name="' . $id_tipo_habitacion . '" id="numero_habitaciones_'
+                        . $i_habitacion . '" onchange="actualizar_precio_reserva(' . $n_habitaciones . ')">';
+                        for ($i = 0; $i <= $n_habitaciones_disponibles and $i <= 10; $i++) {
+                            echo '<option value="' . $i * $fila_tipo_habitacion['precio'] . '">' . $i . '</option>';
+                        }
                     }
                     $i_habitacion++;
                     echo '</select>';
@@ -169,9 +194,13 @@ if (!$resultado) {
             echo '<tr>
                 <td></td>
                 <td></td>
-                <td class="negrita">Precio:</td>
-                <td id="precio_total" colspan="2">0 €</td>
-                <td><button type="submit" id="reservar" name="reservar">Reservar</button></td></tr>';
+                <td class="negrita">Precio Total:</td>
+                <td id="precio_total" name="precio_total" colspan="2">0 €</td>';
+            if ($hay_habitaciones_libres) {
+                echo '<td><button type="submit" id="reservar" name="reservar">Reservar</button></td></tr>';
+            }else{
+                echo '<td><button type="submit" id="reservar" name="reservar" disabled>Agotadas</button></td></tr>';
+            }
             echo '</table>';
             echo '</form>';
         }
