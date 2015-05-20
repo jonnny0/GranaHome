@@ -389,7 +389,7 @@ button a{
 
 #menuOpcionesUsuario ul li{
     list-style: none;
-    background-color: #CCCCCC;
+    background-color: #888888;
     color: black;
     font-size: 18px;
     text-decoration: none;
@@ -411,10 +411,15 @@ button a{
 
 #menuOpcionesUsuario a{
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 #menuOpcionesUsuario a:hover{
+    background-color: #18bbff;
+    color: white;
+}
+
+#menuOpcionesUsuario #active{
     background-color: #18bbff;
     color: white;
 }
@@ -454,4 +459,11 @@ textArea{
 #selector{
     text-align: center;
     font-size: 16px;
+}
+
+/*
+ * Reservas
+ */
+#ver_reservas td{
+    padding-right: 50px;
 }
