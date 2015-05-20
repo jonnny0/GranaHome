@@ -1,3 +1,19 @@
+<div id="menuOpcionesUsuario">
+    <ul>
+	<li id="active">
+            <a href="index.php?sec=comentar">Añadir un comentario</a>
+	</li>
+	<li >
+	    <a href="index.php?sec=ver_reservas">Ver reservas</a>
+	</li>
+	<li>
+	    <a href="index.php?sec=modificar_datos_usuario">Modificar datos usuario</a>
+	</li>
+    </ul>
+</div>
+
+<br><br><br>
+
 <?php
 include_once 'conexion_bd.php';
 echo '<script src="../js/formularios.js"></script>';
