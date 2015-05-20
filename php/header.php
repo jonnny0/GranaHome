@@ -13,7 +13,7 @@
     switch ($seccion) {
         case 'alojamiento':
             ?>
-            <a href="javascript:history.go(-1)" class="simulacionBotones">
+            <a href="index.php?sec=busqueda" class="simulacionBotones">
                 Volver a los resultados
             </a>
         <?php
