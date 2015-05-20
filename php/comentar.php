@@ -51,9 +51,6 @@ if ($resultado) {
         echo '<td id="reserva_' . $fila['id_reserva'] . '_izq"> </td> ';
         echo '<td colspan="2" id="reserva_' . $fila['id_reserva'] . '_der"> </td> ';
         echo '<td id="reserva_' . $fila['id_reserva'] . '_bot"> </td> ';
-//        echo $fila['nombre_alojamiento'] . " ( " . $fila['fecha_inicio'] . " / " . $fila['fecha_fin'] . ")";
-//        echo '<button type="button" onclick="comentar_reserva("' . $fila['id_reserva'] .'")" />';
-//        echo '<br /><div id="reserva_' . $fila['id_reserva'] . '"></div>';
         echo '</tr>';
     }
     echo '</table>';
