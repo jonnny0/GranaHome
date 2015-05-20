@@ -3,6 +3,7 @@
 include_once 'conexion_bd.php';
 include_once 'alojamiento_cumple_condiciones_para_reservar.php';
 include_once 'obtener_fotos_alojamiento.php';
+include_once 'habitacion.php';
 
 //$id_alojamiento = $_POST['id_alojamiento'];
 //$consulta = 'SELECT * FROM alojamiento WHERE id_alojamiento=' . $id_alojamiento;
@@ -121,6 +122,7 @@ if (!$resultado) {
         } else {
             $n_habitaciones = mysql_num_rows($resultado);
             $i_habitacion = 0;
+            
             echo '<form method="post" action="php/crear_reserva.php">';
             echo '<input type="hidden" name="id_alojamiento" value="' . $id_alojamiento . '"/>';
             echo '<input type="hidden" name="tipo_alquiler" value="' . $fila['tipo_alquiler'] . '"/>';
@@ -143,12 +145,13 @@ if (!$resultado) {
 
                     $n_habitaciones_disponibles = obtener_habitaciones_disponibles_por_tipo($id_alojamiento, $id_tipo_habitacion, $fecha_inicio, $fecha_fin);
 
-                    echo '<tr>
+                    echo '<tr onclick="datos_habitacion(' . $id_tipo_habitacion . ');">
                         <td class="negrita">
                             Nombre:
                         </td>
                         <td colspan="5">';
-                    echo $fila_tipo_habitacion['nombre_tipo'];
+                    echo "<a href='index.php?sec=alojamiento&aloj=" . $id_alojamiento . "&id_hab=" . $id_tipo_habitacion . "#detalle_habitacion'>" . $fila_tipo_habitacion['nombre_tipo'] . "</a>";
+//                    echo $fila_tipo_habitacion['nombre_tipo'] ;
                     echo '</td>
                     </tr>
                     <tr>
@@ -185,6 +188,8 @@ if (!$resultado) {
                             echo '<option value="' . $i * $fila_tipo_habitacion['precio'] . '">' . $i . '</option>';
                         }
                     }
+                    echo '<p id="datos_habitacion_' . $id_tipo_habitacion . '"> </p>';
+                    
                     $i_habitacion++;
                     echo '</select>';
                     echo '</td>';
