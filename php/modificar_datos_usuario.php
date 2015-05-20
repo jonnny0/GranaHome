@@ -1,3 +1,28 @@
+<?php
+include_once 'conexion_bd.php';
+
+if (isset($_SESSION['nombre_usuario'])) {
+    if($_SESSION['tipo_usuario']=="propietario"){
+?>
+<div id="menuOpcionesUsuario">
+    <ul>
+	<li>
+            <a href="index.php?sec=nuevo_alojamiento">Añadir un alojamiento</a>
+	</li>
+	<li>
+	    <a href="index.php?sec=nueva_habitacion">Añadir Habitacion</a>
+	</li>
+	<li>
+	    <a href="index.php?sec=modificar_alojamiento">Modificar un alojamiento</a>
+	</li>
+	<li id="active">
+	    <a href="index.php?sec=modificar_datos_usuario">Modificar datos usuario</a>
+	</li>
+    </ul>
+</div>
+<?php
+    } else if($_SESSION['tipo_usuario']=="cliente"){
+?>
 <div id="menuOpcionesUsuario">
     <ul>
 	<li>
@@ -11,12 +36,27 @@
 	</li>
     </ul>
 </div>
-
-<br><br><br>
 <?php
-include_once 'conexion_bd.php';
+    } else if($_SESSION['tipo_usuario']=="administrador"){
+        
+?>
+<div id="menuOpcionesUsuario">
+    <ul>
+	<li>
+            <a href="index.php?sec=validar_alojamientos">Validar alojamientos</a>
+	</li>
+	<li>
+	    <a href="index.php?sec=alta_administrador">Dar de alta administrador</a>
+	</li>
+	<li id="active">
+	    <a href="index.php?sec=modificar_datos_usuario">Modificar datos usuario</a>
+	</li>
+    </ul>
 
-if (isset($_SESSION['nombre_usuario'])) {
+</div>
+<?php
+    }
+echo '<br><br><br>';
 
     //comprobación de que el usuario exista
     $consulta = 'SELECT * FROM usuario WHERE nombre_usuario="' . $_SESSION['nombre_usuario'] . '"';

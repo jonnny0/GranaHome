@@ -1,3 +1,21 @@
+<div id="menuOpcionesUsuario">
+    <ul>
+	<li>
+            <a href="index.php?sec=nuevo_alojamiento">Añadir un alojamiento</a>
+	</li>
+	<li>
+	    <a href="index.php?sec=nueva_habitacion">Añadir Habitacion</a>
+	</li>
+	<li id="active">
+	    <a href="index.php?sec=modificar_alojamiento">Modificar un alojamiento</a>
+	</li>
+	<li>
+	    <a href="index.php?sec=modificar_datos_usuario">Modificar datos usuario</a>
+	</li>
+    </ul>
+</div>
+
+
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
 <script type="text/javascript">
     function actualizar(select) {

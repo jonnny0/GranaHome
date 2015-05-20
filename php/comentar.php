@@ -34,7 +34,7 @@ $resultado = conexionBD($consulta);
 
 if ($resultado) {
     echo '<form action="php/registrar_comentario.php" method="post">';
-    echo '<table>';
+    echo '<table id="ver_reservas">';
     echo '<tr><th>Nombre del alojamiento</th>';
     echo '<th>Fecha inicio</th>';
     echo '<th>Fecha fin</th>';
