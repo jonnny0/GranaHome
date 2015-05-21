@@ -23,7 +23,7 @@ $consulta_alojamientos_completos = "
     INNER JOIN `alquiler_completo` ON `alquiler_completo`.`id_alojamiento_completo`=`alojamiento`.`id_alojamiento`
     LEFT JOIN `cliente_reserva` ON `cliente_reserva`.`id_alojamiento`=`alojamiento`.`id_alojamiento` "
 //    . " WHERE `id_administrador` IS NOT NULL "
-    . " GROUP BY `id_alojamiento` ";
+        . " GROUP BY `id_alojamiento` ";
 
 $consulta_alojamientos_habitaciones = "
     SELECT `alojamiento`.`id_alojamiento`, `nombre_alojamiento`, `descripcion_breve`, `direccion`, `localidad`,`tipo_alquiler_habitacion` AS 'tipo_alquiler', AVG(`puntuacion`) AS 'puntuacion'
@@ -31,7 +31,7 @@ $consulta_alojamientos_habitaciones = "
     INNER JOIN `alquiler_habitaciones` ON `alquiler_habitaciones`.`id_alojamiento_habitaciones`=`alojamiento`.`id_alojamiento`
     LEFT JOIN `cliente_reserva` ON `cliente_reserva`.`id_alojamiento`=`alojamiento`.`id_alojamiento` "
 //    . " WHERE `id_administrador` IS NOT NULL "
-    . " GROUP BY `id_alojamiento` ";
+        . " GROUP BY `id_alojamiento` ";
 
 
 $consulta_alojamientos = "SELECT * FROM ( "
@@ -52,9 +52,10 @@ $resultado_alojamientos = conexionBD($consulta_alojamientos);
 
 $lista_ids = [];
 while ($fila_alojamiento = mysql_fetch_array($resultado_alojamientos)) {
-    if (alojamiento_cumple_condiciones_para_reservar($fila_alojamiento['id_alojamiento'], $fila_alojamiento['tipo_alquiler'],
-            $_POST['numero_habitaciones'], $_POST['numero_huespedes'], $_POST['fecha_entrada'], $_POST['fecha_salida'], $_POST['numero_estrellas'])) {
-        array_push($lista_ids, $fila_alojamiento);
+    if (alojamiento_cumple_condiciones_para_reservar($fila_alojamiento['id_alojamiento'], $fila_alojamiento['tipo_alquiler'], $_POST['numero_habitaciones'], $_POST['numero_huespedes'], $_POST['fecha_entrada'], $_POST['fecha_salida'], $_POST['numero_estrellas'])) {
+        if (alojamiento_cumple_caracteristicas()) {
+            array_push($lista_ids, $fila_alojamiento);
+        }
     }
 };
 
