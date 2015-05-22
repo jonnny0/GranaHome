@@ -24,7 +24,7 @@
         ?>
 
         <?php
-        include('php/conexion_bd.php');
+        include_once 'php/conexion_bd.php';
         ?>
 
         <!--Comienzo de la cabecera-->

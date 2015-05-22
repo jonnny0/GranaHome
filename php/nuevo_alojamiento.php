@@ -24,7 +24,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
 <div class="opciones_usuario insertar_alojamiento movedown">
     <h2>Datos para insertar un nuevo alojamiento</h2>
     <hr/>
-    <form method="post" action="php/insertar_alojamiento.php">
+    <form method="post" enctype="multipart/form-data" action="php/insertar_alojamiento.php">
         <label for="tipo_alojamiento">Tipo Alojamiento: </label>
         <select name="tipo_alojamiento" id="tipo_alojamiento" onchange="validar_tipo_alojamiento(this)">
             <option value="hotel">Hotel</option>
@@ -65,7 +65,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
         </select>
         <br><br>
         <label for="foto0">Introduce el nombre de la imagen 1: </label>
-        <input type="file" id="foto0" name="foto0" maxlength="50" size="50" required/>
+        <input type="file" id="foto0" name="foto0" required/>
         <div id='mas_imagenes'></div>
         <br>
         <label for="descripcion_breve">Descripción breve (Máximo 200 caracteres): </label>

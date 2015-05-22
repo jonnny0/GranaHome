@@ -513,7 +513,7 @@ textArea{
 #foto_habitacion_principal{
     margin-bottom: 10px;
     -ms-interpolation-mode: bicubic;
-    max-width: 100%;
+    max-width: 500px;
     max-height: 250px;
 }
 
@@ -537,6 +537,7 @@ textArea{
 
 .tablaFotoHabitaciones img{
     -ms-interpolation-mode: bicubic;
+    max-width: 200px;
     max-height: 83px;
     cursor:pointer;
 }

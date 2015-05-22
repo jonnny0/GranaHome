@@ -42,6 +42,34 @@ if ($id_propietario == -1) {
                 $fila = mysql_fetch_array($resultado);
                 $id_tipo_habitacion = $fila['id_tipo_habitacion'];
 
+                // ********************** INICIO DE IMAGENES **************************
+                $n_fotos = $_POST['num_fotos'];
+                for ($i = 0; $i < $n_fotos; $i++) {
+                    if ($_FILES['foto' . $i]["error"] > 0) {
+                        salir("Ha ocurrido un error en la carga de la imagen", -3);
+                    } else {
+                        $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+                        $limite_kb = 2048;
+                        if (in_array($_FILES['foto' . $i]['type'], $permitidos) && $_FILES['foto' . $i]['size'] <= $limite_kb * 1024) {
+                            $carpeta = "../imagenes/habitacion_" . $id_tipo_habitacion;
+                            if (!is_dir($carpeta)) {
+                                mkdir($carpeta);
+                            }
+                            $nombre_archivo = $_FILES['foto' . $i]['name'];
+                            $ruta = $carpeta . "/" . $nombre_archivo;
+                            if (!file_exists($ruta)) {
+                                $resultado_subida = @move_uploaded_file($_FILES['foto' . $i]['tmp_name'], $ruta);
+                                if ($resultado_subida) {
+                                    $url = $url = "imagenes/habitacion_" . $id_tipo_habitacion . "/" . $_FILES['foto' . $i]['name'];
+                                    insertar_imagen($id_tipo_habitacion, $url);
+                                }
+                            }
+                        }
+                    }
+                }
+                // ********************** FIN DE IMAGENES **************************   
+
+
                 if (isset($_POST['caracteristica_tipo_habitacion'])) {
                     $resultado = tipo_habitacion_tiene_caracteristicas($id_tipo_habitacion, $_POST['caracteristica_tipo_habitacion']);
                 }
@@ -101,6 +129,12 @@ function tipo_habitacion_tiene_caracteristicas($id_tipo_habitacion, $caracterist
         }
     }
     return true;
+}
+
+function insertar_imagen($id_tipo_habitacion, $url) {
+    $consulta = 'INSERT INTO foto_tipo_habitacion (id_tipo_habitacion, url) VALUES (' . $id_tipo_habitacion . ', "' . $url . '")';
+    $resultado = conexionBD($consulta);
+    return $resultado;
 }
 
 ?>

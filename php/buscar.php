@@ -53,9 +53,9 @@ $resultado_alojamientos = conexionBD($consulta_alojamientos);
 $lista_ids = [];
 while ($fila_alojamiento = mysql_fetch_array($resultado_alojamientos)) {
     if (alojamiento_cumple_condiciones_para_reservar($fila_alojamiento['id_alojamiento'], $fila_alojamiento['tipo_alquiler'], $_POST['numero_habitaciones'], $_POST['numero_huespedes'], $_POST['fecha_entrada'], $_POST['fecha_salida'], $_POST['numero_estrellas'])) {
-        if (alojamiento_cumple_caracteristicas()) {
+//        if (alojamiento_cumple_caracteristicas()) {
             array_push($lista_ids, $fila_alojamiento);
-        }
+//        }
     }
 };
 

@@ -30,7 +30,7 @@ if (isset($_POST['id_tipo_habitacion'])) {
         echo '</select>';
         echo '<br><br>';
         echo '<label for="foto0">Introduce el nombre de la imagen 1: </label>';
-        echo '<input type="text" id="foto0" name="foto0" maxlength="50" size="50" required/>';
+        echo '<input type="file" id="foto0" name="foto0" maxlength="50" size="50" required/>';
         echo '<div id="mas_imagenes"></div>';
         echo '<br>';
 

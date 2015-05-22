@@ -36,6 +36,16 @@ function obtener_array_fotos_alojamiento($id) {
     return $fotos;
 }
 
+function obtener_foto_habitacion($id) {
+    $resultado = obtener_fotos_habitacion($id);
+    $foto = "";
+    if ($resultado) {
+        $fila = mysql_fetch_array($resultado);
+        $foto = $fila['url'];
+    }
+    return $foto;
+}
+
 function obtener_fotos_habitacion($id) {
     $consulta = "SELECT url FROM foto_tipo_habitacion WHERE id_tipo_habitacion=" . $id;
 

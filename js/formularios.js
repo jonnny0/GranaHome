@@ -156,7 +156,7 @@ function add_campos_imagenes(select) {
     for (var i = 1; i < select.value; i++) {
         campos += '<br>'
                 + '<label for="foto' + i + '"> Introduce el nombre de la imagen ' + (i + 1) + ': </label>'
-                + '<input type="file" id="foto' + i + '" name="foto' + i + '" maxlength = "50" size = "50" required />'
+                + '<input type="file" id="foto' + i + '" name="foto' + i + '" required />'
                 + '<br>';
     }
     document.getElementById("mas_imagenes").innerHTML = campos;

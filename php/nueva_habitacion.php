@@ -38,7 +38,7 @@ if ($id_propietario != -1) {
             . 'WHERE id_propietario=' . $id_propietario . ' AND '
             . 'alojamiento.id_alojamiento=alquiler_habitaciones.id_alojamiento_habitaciones';
     $resultado_hotel = conexionBD($consulta_hotel);
-    echo '<form method = "post" action = "php/insertar_tipo_habitacion.php" onsubmit="return comprueba_formulario_tipo_habitacion(this)">';
+    echo '<form method="post" enctype="multipart/form-data" action="php/insertar_tipo_habitacion.php" onsubmit="return comprueba_formulario_tipo_habitacion(this)">';
     if ($resultado_hotel) {
         echo '<div id="selector">';
 //        echo '<label for="alojamiento_seleccionado">Selecciona el alojamiento: </label>';
