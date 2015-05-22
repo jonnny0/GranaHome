@@ -5,7 +5,6 @@ Epi::init('api');
 
 getRoute()->get('/', 'default_func');
 getRoute()->get('/hoteles', 'list_func');
-getRoute()->get('/hotel', 'list_func');
 getRoute()->post('/hoteles', 'metodo_post');
 getRoute()->get('/reserva', 'reservar');
 getRoute()->get('/hoteles/(\w+)/huespedes/(\d+)', 'list_func_parametros');
@@ -19,7 +18,6 @@ function default_func(){
 function list_func(){
 //    return array('id' => 'Estos son los hoteles disponibles');
     echo "Estos son los hoteles disponibles";
-    return "Estos son los hoteles disponibles";
 }
 
 function list_func_parametros($param, $param2){
