@@ -157,7 +157,10 @@ function add_campos_imagenes(select) {
         campos += '<br>'
                 + '<label for="foto' + i + '"> Introduce el nombre de la imagen ' + (i + 1) + ': </label>'
                 + '<input type="file" id="foto' + i + '" name="foto' + i + '" required />'
-                + '<br>';
+                + '<br><br>'
+                + '<label for="descripcion' + i + '">Introduce la descripción para la imagen ' + (i + 1) + ':</label>'
+                + '<br />'
+                + '<textarea id="descripcion' + i + '" cols="85" rows="2" maxlength="150" name="descripcion' + i + '" required></textarea><br>';
     }
     document.getElementById("mas_imagenes").innerHTML = campos;
 }

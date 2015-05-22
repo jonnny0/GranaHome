@@ -39,9 +39,6 @@ if (!isset($_SESSION['nombre_usuario'])) {
             <input type="number" min="1" max="5" id="numero_estrellas" name="numero_estrellas" required/>
         </p>
         <p id="capacidad_y_precio"></p>
-        <!--	Estas dos lineas aparecen cuando se marca Piso o Casa Rural  -->
-        <!--	<label for="precio_noche">Precio por noche: </label>
-                <input type="number" step="any" id="precio_noche" name="precio" required/>-->
 
         <label for="nombre_alojamiento">Nombre del alojamiento: </label>
         <input type="text" size="60" id="nombre_alojamiento" name="nombre_alojamiento" maxlength="50" required />
@@ -66,6 +63,10 @@ if (!isset($_SESSION['nombre_usuario'])) {
         <br><br>
         <label for="foto0">Introduce el nombre de la imagen 1: </label>
         <input type="file" id="foto0" name="foto0" required/>
+        <br /><br />
+        <label for="descripcion0">Introduce la descripción para la imagen 1:</label>
+        <br />
+        <textarea id="descripcion_foto" cols="85" rows="2" maxlength="150" name="descripcion_foto" required></textarea>
         <div id='mas_imagenes'></div>
         <br>
         <label for="descripcion_breve">Descripción breve (Máximo 200 caracteres): </label>

@@ -41,7 +41,6 @@ if ($id_propietario != -1) {
     echo '<form method="post" enctype="multipart/form-data" action="php/insertar_tipo_habitacion.php" onsubmit="return comprueba_formulario_tipo_habitacion(this)">';
     if ($resultado_hotel) {
         echo '<div id="selector">';
-//        echo '<label for="alojamiento_seleccionado">Selecciona el alojamiento: </label>';
         echo '<select name="alojamiento_seleccionado" id="alojamiento_seleccionado">';
         echo '<option value="-1"> Selecciona alojamiento</option>';
         while ($fila = mysql_fetch_array($resultado_hotel)) {
