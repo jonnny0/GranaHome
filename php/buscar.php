@@ -22,7 +22,7 @@ $consulta_alojamientos_completos = "
     FROM `alojamiento`
     INNER JOIN `alquiler_completo` ON `alquiler_completo`.`id_alojamiento_completo`=`alojamiento`.`id_alojamiento`
     LEFT JOIN `cliente_reserva` ON `cliente_reserva`.`id_alojamiento`=`alojamiento`.`id_alojamiento` "
-//    . " WHERE `id_administrador` IS NOT NULL "
+        . " WHERE `id_administrador` IS NOT NULL "
         . " GROUP BY `id_alojamiento` ";
 
 $consulta_alojamientos_habitaciones = "
@@ -30,7 +30,7 @@ $consulta_alojamientos_habitaciones = "
     FROM `alojamiento`
     INNER JOIN `alquiler_habitaciones` ON `alquiler_habitaciones`.`id_alojamiento_habitaciones`=`alojamiento`.`id_alojamiento`
     LEFT JOIN `cliente_reserva` ON `cliente_reserva`.`id_alojamiento`=`alojamiento`.`id_alojamiento` "
-//    . " WHERE `id_administrador` IS NOT NULL "
+        . " WHERE `id_administrador` IS NOT NULL "
         . " GROUP BY `id_alojamiento` ";
 
 
