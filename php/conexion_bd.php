@@ -16,7 +16,8 @@ function conexionBD($consulta_sql) {
     // Abrimos Base de Datos		
     mysql_select_db('alojamientos', $conexion);
 
-
+    mysql_set_charset('utf8');
+    
     // Ejecutamos el código SQL
     $resultado = mysql_query($consulta_sql, $conexion);// or die(mysql_error());
 
