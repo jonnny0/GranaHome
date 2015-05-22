@@ -72,7 +72,7 @@ if (!$resultado) {
         echo '<td>';
         if ($fotos[$pos[$i]]) {
             echo '<div class="centrado_horizontal">';
-            echo '<img src="' . $fotos[$pos[$i]] . '" alt="Foto ' . $fila['nombre_alojamiento'] . '" onclick="cambiar_foto_principal(this)"/>';
+            echo '<img src="' . $fotos[$pos[$i]] . '" alt="' . obtener_descripcion_foto_alojamiento($fotos[$pos[$i]]) . '" onclick="cambiar_foto_principal(this)"/>';
             echo '</div>';
         }
         echo '</td>';

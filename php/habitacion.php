@@ -21,7 +21,7 @@ if (isset($_POST['id_habitacion'])) {
             echo "<hr/>";
             $fotos = obtener_array_fotos_habitacion($id_habitacion);
             echo '<div id="div_img_habitacion_principal" class="centrado_horizontal">';
-            echo '<img id="foto_habitacion_principal" src="' . $fotos[0] . '" alt="Foto ' . $fila['nombre_tipo'] . '" />';
+            echo '<img id="foto_habitacion_principal" src="' . $fotos[0] . '" alt="Foto Principal" />';
             echo '</div>';
             echo '<div id="lista_img_habitaciones_izquierda">';
             echo '<table class="tablaFotoHabitaciones">';
@@ -30,14 +30,14 @@ if (isset($_POST['id_habitacion'])) {
                 echo '<td>';
                 if ($fotos[$i]) {
                     echo '<div class="centrado_horizontal">';
-                    echo '<img src="' . $fotos[$i] . '" alt="Foto ' . $fila['nombre_tipo'] . '" onclick="cambiar_foto_habitacion_principal(this)"/>';
+                    echo '<img src="' . $fotos[$i] . '" alt="' . obtener_descripcion_foto_habitacion($fotos[$i]) . '" onclick="cambiar_foto_habitacion_principal(this)"/>';
                     echo '</div>';
                 }
                 echo '</td>';
                 echo '<td>';
                 if ($fotos[$i + 1]) {
                     echo '<div class="centrado_horizontal">';
-                    echo '<img src="' . $fotos[$i + 1] . '" alt="Foto ' . $fila['nombre_tipo'] . '" onclick="cambiar_foto_habitacion_principal(this)"/>';
+                    echo '<img src="' . $fotos[$i + 1] . '" alt="' . obtener_descripcion_foto_habitacion($fotos[$i]) . '" onclick="cambiar_foto_habitacion_principal(this)"/>';
                     echo '</div>';
                 }
                 echo '</td>';
@@ -47,7 +47,7 @@ if (isset($_POST['id_habitacion'])) {
             echo '<td colspan="2">';
             if ($fotos[$i]) {
                 echo '<div class="centrado_horizontal">';
-                echo '<img src="' . $fotos[$i] . '" alt="Foto ' . $fila['nombre_tipo'] . '" onclick="cambiar_foto_habitacion_principal(this)"/>';
+                echo '<img src="' . $fotos[$i] . '" alt="' . obtener_descripcion_foto_habitacion($fotos[$i]) . '" onclick="cambiar_foto_habitacion_principal(this)"/>';
                 echo '</div>';
             }
             echo '</td>';

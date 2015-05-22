@@ -84,7 +84,25 @@ function obtener_imagen_estrellas($id_alojamiento){
 }
 
 function obtener_descripcion_foto_alojamiento($url){
-    $consulta_foto = "SELECT * FROM foto_alojamiento";
+    $consulta_foto = "SELECT * FROM foto_alojamiento WHERE url='" . $url . "'";
+    $resultado_foto = conexionBD($consulta_foto);
+    $descripcion = "";
+    if($resultado_foto){
+        $fila_foto = mysql_fetch_array($resultado_foto);
+        $descripcion = $fila_foto['descripcion'];
+    }
+    return $descripcion;
+}
+
+function obtener_descripcion_foto_habitacion($url){
+    $consulta_foto = "SELECT * FROM foto_tipo_habitacion WHERE url='" . $url . "'";
+    $resultado_foto = conexionBD($consulta_foto);
+    $descripcion = "";
+    if($resultado_foto){
+        $fila_foto = mysql_fetch_array($resultado_foto);
+        $descripcion = $fila_foto['descripcion'];
+    }
+    return $descripcion;
 }
 
 ?>
