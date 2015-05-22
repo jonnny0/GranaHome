@@ -58,10 +58,36 @@ if ($id == -1) {
                 } else {
                     $n_fotos = $_POST['num_fotos'];
                     for ($i = 0; $i < $n_fotos; $i++) {
-                        $url = "imagenes/" . $_POST['nombre_alojamiento'] . "/" . $_POST['foto'.$i];
-                        if(!insertar_imagen($id_alojamiento, $url)){
-                            $error = true;
+
+
+
+                        // ********************** INICIO DE IMAGENES **************************
+
+                        if ($_FILES["foto" . $i]["error"] > 0) {
+                            salir("Ha ocurrido un error en la carga de la imagen", -3);
+                        } else {
+                            $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+                            $limite_kb = 500;
+
+                            if (in_array($_FILES["foto" . $i]['type'], $permitidos) && $_FILES['imagen']['size'] <= $limite_kb * 1024) {
+                                $carpeta = "../imagenes/" . $_POST['nombre_alojamiento'];
+                                if (!is_dir($carpeta)) {
+                                    mkdir($carpeta);
+                                }
+                                $nombre_archivo = $_FILES["foto" . $i]['name'];
+                                $ruta = $carpeta . "/" . $nombre_archivo;
+                                if (!file_exists($ruta)) {
+                                    $resultado_subida = @move_uploaded_file($_FILES["foto" . $i]['tmp_name'], $ruta);
+                                    if ($resultado_subida) {
+                                        $url = $url = "imagenes/" . $_POST['nombre_alojamiento'] . "/" . $_FILES["foto" . $i]['name'];
+                                        if (!insertar_imagen($id_alojamiento, $url)) {
+                                            $error = true;
+                                        }
+                                    }
+                                }
+                            }
                         }
+                        // ********************** FIN DE IMAGENES **************************   
                     }
                 }
             }
@@ -72,7 +98,7 @@ if ($id == -1) {
             alert("No se ha podido insertar el alojamiento.");
             location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
         </script>';
-    }else{
+    } else {
         echo '<script>
             alert("El alojamiento ha sido añadido.");
             location.href= "../index.php?sec=opciones_usuario";
@@ -116,9 +142,18 @@ function alojamiento_tiene_caracteristicas($id_alojamiento, $caracteristicas) {
     return true;
 }
 
-function insertar_imagen($id_alojamiento, $url){
+function insertar_imagen($id_alojamiento, $url) {
     $consulta = 'INSERT INTO foto_alojamiento (id_alojamiento, url) VALUES (' . $id_alojamiento . ', "' . $url . '")';
     $resultado = conexionBD($consulta);
     return $resultado;
 }
+
+function salir($str, $code) {
+    echo '<script>
+            alert("' . $str . '");
+            location.href= " ' . $_SERVER['HTTP_REFERER'] . '";
+        </script>';
+    return $code;
+}
+
 ?>

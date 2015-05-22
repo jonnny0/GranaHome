@@ -65,7 +65,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
         </select>
         <br><br>
         <label for="foto0">Introduce el nombre de la imagen 1: </label>
-        <input type="text" id="foto0" name="foto0" maxlength="50" size="50" required/>
+        <input type="file" id="foto0" name="foto0" maxlength="50" size="50" required/>
         <div id='mas_imagenes'></div>
         <br>
         <label for="descripcion_breve">Descripción breve (Máximo 200 caracteres): </label>
