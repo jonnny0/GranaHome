@@ -77,7 +77,8 @@ if ($id == -1) {
                                     $resultado_subida = @move_uploaded_file($_FILES['foto' . $i]['tmp_name'], $ruta);
                                     if ($resultado_subida) {
                                         $url = $url = "imagenes/" . $_POST['nombre_alojamiento'] . "/" . $_FILES['foto' . $i]['name'];
-                                        insertar_imagen($id_alojamiento, $url);
+                                        $descripcion = $_POST['descripcion' . $i];
+                                        insertar_imagen($id_alojamiento, $url, $descripcion);
                                     }
                                 }
                             }
@@ -137,8 +138,9 @@ function alojamiento_tiene_caracteristicas($id_alojamiento, $caracteristicas) {
     return true;
 }
 
-function insertar_imagen($id_alojamiento, $url) {
-    $consulta = 'INSERT INTO foto_alojamiento (id_alojamiento, url) VALUES (' . $id_alojamiento . ', "' . $url . '")';
+function insertar_imagen($id_alojamiento, $url, $descripcion) {
+    $consulta = 'INSERT INTO foto_alojamiento (id_alojamiento, url, descripcion) VALUES '
+            . '(' . $id_alojamiento . ', "' . $url . '", "' . $descripcion . '")';
     $resultado = conexionBD($consulta);
     return $resultado;
 }

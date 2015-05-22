@@ -61,7 +61,8 @@ if ($id_propietario == -1) {
                                 $resultado_subida = @move_uploaded_file($_FILES['foto' . $i]['tmp_name'], $ruta);
                                 if ($resultado_subida) {
                                     $url = $url = "imagenes/habitacion_" . $id_tipo_habitacion . "/" . $_FILES['foto' . $i]['name'];
-                                    insertar_imagen($id_tipo_habitacion, $url);
+                                    $descripcion = $_POST['descripcion' . $i];
+                                    insertar_imagen($id_alojamiento, $url, $descripcion);
                                 }
                             }
                         }
@@ -131,8 +132,9 @@ function tipo_habitacion_tiene_caracteristicas($id_tipo_habitacion, $caracterist
     return true;
 }
 
-function insertar_imagen($id_tipo_habitacion, $url) {
-    $consulta = 'INSERT INTO foto_tipo_habitacion (id_tipo_habitacion, url) VALUES (' . $id_tipo_habitacion . ', "' . $url . '")';
+function insertar_imagen($id_tipo_habitacion, $url, $descripcion) {
+    $consulta = 'INSERT INTO foto_tipo_habitacion (id_tipo_habitacion, url, descripcion) VALUES '
+            . '(' . $id_tipo_habitacion . ', "' . $url . '", "' . $descripcion . '")';
     $resultado = conexionBD($consulta);
     return $resultado;
 }
