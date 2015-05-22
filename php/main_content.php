@@ -2,7 +2,7 @@
 
 switch ($seccion) {
     case 'buscador':
-        include 'html/es/buscador.html';
+        include 'php/buscador.php';
         break;
     case 'busqueda':
 //        include 'html/es/busqueda.html';
