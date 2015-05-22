@@ -5,12 +5,9 @@ switch ($seccion) {
         include 'php/buscador.php';
         break;
     case 'busqueda':
-//        include 'html/es/busqueda.html';
         include 'php/busqueda.php';
         break;
     case 'alojamiento':
-//        $id_alojamiento = $_POST['id_alojamiento'];
-//        $id_alojamiento = 28;
         include 'php/alojamiento.php';
         break;
     case 'opciones_usuario':
@@ -41,7 +38,7 @@ switch ($seccion) {
         include 'php/alta_administrador.php';
         break;
     default:
-        include 'html/eleccion.html';
+        include 'php/index.php';
         break;
 }
 

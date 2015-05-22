@@ -61,7 +61,7 @@ if (!$resultado) {
     echo '</p>';
 
     echo '<div class="centrado_horizontal">';
-    echo '<img id="foto_principal" src="' . obtener_foto_alojamiento($id_alojamiento) . '" alt="Foto ' . $fila['nombre_alojamiento'] . '" />';
+    echo '<img id="foto_principal" src="' . obtener_foto_alojamiento($id_alojamiento) . '" alt="Foto Principal" />';
     echo '</div>';
 
     $fotos = obtener_array_fotos_alojamiento($id_alojamiento);

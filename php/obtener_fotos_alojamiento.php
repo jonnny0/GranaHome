@@ -83,4 +83,8 @@ function obtener_imagen_estrellas($id_alojamiento){
     }
 }
 
+function obtener_descripcion_foto_alojamiento($url){
+    $consulta_foto = "SELECT * FROM foto_alojamiento";
+}
+
 ?>
