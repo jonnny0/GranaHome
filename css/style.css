@@ -184,6 +184,10 @@ button a{
     margin-left: 10%;
 }
 
+#formularioBusqueda h3 {
+    text-align: center;
+}
+
 #formularioBusqueda hr{
     margin-top: 25px;
     margin-bottom: 25px;
