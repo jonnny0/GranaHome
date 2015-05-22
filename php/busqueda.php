@@ -11,26 +11,6 @@ if (!isset($_SESSION['ids_alojamientos_buscados'])) {
         </script>';
 }
 
-echo '<div id="menuOrdenarPor">';
-echo '<ul>';
-echo '<li id="titulo">Ordenar Por:</li>';
-if ($_SESSION['orden_busqueda'] == "puntuacion") {
-    echo '<li id="active" onclick="">Valoración</li>';
-} else {
-    echo '<li onclick="">Valoración</li>';
-}
-if ($_SESSION['orden_busqueda'] == "estrellas") {
-    echo '<li id="active" onclick="">Estrellas</li>';
-} else {
-    echo '<li onclick="">Estrellas</li>';
-}
-if ($_SESSION['orden_busqueda'] == "precio") {
-    echo '<li id="active" onclick="">Precio</li>';
-} else {
-    echo '<li onclick="">Precio</li>';
-}
-echo '</ul>';
-echo '</div>';
 echo '<br class="clearfloat"/>';
 
 echo '<table class="tablaBusqueda">';
