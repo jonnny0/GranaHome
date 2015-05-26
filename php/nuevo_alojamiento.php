@@ -66,7 +66,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
         <br /><br />
         <label for="descripcion0">Introduce la descripción para la imagen 1:</label>
         <br />
-        <textarea id="descripcion_foto" cols="85" rows="2" maxlength="150" name="descripcion_foto" required></textarea>
+        <textarea id="descripcion0" cols="85" rows="2" maxlength="150" name="descripcion0" required></textarea>
         <div id='mas_imagenes'></div>
         <br>
         <label for="descripcion_breve">Descripción breve (Máximo 200 caracteres): </label>

@@ -6,6 +6,8 @@ include_once 'obtener_fotos_alojamiento.php';
 if (isset($_POST['id_habitacion'])) {
     $id_habitacion = $_POST['id_habitacion'];
 }
+$fotos = obtener_array_fotos_habitacion($id_habitacion);
+echo $fotos[0];
 ?>
 
 <div id="detalle_habitacion" class="modalmask">
@@ -30,6 +32,7 @@ if (isset($_POST['id_habitacion'])) {
                 echo '<td>';
                 if ($fotos[$i]) {
                     echo '<div class="centrado_horizontal">';
+//                    echo $fotos[$i];
                     echo '<img src="' . $fotos[$i] . '" alt="' . obtener_descripcion_foto_habitacion($fotos[$i]) . '" onclick="cambiar_foto_habitacion_principal(this)"/>';
                     echo '</div>';
                 }

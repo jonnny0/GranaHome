@@ -62,7 +62,7 @@ if ($id_propietario == -1) {
                                 if ($resultado_subida) {
                                     $url = $url = "imagenes/habitacion_" . $id_tipo_habitacion . "/" . $_FILES['foto' . $i]['name'];
                                     $descripcion = $_POST['descripcion' . $i];
-                                    insertar_imagen($id_alojamiento, $url, $descripcion);
+                                    insertar_imagen($id_habitacion, $url, $descripcion);
                                 }
                             }
                         }

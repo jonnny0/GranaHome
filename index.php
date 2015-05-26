@@ -41,11 +41,11 @@ function get_hoteles_disponibles($localidad, $f_inicio, $f_fin, $n_hab, $n_huesp
     $array_resultado = array();
     if ($resultado_hoteles) {
         while ($fila_hoteles = mysql_fetch_array($resultado_hoteles)) {
-            echo "<br>" . $fila_hoteles['nombre_alojamiento'];
+//            echo "<br>" . $fila_hoteles['nombre_alojamiento'];
             $id_alojamiento = $fila_hoteles['id_alojamiento'];
             $libre = alojamiento_habitaciones_cumple_condiciones_para_reservar($id_alojamiento, $n_hab, $n_huesp, $fecha_inicio, $fecha_fin, 0);
             if ($libre) {
-                echo " ------> SI";
+//                echo " ------> SI";
                 $consulta_habitacion = 'SELECT DISTINCT id_tipo_habitacion FROM habitacion WHERE id_alojamiento=' . $id_alojamiento;
                 $resultado_habitacion = conexionBD($consulta_habitacion);
 
@@ -65,9 +65,9 @@ function get_hoteles_disponibles($localidad, $f_inicio, $f_fin, $n_hab, $n_huesp
                             if ($resultado_tipo_habitacion) {
                                 $fila_tipo_habitacion = mysql_fetch_array($resultado_tipo_habitacion);
 
-                                echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;" . $fila_tipo_habitacion['nombre_tipo'] . " libres: " . $n_habitaciones_disponibles;
-                                echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;capacidad: " . $fila_tipo_habitacion['capacidad'];
-                                echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;precio: " . $fila_tipo_habitacion['precio'] . "€<br>";
+//                                echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;" . $fila_tipo_habitacion['nombre_tipo'] . " libres: " . $n_habitaciones_disponibles;
+//                                echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;capacidad: " . $fila_tipo_habitacion['capacidad'];
+//                                echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;precio: " . $fila_tipo_habitacion['precio'] . "€<br>";
                                 $datos_tipo = array('id_tipo' => $id_tipo_habitacion,
                                     'nombre_tipo' => $fila_tipo_habitacion['nombre_tipo'],
                                     'foto_tipo' => "http://localhost/GranaHome_php/" . obtener_foto_habitacion($id_tipo_habitacion),
@@ -86,20 +86,18 @@ function get_hoteles_disponibles($localidad, $f_inicio, $f_fin, $n_hab, $n_huesp
                     array_push($array_resultado, $array_hotel);
                 }
             } else {
-                echo " ------> NO";
+//                echo " ------> NO";
             }
-            echo '<br>';
+//            echo '<br>';
         }
     }
     $json = json_encode($array_resultado);
-    $decode = json_decode($json);
-    echo '<br>';
-    echo "Numero de hoteles: " . count($decode);
-    echo '<br>';
-    echo '<br>';
+//    echo '<br>';
+//    echo "Numero de hoteles: " . count($decode);
+//    echo '<br>';
+//    echo '<br>';
     echo $json;
-    echo '<br>';
-    echo '<br>';
+//    echo '<br>';
 }
 
 function reservar_alojamiento($f_inicio, $f_fin, $id_hotel, $id_hab, $n_hab) {

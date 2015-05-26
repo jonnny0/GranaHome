@@ -34,7 +34,7 @@ if (isset($_POST['id_tipo_habitacion'])) {
         echo '<br /><br />';
         echo '<label for="descripcion0">Introduce la descripción para la imagen 1:</label>';
         echo '<br />';
-        echo '<textarea id="descripcion_foto" cols="85" rows="2" maxlength="150" name="descripcion_foto" required></textarea>';
+        echo '<textarea id="descripcion0" cols="85" rows="2" maxlength="150" name="descripcion0" required></textarea>';
         
         echo '<div id="mas_imagenes"></div>';
         echo '<br>';
