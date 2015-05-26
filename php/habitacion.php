@@ -7,7 +7,6 @@ if (isset($_POST['id_habitacion'])) {
     $id_habitacion = $_POST['id_habitacion'];
 }
 $fotos = obtener_array_fotos_habitacion($id_habitacion);
-echo $fotos[0];
 ?>
 
 <div id="detalle_habitacion" class="modalmask">
