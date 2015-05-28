@@ -83,7 +83,10 @@ if (!$resultado) {
 
     echo '<h2> Descripción detallada </h2>';
     echo '<p class="resumen">';
-    echo $fila['descripcion_detallada'];
+    $descripcion = explode("\n", $fila['descripcion_detallada']);
+    foreach ($descripcion as $str) {
+        echo "<p>" . $str . "</p>";
+    }
     echo '</p>';
 
     if (!$es_alquiler_por_habitaciones) {
